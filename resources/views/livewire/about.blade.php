@@ -1,4 +1,13 @@
-<x-layouts.public title="About Us | KMG Environmental Solutions">
+<?php
+
+use function Livewire\Volt\{layout, title};
+
+layout('components.layouts.public');
+title('About Us | KMG Environmental Solutions');
+
+?>
+
+<div>
     <x-public.breadcrumb :items="[
         ['label' => 'Home', 'url' => route('home')],
         ['label' => 'About Us'],
@@ -10,4 +19,4 @@
             <p class="text-xl text-gray-600">Coming soon...</p>
         </div>
     </section>
-</x-layouts.public>
+</div>

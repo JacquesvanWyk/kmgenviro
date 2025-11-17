@@ -1,7 +1,10 @@
 <?php
 
-use function Livewire\Volt\{computed};
+use function Livewire\Volt\{computed, layout, title};
 use App\Models\{ServiceCategory, Project, ClientLogo, BlogPost, TeamMember, Accreditation};
+
+layout('components.layouts.public');
+title('KMG Environmental Solutions | Environmental Consultancy South Africa');
 
 $serviceCategories = computed(fn() =>
     ServiceCategory::where('is_active', true)
@@ -36,7 +39,6 @@ $projectCount = computed(fn() => Project::count());
 
 ?>
 
-<x-layouts.public title="KMG Environmental Solutions | Environmental Consultancy South Africa">
 <div>
     <!-- Hero Section -->
     <section class="relative h-screen min-h-[600px] flex items-center justify-center bg-cover bg-center"
@@ -187,4 +189,3 @@ $projectCount = computed(fn() => Project::count());
         </div>
     </section>
 </div>
-</x-layouts.public>
