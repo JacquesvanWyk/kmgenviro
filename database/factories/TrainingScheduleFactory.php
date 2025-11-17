@@ -2,10 +2,9 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use App\Models\TrainingCourse;
 use App\Models\TrainingSchedule;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TrainingScheduleFactory extends Factory
 {

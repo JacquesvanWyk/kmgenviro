@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Models\ServiceCategory;
-use App\Models\Service;
-use App\Models\TeamMember;
 use App\Models\Project;
 use App\Models\Sector;
+use App\Models\Service;
+use App\Models\ServiceCategory;
+use App\Models\TeamMember;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
@@ -24,7 +24,7 @@ it('service category factory creates valid data', function () {
 it('service factory creates valid data', function () {
     $category = ServiceCategory::factory()->create();
     $service = Service::factory()->create([
-        'service_category_id' => $category->id
+        'service_category_id' => $category->id,
     ]);
 
     expect($service->name)->not->toBeNull();
@@ -54,7 +54,7 @@ it('team member factory creates valid data', function () {
 it('project factory creates valid data', function () {
     $sector = Sector::factory()->create();
     $project = Project::factory()->create([
-        'sector_id' => $sector->id
+        'sector_id' => $sector->id,
     ]);
 
     expect($project->title)->not->toBeNull();

@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Models\ServiceCategory;
 use App\Models\Service;
+use App\Models\ServiceCategory;
 use App\Models\TeamMember;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
@@ -61,7 +61,7 @@ it('can perform complete crud cycle for service', function () {
     // Update
     $service->update([
         'name' => 'Updated Service',
-        'is_featured' => true
+        'is_featured' => true,
     ]);
     expect($service->fresh()->name)->toBe('Updated Service');
     expect($service->fresh()->is_featured)->toBeTrue();
@@ -95,7 +95,7 @@ it('can perform complete crud cycle for team member', function () {
     // Update
     $member->update([
         'title' => 'Updated Position',
-        'email' => 'updated@example.com'
+        'email' => 'updated@example.com',
     ]);
     expect($member->fresh()->title)->toBe('Updated Position');
     expect($member->fresh()->email)->toBe('updated@example.com');

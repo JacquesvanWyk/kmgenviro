@@ -2,9 +2,8 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use App\Models\Accreditation;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class AccreditationFactory extends Factory
 {
