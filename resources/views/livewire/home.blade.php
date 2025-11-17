@@ -37,6 +37,7 @@ $projectCount = computed(fn() => Project::count());
 ?>
 
 <x-layouts.public title="KMG Environmental Solutions | Environmental Consultancy South Africa">
+<div>
     <!-- Hero Section -->
     <section class="relative h-screen min-h-[600px] flex items-center justify-center bg-cover bg-center"
              style="background-image: url('{{ asset('images/hero-bg.jpg') }}')">
@@ -185,4 +186,5 @@ $projectCount = computed(fn() => Project::count());
             </a>
         </div>
     </section>
+</div>
 </x-layouts.public>
