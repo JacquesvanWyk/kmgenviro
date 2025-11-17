@@ -1,8 +1,8 @@
 @php
 use App\Models\ServiceCategory;
 
-$topServices = ServiceCategory::where('active', true)
-    ->orderBy('display_order')
+$topServices = ServiceCategory::where('is_active', true)
+    ->orderBy('sort_order')
     ->limit(5)
     ->get();
 @endphp

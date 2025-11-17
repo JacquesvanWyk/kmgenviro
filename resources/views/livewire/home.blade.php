@@ -4,34 +4,34 @@ use function Livewire\Volt\{computed};
 use App\Models\{ServiceCategory, Project, ClientLogo, BlogPost, TeamMember, Accreditation};
 
 $serviceCategories = computed(fn() =>
-    ServiceCategory::where('active', true)
-        ->orderBy('display_order')
+    ServiceCategory::where('is_active', true)
+        ->orderBy('sort_order')
         ->limit(6)
         ->get()
 );
 
 $featuredProjects = computed(fn() =>
-    Project::where('featured', true)
+    Project::where('is_featured', true)
         ->latest('completion_date')
         ->limit(3)
         ->get()
 );
 
 $clientLogos = computed(fn() =>
-    ClientLogo::where('active', true)
-        ->orderBy('display_order')
+    ClientLogo::where('is_active', true)
+        ->orderBy('sort_order')
         ->get()
 );
 
 $latestPosts = computed(fn() =>
-    BlogPost::where('published', true)
+    BlogPost::where('is_published', true)
         ->latest('published_at')
         ->limit(3)
         ->get()
 );
 
-$teamCount = computed(fn() => TeamMember::where('active', true)->count());
-$accreditationCount = computed(fn() => Accreditation::where('active', true)->count());
+$teamCount = computed(fn() => TeamMember::where('is_active', true)->count());
+$accreditationCount = computed(fn() => Accreditation::where('is_active', true)->count());
 $projectCount = computed(fn() => Project::count());
 
 ?>
