@@ -1,0 +1,347 @@
+# KMG Environmental Solutions - Blueprint Schema
+# Run: php artisan blueprint:build
+# This will generate models, migrations, factories, controllers, and resources
+
+models:
+  ServiceCategory:
+    name: string
+    slug: string unique index
+    description: longtext nullable
+    icon: string nullable
+    sort_order: integer default:0
+    is_active: boolean default:true
+    meta_title: string nullable
+    meta_description: text nullable
+    timestamps: true
+    softdeletes: true
+    relationships:
+      hasMany: Service
+
+  Service:
+    service_category_id: id foreign:service_categories
+    name: string
+    slug: string unique index
+    short_description: text nullable
+    full_description: longtext nullable
+    icon: string nullable
+    sort_order: integer default:0
+    is_active: boolean default:true
+    is_featured: boolean default:false
+    meta_title: string nullable
+    meta_description: text nullable
+    timestamps: true
+    softdeletes: true
+    relationships:
+      belongsTo: ServiceCategory
+
+  TeamMember:
+    name: string
+    slug: string unique index
+    title: string
+    email: string nullable
+    phone: string nullable
+    bio: longtext nullable
+    qualifications: text nullable
+    registrations: text nullable # JSON field for professional registrations
+    sort_order: integer default:0
+    is_active: boolean default:true
+    photo: string nullable
+    timestamps: true
+    softdeletes: true
+
+  Sector:
+    name: string
+    slug: string unique index
+    description: longtext nullable
+    icon: string nullable
+    sort_order: integer default:0
+    is_active: boolean default:true
+    meta_title: string nullable
+    meta_description: text nullable
+    timestamps: true
+    softdeletes: true
+    relationships:
+      hasMany: Project
+
+  Project:
+    sector_id: id foreign:sectors nullable
+    title: string
+    slug: string unique index
+    client_name: string nullable
+    location: string nullable
+    province: string nullable
+    short_description: text nullable
+    full_description: longtext nullable
+    services_provided: text nullable # JSON array
+    outcomes: text nullable
+    featured_image: string nullable
+    gallery_images: text nullable # JSON array
+    completion_date: date nullable
+    is_featured: boolean default:false
+    is_active: boolean default:true
+    sort_order: integer default:0
+    meta_title: string nullable
+    meta_description: text nullable
+    timestamps: true
+    softdeletes: true
+    relationships:
+      belongsTo: Sector
+
+  TrainingCourse:
+    name: string
+    slug: string unique index
+    short_description: text nullable
+    full_description: longtext nullable
+    duration: string nullable # e.g., "2 days", "5 hours"
+    accreditation: string nullable # SACNASP, EAPASA, etc.
+    price: decimal:10,2 nullable
+    max_delegates: integer nullable
+    is_active: boolean default:true
+    is_featured: boolean default:false
+    course_outline: longtext nullable
+    target_audience: text nullable
+    prerequisites: text nullable
+    thumbnail: string nullable
+    sort_order: integer default:0
+    meta_title: string nullable
+    meta_description: text nullable
+    timestamps: true
+    softdeletes: true
+    relationships:
+      hasMany: TrainingSchedule, TrainingBooking
+
+  TrainingSchedule:
+    training_course_id: id foreign:training_courses
+    start_date: datetime
+    end_date: datetime nullable
+    location: string nullable
+    is_online: boolean default:false
+    available_seats: integer nullable
+    price_override: decimal:10,2 nullable
+    notes: text nullable
+    is_active: boolean default:true
+    timestamps: true
+    softdeletes: true
+    relationships:
+      belongsTo: TrainingCourse
+      hasMany: TrainingBooking
+
+  TrainingBooking:
+    training_course_id: id foreign:training_courses
+    training_schedule_id: id foreign:training_schedules nullable
+    name: string
+    email: string
+    phone: string
+    company: string nullable
+    number_of_delegates: integer default:1
+    delegate_names: text nullable # JSON array
+    special_requirements: text nullable
+    preferred_date: date nullable
+    status: string default:'pending' # pending, confirmed, cancelled, completed
+    notes: text nullable
+    timestamps: true
+    softdeletes: true
+    relationships:
+      belongsTo: TrainingCourse, TrainingSchedule
+
+  EquipmentCategory:
+    name: string
+    slug: string unique index
+    description: longtext nullable
+    icon: string nullable
+    sort_order: integer default:0
+    is_active: boolean default:true
+    timestamps: true
+    softdeletes: true
+    relationships:
+      hasMany: Equipment
+
+  Equipment:
+    equipment_category_id: id foreign:equipment_categories
+    name: string
+    slug: string unique index
+    description: longtext nullable
+    specifications: text nullable
+    typical_uses: text nullable
+    photo: string nullable
+    gallery_images: text nullable # JSON array
+    daily_rate: decimal:10,2 nullable
+    weekly_rate: decimal:10,2 nullable
+    monthly_rate: decimal:10,2 nullable
+    is_available: boolean default:true
+    is_featured: boolean default:false
+    sort_order: integer default:0
+    timestamps: true
+    softdeletes: true
+    relationships:
+      belongsTo: EquipmentCategory
+      hasMany: EquipmentRentalQuote
+
+  EquipmentRentalQuote:
+    equipment_id: id foreign:equipment nullable
+    name: string
+    company: string nullable
+    email: string
+    phone: string
+    equipment_requested: text nullable # JSON array if multiple items
+    rental_duration: string nullable # "1 day", "1 week", etc.
+    start_date: date nullable
+    location: string nullable
+    delivery_required: boolean default:false
+    message: text nullable
+    status: string default:'pending' # pending, quoted, confirmed, completed, cancelled
+    notes: text nullable
+    timestamps: true
+    softdeletes: true
+    relationships:
+      belongsTo: Equipment
+
+  BlogPost:
+    title: string
+    slug: string unique index
+    excerpt: text nullable
+    content: longtext
+    featured_image: string nullable
+    author: string nullable
+    published_at: datetime nullable
+    is_published: boolean default:false
+    is_featured: boolean default:false
+    meta_title: string nullable
+    meta_description: text nullable
+    timestamps: true
+    softdeletes: true
+
+  ClientLogo:
+    name: string
+    logo: string
+    website: string nullable
+    sort_order: integer default:0
+    is_active: boolean default:true
+    timestamps: true
+
+  Accreditation:
+    name: string
+    acronym: string nullable
+    logo: string
+    description: text nullable
+    certificate_number: string nullable
+    valid_until: date nullable
+    sort_order: integer default:0
+    is_active: boolean default:true
+    timestamps: true
+    softdeletes: true
+
+  Resource:
+    title: string
+    slug: string unique index
+    description: text nullable
+    file: string
+    file_type: string nullable # PDF, DOCX, etc.
+    file_size: integer nullable
+    category: string nullable # Company Profile, Brochure, Guide, etc.
+    download_count: integer default:0
+    requires_details: boolean default:false # Lead capture before download
+    is_active: boolean default:true
+    sort_order: integer default:0
+    timestamps: true
+    softdeletes: true
+
+  ContactSubmission:
+    type: string default:'general' # general, quote, consultation
+    name: string
+    email: string
+    phone: string nullable
+    company: string nullable
+    subject: string nullable
+    message: text
+    service_type: string nullable
+    project_name: string nullable
+    location: string nullable
+    sector: string nullable
+    timeline: string nullable
+    attachments: text nullable # JSON array
+    status: string default:'new' # new, contacted, in_progress, closed
+    notes: text nullable
+    ip_address: string nullable
+    user_agent: text nullable
+    timestamps: true
+
+  LeadCapture:
+    name: string
+    email: string
+    phone: string nullable
+    company: string nullable
+    province: string nullable
+    source: string nullable # Which download/form
+    resource_id: id foreign:resources nullable
+    timestamps: true
+    relationships:
+      belongsTo: Resource
+
+controllers:
+  Service:
+    index:
+      query: all
+      render: services.index with:services
+    show:
+      find: slug
+      render: services.show with:service
+
+  TeamMember:
+    index:
+      query: all
+      render: team.index with:team_members
+
+  Sector:
+    index:
+      query: all
+      render: sectors.index with:sectors
+    show:
+      find: slug
+      render: sectors.show with:sector,projects
+
+  Project:
+    index:
+      query: all
+      render: projects.index with:projects
+    show:
+      find: slug
+      render: projects.show with:project
+
+  TrainingCourse:
+    index:
+      query: all
+      render: training.index with:courses,schedules
+    show:
+      find: slug
+      render: training.show with:course,schedules
+
+  Equipment:
+    index:
+      query: all
+      render: equipment.index with:equipment,categories
+    show:
+      find: slug
+      render: equipment.show with:equipment
+
+  BlogPost:
+    index:
+      query: published
+      render: blog.index with:posts
+    show:
+      find: slug
+      render: blog.show with:post
+
+  Resource:
+    index:
+      query: all
+      render: resources.index with:resources
+    download:
+      find: slug
+      redirect: route('resources.index')
+
+# Note: After running blueprint:build, you'll need to:
+# 1. Install Filament: composer require filament/filament
+# 2. Run: php artisan filament:install --panels
+# 3. Create Filament resources for each model
+# 4. Customize as needed
