@@ -51,6 +51,8 @@
         {{ $slot }}
     </main>
 
+    <x-public.gallery-strip />
+
     <x-public.footer />
 
     @fluxScripts

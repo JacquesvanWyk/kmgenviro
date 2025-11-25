@@ -31,6 +31,7 @@ Volt::route('/blog', 'blog.index')->name('blog.index');
 Volt::route('/blog/{post:slug}', 'blog.show')->name('blog.show');
 
 Volt::route('/resources', 'resources')->name('resources');
+Volt::route('/gallery', 'gallery')->name('gallery');
 Volt::route('/contact', 'contact')->name('contact');
 
 Route::view('dashboard', 'dashboard')
