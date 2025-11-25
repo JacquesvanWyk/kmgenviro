@@ -15,6 +15,7 @@ Volt::route('/team', 'team')->name('team');
 Volt::route('/accreditations', 'accreditations')->name('accreditations');
 
 Volt::route('/services', 'services.index')->name('services.index');
+Volt::route('/services/category/{category:slug}', 'services.category')->name('services.category');
 Volt::route('/services/{service:slug}', 'services.show')->name('services.show');
 
 Volt::route('/sectors', 'sectors.index')->name('sectors.index');
