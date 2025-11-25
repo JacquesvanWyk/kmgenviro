@@ -44,10 +44,10 @@ $projectCount = computed(fn() => Project::count());
 <div class="bg-zinc-50">
     <!-- Hero Section -->
     <section class="relative min-h-screen flex items-center justify-center overflow-hidden liquid-glass">
-        @if(file_exists(public_path('images/hero-1.jpg')))
+        @if(file_exists(public_path('images/hero/team-water-sampling.jpg')))
             <!-- Background Image -->
-            <img src="{{ asset('images/hero-1.jpg') }}"
-                 alt="KMG Environmental fieldwork - Professional environmental consultants conducting on-site assessment"
+            <img src="{{ asset('images/hero/team-water-sampling.jpg') }}"
+                 alt="KMG Environmental team conducting water quality sampling in Lesotho river"
                  class="absolute inset-0 w-full h-full object-cover object-center"
                  loading="eager">
 
