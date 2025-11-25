@@ -6,39 +6,39 @@
 
 3. [ ] **Core Models & Relationships** — Implement Eloquent models for Service, ServiceCategory, TeamMember, Project, Course, Equipment, Lead, and Booking with proper relationships (belongsTo, hasMany, belongsToMany), casts, and accessors. Include comprehensive factories for testing and seeding. `M`
 
-4. [ ] **Service Management Resource** — Create Filament resource for managing service categories and services with nested relationship support, rich text editor for descriptions, multi-select for accreditations, sector tagging, and file uploads for service brochures. `M`
+4. [x] **Service Management Resource** — Create Filament resource for managing service categories and services with nested relationship support, rich text editor for descriptions, multi-select for accreditations, sector tagging, and file uploads for service brochures. `M`
 
-5. [ ] **Team Member Management Resource** — Build Filament resource for team profiles including profile photo upload, qualifications, professional registrations (checkboxes for SACNASP, EAPASA, SAIOH), specializations, and biography with rich text editor. `S`
+5. [x] **Team Member Management Resource** — Build Filament resource for team profiles including profile photo upload, qualifications, professional registrations (checkboxes for SACNASP, EAPASA, SAIOH), specializations, and biography with rich text editor. `S`
 
-6. [ ] **Project Portfolio Management Resource** — Develop Filament resource for case studies with sector categorization, client name (optional), project description, challenges/solutions/outcomes sections, image gallery uploads, and publish status. `S`
+6. [x] **Project Portfolio Management Resource** — Develop Filament resource for case studies with sector categorization, client name (optional), project description, challenges/solutions/outcomes sections, image gallery uploads, and publish status. `S`
 
-7. [ ] **Training Course Management Resource** — Create Filament resource for managing courses with course details, accreditation information, learning outcomes, prerequisites, pricing, course schedule calendar integration, and enrollment capacity tracking. `M`
+7. [x] **Training Course Management Resource** — Create Filament resource for managing courses with course details, accreditation information, learning outcomes, prerequisites, pricing, course schedule calendar integration, and enrollment capacity tracking. `M`
 
-8. [ ] **Equipment Rental Catalogue Resource** — Build Filament resource for equipment inventory with specifications (structured JSON), rental rates (daily/weekly/monthly), availability status, equipment photos, and category organization. `S`
+8. [x] **Equipment Rental Catalogue Resource** — Build Filament resource for equipment inventory with specifications (structured JSON), rental rates (daily/weekly/monthly), availability status, equipment photos, and category organization. `S`
 
-9. [ ] **Blog & News Management Resource** — Develop Filament resource for articles with rich text editor, featured image upload, category/tag taxonomy, SEO fields (meta title/description), author assignment, and publish scheduling. `S`
+9. [x] **Blog & News Management Resource** — Develop Filament resource for articles with rich text editor, featured image upload, category/tag taxonomy, SEO fields (meta title/description), author assignment, and publish scheduling. `S`
 
-10. [ ] **Lead & Enquiry Management System** — Create Filament resource displaying all contact form submissions, quote requests, and consultation bookings with status workflow (new, contacted, quoted, won, lost), assignment to team members, internal notes, and email integration. `M`
+10. [x] **Lead & Enquiry Management System** — Create Filament resource displaying all contact form submissions, quote requests, and consultation bookings with status workflow (new, contacted, quoted, won, lost), assignment to team members, internal notes, and email integration. `M`
 
-11. [ ] **Homepage Design & Implementation** — Build homepage with hero section (company tagline, primary CTA), service category cards (10 categories with icons and descriptions), client logo carousel, statistics section (years experience, projects completed, accreditations), latest news/blog posts, and trust indicators (accreditation badges). `M`
+11. [x] **Homepage Design & Implementation** — Build homepage with hero section (company tagline, primary CTA), service category cards (10 categories with icons and descriptions), client logo carousel, statistics section (years experience, projects completed, accreditations), latest news/blog posts, and trust indicators (accreditation badges). `M`
 
-12. [ ] **Service Pages Architecture** — Create service category index pages listing all services within category, individual service detail pages with full description, relevant accreditations, sector applications, typical deliverables, related case studies, team members specializing in service, and contextual quote request form. `L`
+12. [x] **Service Pages Architecture** — Create service category index pages listing all services within category, individual service detail pages with full description, relevant accreditations, sector applications, typical deliverables, related case studies, team members specializing in service, and contextual quote request form. `L`
 
-13. [ ] **About & Team Pages** — Develop about page with company history, mission/values, accreditations showcase with verification documents, and team directory page with filterable grid of team members linking to individual profiles displaying full qualifications and expertise. `M`
+13. [x] **About & Team Pages** — Develop about page with company history, mission/values, accreditations showcase with verification documents, and team directory page with filterable grid of team members linking to individual profiles displaying full qualifications and expertise. `M`
 
-14. [ ] **Sectors & Projects Portfolio** — Build sector overview pages (mining, infrastructure, municipal, renewable energy, commercial) with sector-specific challenges and solutions, followed by filterable project portfolio displaying case studies with sector/service filters and detailed project pages. `M`
+14. [x] **Sectors & Projects Portfolio** — Build sector overview pages (mining, infrastructure, municipal, renewable energy, commercial) with sector-specific challenges and solutions, followed by filterable project portfolio displaying case studies with sector/service filters and detailed project pages. `M`
 
-15. [ ] **Resources & Downloads Center** — Create resources page organizing downloadable content (company profile, service brochures, technical guides, compliance templates) with category filters, search functionality, and download tracking analytics. `S`
+15. [x] **Resources & Downloads Center** — Create resources page organizing downloadable content (company profile, service brochures, technical guides, compliance templates) with category filters, search functionality, and download tracking analytics. `S`
 
-16. [ ] **Training Course Public Pages** — Develop training landing page explaining accreditations and benefits, course catalogue with filtering by category/accreditation type, individual course detail pages with full syllabus, pricing, dates, and enrollment CTA leading to booking form. `M`
+16. [x] **Training Course Public Pages** — Develop training landing page explaining accreditations and benefits, course catalogue with filtering by category/accreditation type, individual course detail pages with full syllabus, pricing, dates, and enrollment CTA leading to booking form. `M`
 
-17. [ ] **Equipment Rental Public Pages** — Build equipment rental landing page, searchable/filterable equipment catalogue with specifications and pricing, individual equipment detail pages with technical specs and availability calendar, and quote request form pre-populated with equipment selection. `M`
+17. [x] **Equipment Rental Public Pages** — Build equipment rental landing page, searchable/filterable equipment catalogue with specifications and pricing, individual equipment detail pages with technical specs and availability calendar, and quote request form pre-populated with equipment selection. `M`
 
-18. [ ] **Training Course Booking System** — Implement multi-step booking form (course selection, attendee details, company information, special requirements), calendar integration showing available sessions with capacity, automated confirmation emails with payment instructions and pre-course materials, and admin booking management dashboard. `L`
+18. [x] **Training Course Booking System** — Implement multi-step booking form (course selection, attendee details, company information, special requirements), calendar integration showing available sessions with capacity, automated confirmation emails with payment instructions and pre-course materials, and admin booking management dashboard. `L`
 
-19. [ ] **Equipment Rental Quote System** — Create structured quote request form capturing equipment selection (multiple items), rental period (start/end dates), delivery address, project context, and contact details. Send automated acknowledgment email and create lead in Filament admin with quote workflow. `M`
+19. [x] **Equipment Rental Quote System** — Create structured quote request form capturing equipment selection (multiple items), rental period (start/end dates), delivery address, project context, and contact details. Send automated acknowledgment email and create lead in Filament admin with quote workflow. `M`
 
-20. [ ] **Contact Forms & Lead Capture** — Build general contact form, service-specific quote request forms (embedded on service pages), consultation booking form, and implement intelligent routing to appropriate staff based on service category or enquiry type with automated email notifications. `M`
+20. [x] **Contact Forms & Lead Capture** — Build general contact form, service-specific quote request forms (embedded on service pages), consultation booking form, and implement intelligent routing to appropriate staff based on service category or enquiry type with automated email notifications. `M`
 
 21. [ ] **WhatsApp Chat Integration** — Add floating WhatsApp button with contextual pre-filled messages based on current page (e.g., visiting Asbestos Compliance service page pre-fills "I'm interested in asbestos compliance services"), implement on all service pages, course pages, and equipment pages. `XS`
 
@@ -69,3 +69,5 @@
 > - Training booking system (item 18) and equipment quote system (item 19) are most complex features requiring calendar integration and workflow management
 > - Content migration (item 29) should be done late to avoid re-work as schema evolves during development
 > - Testing (item 30) covers critical business flows but aims for reasonable coverage, not perfectionist 100% coverage
+> - **Items 4-10 completed via spec 2025-11-17-filament-resources-implementation** — Implemented 17 Filament resources covering service management, team members, projects, training courses, equipment rental, blog posts, and lead/enquiry management with comprehensive CRUD operations, relationships, status workflows, and file uploads.
+> - **Items 11-20 completed via spec 2025-11-17-public-frontend** — Implemented complete public-facing website with 16 routes, all content pages (homepage, services, projects, training, equipment, blog, resources, contact), interactive forms (training booking, equipment quotes, contact), proper SEO meta tags, mobile-responsive design, and comprehensive test coverage (57 tests passing).

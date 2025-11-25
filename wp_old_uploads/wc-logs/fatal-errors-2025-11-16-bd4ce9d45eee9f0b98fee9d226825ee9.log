@@ -1,0 +1,32 @@
+2025-11-16T06:41:32+00:00 CRITICAL Uncaught Error: Attempt to assign property "filename" on null in /home/u88283/domains/kmgenviro.co.za/public_html/wp-content/plugins/booked/includes/updates/plugin-update-checker.php:228
+Stack trace:
+#0 /home/u88283/domains/kmgenviro.co.za/public_html/wp-content/plugins/booked/includes/updates/plugin-update-checker.php(256): PluginUpdateChecker_2_3->requestInfo()
+#1 /home/u88283/domains/kmgenviro.co.za/public_html/wp-content/plugins/booked/includes/updates/plugin-update-checker.php(349): PluginUpdateChecker_2_3->requestUpdate()
+#2 /home/u88283/domains/kmgenviro.co.za/public_html/wp-content/plugins/booked/includes/updates/plugin-update-checker.php(407): PluginUpdateChecker_2_3->checkForUpdates()
+#3 /home/u88283/domains/kmgenviro.co.za/public_html/wp-includes/class-wp-hook.php(324): PluginUpdateChecker_2_3->maybeCheckForUpdates()
+#4 /home/u88283/domains/kmgenviro.co.za/public_html/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters()
+#5 /home/u88283/domains/kmgenviro.co.za/public_html/wp-includes/plugin.php(565): WP_Hook->do_action()
+#6 /home/u88283/domains/kmgenviro.co.za/public_html/wp-cron.php(191): do_action_ref_array()
+#7 {main}
+  thrown in /home/u88283/domains/kmgenviro.co.za/public_html/wp-content/plugins/booked/includes/updates/plugin-update-checker.php on line 228
+
+2025-11-16T18:36:41+00:00 CRITICAL Uncaught Error: Attempt to assign property "filename" on null in /home/u88283/domains/kmgenviro.co.za/public_html/wp-content/plugins/booked/includes/updates/plugin-update-checker.php:228
+Stack trace:
+#0 /home/u88283/domains/kmgenviro.co.za/public_html/wp-content/plugins/booked/includes/updates/plugin-update-checker.php(256): PluginUpdateChecker_2_3->requestInfo()
+#1 /home/u88283/domains/kmgenviro.co.za/public_html/wp-content/plugins/booked/includes/updates/plugin-update-checker.php(349): PluginUpdateChecker_2_3->requestUpdate()
+#2 /home/u88283/domains/kmgenviro.co.za/public_html/wp-content/plugins/booked/includes/updates/plugin-update-checker.php(407): PluginUpdateChecker_2_3->checkForUpdates()
+#3 /home/u88283/domains/kmgenviro.co.za/public_html/wp-includes/class-wp-hook.php(324): PluginUpdateChecker_2_3->maybeCheckForUpdates()
+#4 /home/u88283/domains/kmgenviro.co.za/public_html/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters()
+#5 /home/u88283/domains/kmgenviro.co.za/public_html/wp-includes/plugin.php(565): WP_Hook->do_action()
+#6 /home/u88283/domains/kmgenviro.co.za/public_html/wp-cron.php(191): do_action_ref_array()
+#7 {main}
+  thrown in /home/u88283/domains/kmgenviro.co.za/public_html/wp-content/plugins/booked/includes/updates/plugin-update-checker.php on line 228
+
+2025-11-16T20:35:05+00:00 CRITICAL Uncaught Error: Call to undefined function tutor_course_enroll_box() in /home/u88283/domains/kmgenviro.co.za/public_html/wp-content/themes/visapass/tutor/single-course.php:39
+Stack trace:
+#0 /home/u88283/domains/kmgenviro.co.za/public_html/wp-includes/template-loader.php(106): include()
+#1 /home/u88283/domains/kmgenviro.co.za/public_html/wp-blog-header.php(19): require_once('/home/u88283/do...')
+#2 /home/u88283/domains/kmgenviro.co.za/public_html/index.php(17): require('/home/u88283/do...')
+#3 {main}
+  thrown in /home/u88283/domains/kmgenviro.co.za/public_html/wp-content/themes/visapass/tutor/single-course.php on line 39
+

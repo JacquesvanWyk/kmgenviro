@@ -1,0 +1,24 @@
+2025-10-21T07:08:03+00:00 CRITICAL Uncaught Error: Attempt to assign property "filename" on null in /home/u88283/domains/kmgenviro.co.za/public_html/wp-content/plugins/booked/includes/updates/plugin-update-checker.php:228
+Stack trace:
+#0 /home/u88283/domains/kmgenviro.co.za/public_html/wp-content/plugins/booked/includes/updates/plugin-update-checker.php(256): PluginUpdateChecker_2_3->requestInfo()
+#1 /home/u88283/domains/kmgenviro.co.za/public_html/wp-content/plugins/booked/includes/updates/plugin-update-checker.php(349): PluginUpdateChecker_2_3->requestUpdate()
+#2 /home/u88283/domains/kmgenviro.co.za/public_html/wp-content/plugins/booked/includes/updates/plugin-update-checker.php(407): PluginUpdateChecker_2_3->checkForUpdates()
+#3 /home/u88283/domains/kmgenviro.co.za/public_html/wp-includes/class-wp-hook.php(324): PluginUpdateChecker_2_3->maybeCheckForUpdates()
+#4 /home/u88283/domains/kmgenviro.co.za/public_html/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters()
+#5 /home/u88283/domains/kmgenviro.co.za/public_html/wp-includes/plugin.php(565): WP_Hook->do_action()
+#6 /home/u88283/domains/kmgenviro.co.za/public_html/wp-cron.php(191): do_action_ref_array()
+#7 {main}
+  thrown in /home/u88283/domains/kmgenviro.co.za/public_html/wp-content/plugins/booked/includes/updates/plugin-update-checker.php on line 228
+
+2025-10-21T18:59:06+00:00 CRITICAL Uncaught Error: Attempt to assign property "filename" on null in /home/u88283/domains/kmgenviro.co.za/public_html/wp-content/plugins/booked/includes/updates/plugin-update-checker.php:228
+Stack trace:
+#0 /home/u88283/domains/kmgenviro.co.za/public_html/wp-content/plugins/booked/includes/updates/plugin-update-checker.php(256): PluginUpdateChecker_2_3->requestInfo()
+#1 /home/u88283/domains/kmgenviro.co.za/public_html/wp-content/plugins/booked/includes/updates/plugin-update-checker.php(349): PluginUpdateChecker_2_3->requestUpdate()
+#2 /home/u88283/domains/kmgenviro.co.za/public_html/wp-content/plugins/booked/includes/updates/plugin-update-checker.php(407): PluginUpdateChecker_2_3->checkForUpdates()
+#3 /home/u88283/domains/kmgenviro.co.za/public_html/wp-includes/class-wp-hook.php(324): PluginUpdateChecker_2_3->maybeCheckForUpdates()
+#4 /home/u88283/domains/kmgenviro.co.za/public_html/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters()
+#5 /home/u88283/domains/kmgenviro.co.za/public_html/wp-includes/plugin.php(565): WP_Hook->do_action()
+#6 /home/u88283/domains/kmgenviro.co.za/public_html/wp-cron.php(191): do_action_ref_array()
+#7 {main}
+  thrown in /home/u88283/domains/kmgenviro.co.za/public_html/wp-content/plugins/booked/includes/updates/plugin-update-checker.php on line 228
+

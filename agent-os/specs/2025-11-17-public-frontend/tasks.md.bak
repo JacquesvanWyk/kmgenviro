@@ -1,0 +1,2714 @@
+# Phase 3: Public Frontend - Implementation Tasks
+
+**Project:** KMG Environmental Solutions - Laravel CMS
+**Phase:** 3 - Public Frontend
+**Created:** 2025-11-17
+**Estimated Duration:** 3-4 weeks
+
+---
+
+## Task Overview
+
+| Group | Tasks | Estimated Time |
+|-------|-------|----------------|
+| 1. Layout & Foundation | 8 tasks | 6-8 hours |
+| 2. Homepage | 7 tasks | 6-8 hours |
+| 3. About Pages | 3 tasks | 4-5 hours |
+| 4. Services Pages | 2 tasks | 3-4 hours |
+| 5. Sectors & Projects | 3 tasks | 5-6 hours |
+| 6. Training Pages | 2 tasks | 4-5 hours |
+| 7. Equipment Pages | 2 tasks | 4-5 hours |
+| 8. Blog Pages | 2 tasks | 3-4 hours |
+| 9. Resources & Contact | 2 tasks | 4-5 hours |
+| 10. Testing & Optimization | 5 tasks | 6-8 hours |
+| **TOTAL** | **36 tasks** | **45-58 hours** |
+
+---
+
+## Task Group 1: Layout & Foundation (6-8 hours)
+
+### 1.1 Create Base Layout Component
+**File:** `resources/views/components/layouts/app.blade.php`
+
+**Requirements:**
+- DOCTYPE and HTML structure
+- Meta tags (viewport, charset, title, description)
+- Favicon links
+- CSS link (compiled Tailwind)
+- Header component slot
+- Main content area (slot)
+- Footer component slot
+- Livewire scripts
+- Alpine.js (included with Livewire)
+- Google Analytics placeholder (optional)
+
+**Implementation:**
+```blade
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ $title ?? 'KMG Environmental Solutions' }}</title>
+    <meta name="description" content="{{ $description ?? 'Environmental consultancy and solutions in South Africa' }}">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+
+    <!-- Styles -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- Additional Head Content -->
+    {{ $head ?? '' }}
+</head>
+<body class="font-sans antialiased bg-white text-gray-900">
+    <x-header />
+
+    <main>
+        {{ $slot }}
+    </main>
+
+    <x-footer />
+</body>
+</html>
+```
+
+**Acceptance Criteria:**
+- Layout renders correctly
+- Meta tags present
+- CSS and JS loaded
+- Header and footer slots work
+
+---
+
+### 1.2 Create Header Component
+**File:** `resources/views/components/header.blade.php`
+
+**Requirements:**
+- KMG logo (links to homepage)
+- Desktop navigation menu
+- Mobile hamburger menu button
+- Active link highlighting
+- Sticky header on scroll (optional)
+- Responsive breakpoints (hidden md:block)
+
+**Navigation Structure:**
+```php
+$navigation = [
+    ['label' => 'Home', 'route' => 'home'],
+    ['label' => 'About', 'route' => 'about', 'children' => [
+        ['label' => 'Our Team', 'route' => 'team'],
+        ['label' => 'Accreditations', 'route' => 'accreditations'],
+    ]],
+    ['label' => 'Services', 'route' => 'services.index'],
+    ['label' => 'Projects', 'route' => 'projects.index'],
+    ['label' => 'Training', 'route' => 'training.index'],
+    ['label' => 'Equipment', 'route' => 'equipment.index'],
+    ['label' => 'Blog', 'route' => 'blog.index'],
+    ['label' => 'Contact', 'route' => 'contact'],
+];
+```
+
+**Features:**
+- Flux UI navbar components
+- Active state with `request()->routeIs()`
+- Dropdown for "About" submenu
+- Mobile menu drawer (Alpine.js)
+
+**Acceptance Criteria:**
+- Logo displays correctly
+- Desktop navigation horizontal
+- Mobile menu toggle works
+- Active links highlighted
+- All links navigate correctly
+
+---
+
+### 1.3 Create Footer Component
+**File:** `resources/views/components/footer.blade.php`
+
+**Requirements:**
+- 4-column layout (desktop) → 2-column (tablet) → 1-column (mobile)
+- **Column 1:** KMG logo, tagline, social links
+- **Column 2:** Quick Links (Home, Services, Training, Equipment, Contact)
+- **Column 3:** Top Services (dynamic, max 5 from ServiceCategory)
+- **Column 4:** Company (About, Team, Accreditations, Projects, Blog)
+- **Bottom:** Copyright notice, legal links
+
+**Dynamic Content:**
+```php
+$topServices = ServiceCategory::where('active', true)
+    ->orderBy('display_order')
+    ->limit(5)
+    ->get();
+```
+
+**Acceptance Criteria:**
+- Footer renders on all pages
+- Dynamic services load correctly
+- Links navigate correctly
+- Responsive layout works
+- Social icons present (if configured)
+
+---
+
+### 1.4 Create Breadcrumb Component
+**File:** `resources/views/components/breadcrumb.blade.php`
+
+**Props:**
+```php
+@props(['items' => []])
+```
+
+**Usage Example:**
+```blade
+<x-breadcrumb :items="[
+    ['label' => 'Home', 'url' => route('home')],
+    ['label' => 'Services', 'url' => route('services.index')],
+    ['label' => $service->name],
+]" />
+```
+
+**Rendering:**
+- Home icon or text for first item
+- Separator between items (chevron or slash)
+- Last item not linked (current page)
+- Responsive text sizing
+
+**Acceptance Criteria:**
+- Breadcrumb renders correctly
+- Links navigate properly
+- Last item not clickable
+- Responsive styling
+
+---
+
+### 1.5 Create Reusable Card Components
+
+**Files:**
+- `resources/views/components/service-card.blade.php`
+- `resources/views/components/project-card.blade.php`
+- `resources/views/components/blog-post-card.blade.php`
+- `resources/views/components/team-member-card.blade.php`
+
+**Service Card:**
+```blade
+@props(['service'])
+
+<div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
+    @if($service->icon)
+        <div class="text-4xl mb-4">{{ $service->icon }}</div>
+    @endif
+    <h3 class="text-xl font-semibold mb-2">{{ $service->name }}</h3>
+    <p class="text-gray-600 mb-4">{{ Str::limit($service->description, 120) }}</p>
+    <a href="{{ route('services.show', $service->slug) }}" class="text-green-600 hover:text-green-700 font-medium">
+        Learn More →
+    </a>
+</div>
+```
+
+**Project Card:**
+- Featured image (aspect-ratio: 16/9)
+- Project name
+- Sector badge
+- Province
+- Completion date
+- "View Details" link
+
+**Blog Post Card:**
+- Featured image
+- Title (h3)
+- Excerpt
+- Author name
+- Published date
+- "Read More" link
+
+**Team Member Card:**
+- Circular photo
+- Name (h3)
+- Position
+- Bio excerpt
+- Professional registrations (expandable)
+- LinkedIn link
+
+**Acceptance Criteria:**
+- All cards render correctly
+- Hover states work
+- Images display properly
+- Links navigate correctly
+- Responsive layouts
+
+---
+
+### 1.6 Setup Routes
+**File:** `routes/web.php`
+
+**Implementation:**
+```php
+use App\Livewire\{
+    Home,
+    About,
+    Team,
+    Accreditations,
+    Services\Index as ServicesIndex,
+    Services\Show as ServiceShow,
+    Sectors\Index as SectorsIndex,
+    Projects\Index as ProjectsIndex,
+    Projects\Show as ProjectShow,
+    Training\Index as TrainingIndex,
+    Training\Show as TrainingShow,
+    Equipment\Index as EquipmentIndex,
+    Equipment\Show as EquipmentShow,
+    Blog\Index as BlogIndex,
+    Blog\Show as BlogShow,
+    Resources,
+    Contact,
+};
+
+Route::get('/', Home::class)->name('home');
+Route::get('/about', About::class)->name('about');
+Route::get('/team', Team::class)->name('team');
+Route::get('/accreditations', Accreditations::class)->name('accreditations');
+
+Route::get('/services', ServicesIndex::class)->name('services.index');
+Route::get('/services/{service:slug}', ServiceShow::class)->name('services.show');
+
+Route::get('/sectors', SectorsIndex::class)->name('sectors.index');
+Route::get('/projects', ProjectsIndex::class)->name('projects.index');
+Route::get('/projects/{project:slug}', ProjectShow::class)->name('projects.show');
+
+Route::get('/training', TrainingIndex::class)->name('training.index');
+Route::get('/training/{course:slug}', TrainingShow::class)->name('training.show');
+
+Route::get('/equipment', EquipmentIndex::class)->name('equipment.index');
+Route::get('/equipment/{equipment:slug}', EquipmentShow::class)->name('equipment.show');
+
+Route::get('/blog', BlogIndex::class)->name('blog.index');
+Route::get('/blog/{post:slug}', BlogShow::class)->name('blog.show');
+
+Route::get('/resources', Resources::class)->name('resources');
+Route::get('/contact', Contact::class)->name('contact');
+```
+
+**Acceptance Criteria:**
+- All routes defined
+- Named routes configured
+- Route model binding works ({service:slug})
+- `php artisan route:list` shows all public routes
+
+---
+
+### 1.7 Create Livewire Volt Components Structure
+
+**Create directories:**
+```bash
+mkdir -p resources/views/livewire
+mkdir -p resources/views/livewire/services
+mkdir -p resources/views/livewire/projects
+mkdir -p resources/views/livewire/training
+mkdir -p resources/views/livewire/equipment
+mkdir -p resources/views/livewire/blog
+```
+
+**Initial Components (empty for now, will implement in subsequent tasks):**
+- `resources/views/livewire/home.blade.php`
+- `resources/views/livewire/about.blade.php`
+- `resources/views/livewire/team.blade.php`
+- `resources/views/livewire/accreditations.blade.php`
+- `resources/views/livewire/services/index.blade.php`
+- `resources/views/livewire/services/show.blade.php`
+- `resources/views/livewire/projects/index.blade.php`
+- `resources/views/livewire/projects/show.blade.php`
+- `resources/views/livewire/training/index.blade.php`
+- `resources/views/livewire/training/show.blade.php`
+- `resources/views/livewire/equipment/index.blade.php`
+- `resources/views/livewire/equipment/show.blade.php`
+- `resources/views/livewire/blog/index.blade.php`
+- `resources/views/livewire/blog/show.blade.php`
+- `resources/views/livewire/resources.blade.php`
+- `resources/views/livewire/contact.blade.php`
+
+**Acceptance Criteria:**
+- Directory structure created
+- Placeholder component files created
+- Ready for implementation
+
+---
+
+### 1.8 Update Tailwind Configuration (if needed)
+**File:** `resources/css/app.css`
+
+**Ensure:**
+- Inter font imported
+- KMG brand colors defined in @theme
+- Custom utilities if needed
+
+**Verification:**
+```bash
+npm run build
+```
+
+**Acceptance Criteria:**
+- Tailwind compiles successfully
+- Custom colors available
+- Typography configured
+- Build completes without errors
+
+---
+
+## Task Group 2: Homepage Implementation (6-8 hours)
+
+### 2.1 Create Homepage Volt Component
+**File:** `resources/views/livewire/home.blade.php`
+
+**Data Requirements:**
+```php
+use function Livewire\Volt\{computed};
+use App\Models\{ServiceCategory, Project, ClientLogo, BlogPost, TeamMember, Accreditation};
+
+$serviceCategories = computed(fn() =>
+    ServiceCategory::where('active', true)
+        ->orderBy('display_order')
+        ->limit(6)
+        ->get()
+);
+
+$featuredProjects = computed(fn() =>
+    Project::where('featured', true)
+        ->latest('completion_date')
+        ->limit(3)
+        ->get()
+);
+
+$clientLogos = computed(fn() =>
+    ClientLogo::where('active', true)
+        ->orderBy('display_order')
+        ->get()
+);
+
+$latestPosts = computed(fn() =>
+    BlogPost::where('published', true)
+        ->latest('published_at')
+        ->limit(3)
+        ->get()
+);
+
+$teamCount = computed(fn() => TeamMember::where('active', true)->count());
+$accreditationCount = computed(fn() => Accreditation::where('active', true)->count());
+$projectCount = computed(fn() => Project::count());
+```
+
+**Acceptance Criteria:**
+- Data loads correctly
+- Computed properties work
+- Ready for template implementation
+
+---
+
+### 2.2 Implement Hero Section
+**Template:** Within `home.blade.php`
+
+**Requirements:**
+- Full-width background image (static or from assets)
+- Dark overlay (bg-black/50)
+- Centered content:
+  - Headline (h1): "Environmental Solutions for Sustainable Growth"
+  - Subheadline (p): Value proposition
+  - 2 CTA buttons: "Our Services", "Get a Quote"
+- Minimum height: 80vh
+- Responsive text sizing
+
+**Implementation:**
+```blade
+<section class="relative h-screen min-h-[600px] flex items-center justify-center bg-cover bg-center"
+         style="background-image: url('{{ asset('images/hero-bg.jpg') }}')">
+    <div class="absolute inset-0 bg-gradient-to-r from-green-900/80 to-green-700/80"></div>
+    <div class="relative z-10 max-w-4xl mx-auto px-4 text-center text-white">
+        <h1 class="text-5xl md:text-6xl font-bold mb-6">
+            Environmental Solutions for Sustainable Growth
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 text-gray-100">
+            Leading environmental consultancy providing expert solutions across South Africa
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <flux:button variant="primary" size="lg" href="{{ route('services.index') }}">
+                Our Services
+            </flux:button>
+            <flux:button variant="secondary" size="lg" href="{{ route('contact') }}">
+                Get a Quote
+            </flux:button>
+        </div>
+    </div>
+</section>
+```
+
+**Acceptance Criteria:**
+- Hero section displays full-height
+- Text legible with overlay
+- CTAs navigate correctly
+- Responsive on mobile
+
+---
+
+### 2.3 Implement Services Overview Section
+
+**Requirements:**
+- Container with padding
+- Section heading: "Our Services"
+- Grid: 3 columns (desktop), 2 (tablet), 1 (mobile)
+- Use `<x-service-card>` component for each service category
+- "View All Services" link below grid
+
+**Implementation:**
+```blade
+<section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-4xl font-bold text-center mb-12">Our Services</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+            @foreach($this->serviceCategories as $category)
+                <x-service-card :service="$category" />
+            @endforeach
+        </div>
+        <div class="text-center">
+            <a href="{{ route('services.index') }}" class="text-green-600 hover:text-green-700 font-semibold text-lg">
+                View All Services →
+            </a>
+        </div>
+    </div>
+</section>
+```
+
+**Acceptance Criteria:**
+- Services display in grid
+- Max 6 service categories shown
+- Responsive layout works
+- Link navigates to services page
+
+---
+
+### 2.4 Implement "Why Choose KMG" Section
+
+**Requirements:**
+- 3-column features grid
+- Icons for each feature (Heroicons or emoji)
+- Headlines and descriptions
+- Dynamic counts from database
+
+**Features:**
+1. **Expert Team:** "X+ environmental professionals"
+2. **Accredited & Certified:** "X+ industry accreditations"
+3. **Proven Track Record:** "X+ successful projects"
+
+**Implementation:**
+```blade
+<section class="py-16">
+    <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-4xl font-bold text-center mb-12">Why Choose KMG</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="text-center">
+                <div class="text-5xl mb-4">👥</div>
+                <h3 class="text-2xl font-semibold mb-2">Expert Team</h3>
+                <p class="text-gray-600">{{ $this->teamCount }}+ environmental professionals</p>
+            </div>
+            <div class="text-center">
+                <div class="text-5xl mb-4">🏆</div>
+                <h3 class="text-2xl font-semibold mb-2">Accredited & Certified</h3>
+                <p class="text-gray-600">{{ $this->accreditationCount }}+ industry accreditations</p>
+            </div>
+            <div class="text-center">
+                <div class="text-5xl mb-4">📊</div>
+                <h3 class="text-2xl font-semibold mb-2">Proven Track Record</h3>
+                <p class="text-gray-600">{{ $this->projectCount }}+ successful projects</p>
+            </div>
+        </div>
+    </div>
+</section>
+```
+
+**Acceptance Criteria:**
+- 3 features display correctly
+- Counts load from database
+- Icons display
+- Responsive grid
+
+---
+
+### 2.5 Implement Featured Projects Section
+
+**Requirements:**
+- Section heading: "Featured Projects"
+- 3-card grid
+- Use `<x-project-card>` component
+- "View All Projects" link
+
+**Implementation:**
+```blade
+<section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-4xl font-bold text-center mb-12">Featured Projects</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            @foreach($this->featuredProjects as $project)
+                <x-project-card :project="$project" />
+            @endforeach
+        </div>
+        <div class="text-center">
+            <a href="{{ route('projects.index') }}" class="text-green-600 hover:text-green-700 font-semibold text-lg">
+                View All Projects →
+            </a>
+        </div>
+    </div>
+</section>
+```
+
+**Acceptance Criteria:**
+- Featured projects display
+- Max 3 projects shown
+- Link navigates to projects page
+- Grid responsive
+
+---
+
+### 2.6 Implement Client Logos Section
+
+**Requirements:**
+- Section heading: "Trusted by Leading Organizations"
+- Grid or scrolling marquee of logos
+- Grayscale logos with color on hover
+
+**Implementation:**
+```blade
+<section class="py-16">
+    <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-4xl font-bold text-center mb-12">Trusted by Leading Organizations</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center">
+            @foreach($this->clientLogos as $logo)
+                <div class="flex items-center justify-center grayscale hover:grayscale-0 transition">
+                    <img src="{{ Storage::url($logo->logo) }}"
+                         alt="{{ $logo->name }}"
+                         class="max-h-20 w-auto">
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+```
+
+**Acceptance Criteria:**
+- Logos display in grid
+- Grayscale effect works
+- Hover color transition smooth
+- Responsive layout
+
+---
+
+### 2.7 Implement Latest Blog Posts Section
+
+**Requirements:**
+- Section heading: "Latest Insights"
+- 3-card grid
+- Use `<x-blog-post-card>` component
+- "Read Our Blog" link
+
+**Implementation:**
+```blade
+<section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-4xl font-bold text-center mb-12">Latest Insights</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            @foreach($this->latestPosts as $post)
+                <x-blog-post-card :post="$post" />
+            @endforeach
+        </div>
+        <div class="text-center">
+            <a href="{{ route('blog.index') }}" class="text-green-600 hover:text-green-700 font-semibold text-lg">
+                Read Our Blog →
+            </a>
+        </div>
+    </div>
+</section>
+```
+
+**Acceptance Criteria:**
+- Latest 3 posts display
+- Cards render correctly
+- Link navigates to blog page
+- Grid responsive
+
+---
+
+## Task Group 3: About Pages (4-5 hours)
+
+### 3.1 Create Team Page
+**File:** `resources/views/livewire/team.blade.php`
+
+**Requirements:**
+- Breadcrumb component
+- Page heading and intro text
+- Grid of team members (4 cols desktop, 2 tablet, 1 mobile)
+- Use `<x-team-member-card>` component
+- Pagination if > 12 members
+
+**Data:**
+```php
+$members = computed(fn() =>
+    TeamMember::where('active', true)
+        ->orderBy('display_order')
+        ->paginate(12)
+);
+```
+
+**Implementation:**
+```blade
+@volt('team')
+<x-layouts.app title="Our Team | KMG Environmental Solutions">
+    <x-breadcrumb :items="[
+        ['label' => 'Home', 'url' => route('home')],
+        ['label' => 'Our Team'],
+    ]" />
+
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h1 class="text-5xl font-bold mb-6">Our Team</h1>
+            <p class="text-xl text-gray-600 mb-12 max-w-3xl">
+                Meet our team of dedicated environmental professionals committed to delivering
+                sustainable solutions across South Africa.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                @foreach($this->members as $member)
+                    <x-team-member-card :member="$member" />
+                @endforeach
+            </div>
+
+            <div class="mt-8">
+                {{ $this->members->links() }}
+            </div>
+        </div>
+    </section>
+</x-layouts.app>
+@endvolt
+```
+
+**Acceptance Criteria:**
+- Team members display in grid
+- Pagination works if > 12 members
+- Breadcrumb renders
+- Responsive layout
+- SEO meta tags present
+
+---
+
+### 3.2 Create Accreditations Page
+**File:** `resources/views/livewire/accreditations.blade.php`
+
+**Requirements:**
+- Breadcrumb
+- Page heading and intro
+- Grid of accreditations (3-4 cols)
+- Show: logo/certificate, name, number, valid until
+- Badge: "Valid" (green) or "Expired" (red)
+- Filter toggle: "Show only valid" (default ON)
+
+**Data:**
+```php
+state(['showOnlyValid' => true]);
+
+$accreditations = computed(fn() =>
+    Accreditation::where('active', true)
+        ->when($this->showOnlyValid, fn($q) =>
+            $q->where('valid_until', '>=', now())
+        )
+        ->orderBy('display_order')
+        ->get()
+);
+```
+
+**Implementation:**
+```blade
+@volt('accreditations')
+<x-layouts.app title="Accreditations | KMG Environmental Solutions">
+    <!-- Breadcrumb -->
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h1 class="text-5xl font-bold mb-6">Accreditations & Certifications</h1>
+            <p class="text-xl text-gray-600 mb-8">
+                KMG Environmental Solutions maintains the highest industry standards through
+                our accreditations and certifications.
+            </p>
+
+            <div class="mb-8">
+                <label class="flex items-center gap-2">
+                    <input type="checkbox"
+                           wire:model.live="showOnlyValid"
+                           class="rounded">
+                    <span>Show only valid accreditations</span>
+                </label>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                @foreach($this->accreditations as $accreditation)
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        @if($accreditation->certificate_logo)
+                            <img src="{{ Storage::url($accreditation->certificate_logo) }}"
+                                 alt="{{ $accreditation->name }}"
+                                 class="h-24 mx-auto mb-4">
+                        @endif
+                        <h3 class="text-xl font-semibold mb-2">{{ $accreditation->name }}</h3>
+                        <p class="text-gray-600 mb-2">{{ $accreditation->issuing_organization }}</p>
+                        <p class="text-sm text-gray-500 mb-2">No: {{ $accreditation->certificate_number }}</p>
+                        <p class="text-sm">
+                            Valid until: {{ $accreditation->valid_until->format('M Y') }}
+                        </p>
+                        <flux:badge :color="$accreditation->valid_until >= now() ? 'success' : 'danger'">
+                            {{ $accreditation->valid_until >= now() ? 'Valid' : 'Expired' }}
+                        </flux:badge>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+</x-layouts.app>
+@endvolt
+```
+
+**Acceptance Criteria:**
+- Accreditations display in grid
+- Filter toggle works
+- Valid/Expired badges correct colors
+- Responsive layout
+- SEO meta tags present
+
+---
+
+### 3.3 Create About Page
+**File:** `resources/views/livewire/about.blade.php`
+
+**Requirements:**
+- Breadcrumb
+- Company overview (static content for now)
+- Mission & Vision
+- Core Values
+- Accreditations preview (4-6 badges)
+- CTA to contact or view team
+
+**Implementation:**
+```blade
+@volt('about')
+<x-layouts.app title="About Us | KMG Environmental Solutions">
+    <x-breadcrumb :items="[
+        ['label' => 'Home', 'url' => route('home')],
+        ['label' => 'About Us'],
+    ]" />
+
+    <section class="py-16">
+        <div class="max-w-4xl mx-auto px-4">
+            <h1 class="text-5xl font-bold mb-6">About KMG Environmental Solutions</h1>
+
+            <div class="prose prose-lg max-w-none">
+                <p>
+                    KMG Environmental Solutions is a leading environmental consultancy firm
+                    providing expert solutions across South Africa. With years of experience
+                    and a team of dedicated professionals, we deliver sustainable environmental
+                    solutions that meet regulatory requirements and exceed client expectations.
+                </p>
+
+                <h2>Our Mission</h2>
+                <p>
+                    To provide innovative, sustainable environmental solutions that protect
+                    our planet while enabling business growth and development.
+                </p>
+
+                <h2>Our Vision</h2>
+                <p>
+                    To be South Africa's most trusted environmental consultancy, recognized
+                    for excellence, integrity, and commitment to sustainability.
+                </p>
+
+                <h2>Core Values</h2>
+                <ul>
+                    <li><strong>Excellence:</strong> We strive for the highest quality in everything we do</li>
+                    <li><strong>Integrity:</strong> We operate with honesty and transparency</li>
+                    <li><strong>Sustainability:</strong> We champion environmental responsibility</li>
+                    <li><strong>Innovation:</strong> We embrace new technologies and methodologies</li>
+                    <li><strong>Collaboration:</strong> We work closely with clients and stakeholders</li>
+                </ul>
+            </div>
+
+            <div class="mt-12 flex gap-4">
+                <flux:button variant="primary" href="{{ route('team') }}">
+                    Meet Our Team
+                </flux:button>
+                <flux:button variant="secondary" href="{{ route('contact') }}">
+                    Contact Us
+                </flux:button>
+            </div>
+        </div>
+    </section>
+</x-layouts.app>
+@endvolt
+```
+
+**Acceptance Criteria:**
+- About content displays
+- CTAs navigate correctly
+- Responsive layout
+- SEO meta tags present
+
+---
+
+## Task Group 4: Services Pages (3-4 hours)
+
+### 4.1 Create Services Listing Page
+**File:** `resources/views/livewire/services/index.blade.php`
+
+**Requirements:**
+- Breadcrumb
+- Page heading and intro
+- Accordion or grouped display by category
+- Each service: icon, name, description excerpt, "Learn More" link
+
+**Data:**
+```php
+$categories = computed(fn() =>
+    ServiceCategory::where('active', true)
+        ->with(['services' => fn($q) =>
+            $q->where('active', true)->orderBy('display_order')
+        ])
+        ->orderBy('display_order')
+        ->get()
+);
+```
+
+**Implementation (Accordion Approach):**
+```blade
+@volt('services.index')
+<x-layouts.app title="Our Services | KMG Environmental Solutions">
+    <x-breadcrumb :items="[
+        ['label' => 'Home', 'url' => route('home')],
+        ['label' => 'Services'],
+    ]" />
+
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h1 class="text-5xl font-bold mb-6">Our Services</h1>
+            <p class="text-xl text-gray-600 mb-12 max-w-3xl">
+                Comprehensive environmental consultancy services tailored to your needs.
+            </p>
+
+            <div class="space-y-4">
+                @foreach($this->categories as $category)
+                    <div x-data="{ open: false }" class="border rounded-lg">
+                        <button @click="open = !open"
+                                class="w-full flex justify-between items-center p-6 text-left">
+                            <div class="flex items-center gap-4">
+                                @if($category->icon)
+                                    <span class="text-3xl">{{ $category->icon }}</span>
+                                @endif
+                                <div>
+                                    <h2 class="text-2xl font-semibold">{{ $category->name }}</h2>
+                                    <p class="text-gray-600">{{ $category->services->count() }} services</p>
+                                </div>
+                            </div>
+                            <svg class="w-6 h-6 transition-transform" :class="{ 'rotate-180': open }"
+                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+
+                        <div x-show="open" x-collapse class="px-6 pb-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                                @foreach($category->services as $service)
+                                    <div class="border-l-4 border-green-500 pl-4">
+                                        <h3 class="text-lg font-semibold mb-2">{{ $service->name }}</h3>
+                                        <p class="text-gray-600 mb-2">
+                                            {{ Str::limit(strip_tags($service->description), 150) }}
+                                        </p>
+                                        <a href="{{ route('services.show', $service->slug) }}"
+                                           class="text-green-600 hover:text-green-700 font-medium">
+                                            Learn More →
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+</x-layouts.app>
+@endvolt
+```
+
+**Acceptance Criteria:**
+- Service categories display
+- Accordion expand/collapse works
+- Services listed under categories
+- Links navigate to detail pages
+- Responsive layout
+- SEO meta tags present
+
+---
+
+### 4.2 Create Service Detail Page
+**File:** `resources/views/livewire/services/show.blade.php`
+
+**Requirements:**
+- Breadcrumb (Home > Services > [Service Name])
+- Service icon and name
+- Full description (rich text)
+- Service category displayed
+- CTA: "Request a Quote" or "Contact Us"
+- Related services section (2-3 from same category)
+
+**Data:**
+```php
+use function Livewire\Volt\{state, computed};
+
+state(['service']);
+
+$relatedServices = computed(fn() =>
+    Service::where('service_category_id', $this->service->service_category_id)
+        ->where('id', '!=', $this->service->id)
+        ->where('active', true)
+        ->limit(3)
+        ->get()
+);
+```
+
+**Implementation:**
+```blade
+@volt('services.show')
+<x-layouts.app :title="$service->meta_title ?? $service->name . ' | KMG'"
+               :description="$service->meta_description">
+    <x-breadcrumb :items="[
+        ['label' => 'Home', 'url' => route('home')],
+        ['label' => 'Services', 'url' => route('services.index')],
+        ['label' => $service->name],
+    ]" />
+
+    <section class="py-16">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="flex items-center gap-4 mb-6">
+                @if($service->icon)
+                    <span class="text-5xl">{{ $service->icon }}</span>
+                @endif
+                <h1 class="text-5xl font-bold">{{ $service->name }}</h1>
+            </div>
+
+            <div class="mb-4">
+                <flux:badge>{{ $service->serviceCategory->name }}</flux:badge>
+            </div>
+
+            <div class="prose prose-lg max-w-none mb-8">
+                {!! $service->description !!}
+            </div>
+
+            <div class="flex gap-4 mb-12">
+                <flux:button variant="primary" href="{{ route('contact') }}">
+                    Request a Quote
+                </flux:button>
+                <flux:button variant="secondary" href="{{ route('services.index') }}">
+                    View All Services
+                </flux:button>
+            </div>
+
+            @if($this->relatedServices->count() > 0)
+                <h2 class="text-3xl font-bold mb-6">Related Services</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    @foreach($this->relatedServices as $related)
+                        <x-service-card :service="$related" />
+                    @endforeach
+                </div>
+            @endif
+        </div>
+    </section>
+</x-layouts.app>
+@endvolt
+```
+
+**Acceptance Criteria:**
+- Service details display
+- Rich text description renders correctly
+- Breadcrumb accurate
+- Related services display (if available)
+- CTAs navigate correctly
+- SEO meta tags from model or fallback
+- Responsive layout
+
+---
+
+## Task Group 5: Sectors & Projects Pages (5-6 hours)
+
+### 5.1 Create Sectors Listing Page
+**File:** `resources/views/livewire/sectors/index.blade.php`
+
+**Requirements:**
+- Breadcrumb
+- Page heading and intro
+- Grid of sectors (3 cols)
+- Each sector: icon, name, description excerpt, project count badge, "View Projects" link
+
+**Data:**
+```php
+$sectors = computed(fn() =>
+    Sector::withCount('projects')
+        ->orderBy('display_order')
+        ->get()
+);
+```
+
+**Implementation:**
+```blade
+@volt('sectors.index')
+<x-layouts.app title="Industry Sectors | KMG Environmental Solutions">
+    <x-breadcrumb :items="[
+        ['label' => 'Home', 'url' => route('home')],
+        ['label' => 'Sectors'],
+    ]" />
+
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h1 class="text-5xl font-bold mb-6">Industry Sectors We Serve</h1>
+            <p class="text-xl text-gray-600 mb-12 max-w-3xl">
+                KMG Environmental Solutions provides specialized services across diverse
+                industry sectors throughout South Africa.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                @foreach($this->sectors as $sector)
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
+                        @if($sector->icon)
+                            <div class="text-4xl mb-4">{{ $sector->icon }}</div>
+                        @endif
+                        <h2 class="text-2xl font-semibold mb-2">{{ $sector->name }}</h2>
+                        <p class="text-gray-600 mb-4">
+                            {{ Str::limit(strip_tags($sector->description), 120) }}
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <flux:badge>{{ $sector->projects_count }} projects</flux:badge>
+                            <a href="{{ route('projects.index', ['sector' => $sector->id]) }}"
+                               class="text-green-600 hover:text-green-700 font-medium">
+                                View Projects →
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+</x-layouts.app>
+@endvolt
+```
+
+**Acceptance Criteria:**
+- Sectors display in grid
+- Project counts accurate
+- Links navigate to filtered projects page
+- Responsive layout
+- SEO meta tags present
+
+---
+
+### 5.2 Create Projects Listing Page with Filters
+**File:** `resources/views/livewire/projects/index.blade.php`
+
+**Requirements:**
+- Breadcrumb
+- Page heading and intro
+- Filter controls:
+  - Sector dropdown (with "All Sectors" option)
+  - Province dropdown (with "All Provinces" option)
+  - Featured toggle
+  - Search input
+- Grid of project cards (3 cols)
+- Pagination (9 per page)
+
+**Data:**
+```php
+use function Livewire\Volt\{state, computed};
+
+state([
+    'sector' => request('sector', ''),
+    'province' => '',
+    'search' => '',
+    'featured' => false,
+]);
+
+$projects = computed(fn() =>
+    Project::query()
+        ->when($this->sector, fn($q) => $q->where('sector_id', $this->sector))
+        ->when($this->province, fn($q) => $q->where('province', $this->province))
+        ->when($this->search, fn($q) => $q->where('name', 'like', "%{$this->search}%"))
+        ->when($this->featured, fn($q) => $q->where('featured', true))
+        ->with('sector')
+        ->latest('completion_date')
+        ->paginate(9)
+);
+
+$sectors = computed(fn() => Sector::orderBy('name')->get());
+
+$provinces = computed(fn() => [
+    'Eastern Cape', 'Free State', 'Gauteng', 'KwaZulu-Natal',
+    'Limpopo', 'Mpumalanga', 'Northern Cape', 'North West', 'Western Cape'
+]);
+```
+
+**Implementation:**
+```blade
+@volt('projects.index')
+<x-layouts.app title="Our Projects | KMG Environmental Solutions">
+    <x-breadcrumb :items="[
+        ['label' => 'Home', 'url' => route('home')],
+        ['label' => 'Projects'],
+    ]" />
+
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h1 class="text-5xl font-bold mb-6">Our Projects</h1>
+            <p class="text-xl text-gray-600 mb-8">
+                Explore our portfolio of successful environmental projects across South Africa.
+            </p>
+
+            <!-- Filters -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Sector</label>
+                        <select wire:model.live="sector" class="w-full rounded-md border-gray-300">
+                            <option value="">All Sectors</option>
+                            @foreach($this->sectors as $s)
+                                <option value="{{ $s->id }}">{{ $s->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Province</label>
+                        <select wire:model.live="province" class="w-full rounded-md border-gray-300">
+                            <option value="">All Provinces</option>
+                            @foreach($this->provinces as $p)
+                                <option value="{{ $p }}">{{ $p }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Search</label>
+                        <input type="text"
+                               wire:model.live.debounce.300ms="search"
+                               placeholder="Search projects..."
+                               class="w-full rounded-md border-gray-300">
+                    </div>
+
+                    <div class="flex items-end">
+                        <label class="flex items-center gap-2">
+                            <input type="checkbox"
+                                   wire:model.live="featured"
+                                   class="rounded">
+                            <span class="text-sm font-medium">Featured only</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                @forelse($this->projects as $project)
+                    <x-project-card :project="$project" />
+                @empty
+                    <div class="col-span-3 text-center py-12 text-gray-500">
+                        No projects found matching your criteria.
+                    </div>
+                @endforelse
+            </div>
+
+            <!-- Pagination -->
+            <div>
+                {{ $this->projects->links() }}
+            </div>
+        </div>
+    </section>
+</x-layouts.app>
+@endvolt
+```
+
+**Acceptance Criteria:**
+- Filters work correctly (sector, province, search, featured)
+- Projects update in real-time
+- Pagination works
+- Grid responsive
+- "No results" message displays when applicable
+- SEO meta tags present
+
+---
+
+### 5.3 Create Project Detail Page
+**File:** `resources/views/livewire/projects/show.blade.php`
+
+**Requirements:**
+- Breadcrumb (Home > Projects > [Project Name])
+- Project name
+- Metadata: Sector badge, Province, Completion Date
+- Featured image (large)
+- Full description (rich text)
+- Gallery images (if any) - simple grid, lightbox optional
+- Related projects (2-3 from same sector)
+
+**Data:**
+```php
+state(['project']);
+
+$relatedProjects = computed(fn() =>
+    Project::where('sector_id', $this->project->sector_id)
+        ->where('id', '!=', $this->project->id)
+        ->limit(3)
+        ->get()
+);
+```
+
+**Implementation:**
+```blade
+@volt('projects.show')
+<x-layouts.app :title="$project->meta_title ?? $project->name . ' | KMG Projects'"
+               :description="$project->meta_description">
+    <x-breadcrumb :items="[
+        ['label' => 'Home', 'url' => route('home')],
+        ['label' => 'Projects', 'url' => route('projects.index')],
+        ['label' => $project->name],
+    ]" />
+
+    <section class="py-16">
+        <div class="max-w-4xl mx-auto px-4">
+            <h1 class="text-5xl font-bold mb-4">{{ $project->name }}</h1>
+
+            <div class="flex flex-wrap gap-4 mb-6">
+                <flux:badge>{{ $project->sector->name }}</flux:badge>
+                <flux:badge>{{ $project->province }}</flux:badge>
+                <span class="text-gray-600">
+                    Completed: {{ $project->completion_date->format('F Y') }}
+                </span>
+            </div>
+
+            @if($project->featured_image)
+                <img src="{{ Storage::url($project->featured_image) }}"
+                     alt="{{ $project->name }}"
+                     class="w-full rounded-lg mb-8">
+            @endif
+
+            <div class="prose prose-lg max-w-none mb-8">
+                {!! $project->description !!}
+            </div>
+
+            @if($project->gallery_images && count($project->gallery_images) > 0)
+                <h2 class="text-3xl font-bold mb-6">Project Gallery</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-12">
+                    @foreach($project->gallery_images as $image)
+                        <img src="{{ Storage::url($image) }}"
+                             alt="Gallery image"
+                             class="w-full h-48 object-cover rounded-lg">
+                    @endforeach
+                </div>
+            @endif
+
+            @if($this->relatedProjects->count() > 0)
+                <h2 class="text-3xl font-bold mb-6">Related Projects</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    @foreach($this->relatedProjects as $related)
+                        <x-project-card :project="$related" />
+                    @endforeach
+                </div>
+            @endif
+        </div>
+    </section>
+</x-layouts.app>
+@endvolt
+```
+
+**Acceptance Criteria:**
+- Project details display correctly
+- Featured image and gallery render
+- Rich text description formatted
+- Related projects display (if available)
+- Breadcrumb accurate
+- SEO meta tags from model or fallback
+- Responsive layout
+
+---
+
+## Task Group 6: Training Pages (4-5 hours)
+
+### 6.1 Create Training Courses Listing Page
+**File:** `resources/views/livewire/training/index.blade.php`
+
+**Requirements:**
+- Breadcrumb
+- Page heading and intro
+- Grid of course cards (3 cols)
+- Each card: featured image, name, duration, max participants, price (ZAR), "View Details" button
+- Show only active courses
+
+**Data:**
+```php
+$courses = computed(fn() =>
+    TrainingCourse::where('active', true)
+        ->orderBy('name')
+        ->get()
+);
+```
+
+**Implementation:**
+```blade
+@volt('training.index')
+<x-layouts.app title="Training Courses | KMG Environmental Solutions">
+    <x-breadcrumb :items="[
+        ['label' => 'Home', 'url' => route('home')],
+        ['label' => 'Training'],
+    ]" />
+
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h1 class="text-5xl font-bold mb-6">Training Courses</h1>
+            <p class="text-xl text-gray-600 mb-12 max-w-3xl">
+                Professional environmental training courses designed to enhance your skills
+                and ensure compliance with industry standards.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                @foreach($this->courses as $course)
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">
+                        @if($course->featured_image)
+                            <img src="{{ Storage::url($course->featured_image) }}"
+                                 alt="{{ $course->name }}"
+                                 class="w-full h-48 object-cover">
+                        @endif
+                        <div class="p-6">
+                            <h2 class="text-2xl font-semibold mb-2">{{ $course->name }}</h2>
+                            <div class="space-y-2 mb-4 text-sm text-gray-600">
+                                <p>⏱️ Duration: {{ $course->duration }}</p>
+                                <p>👥 Max Participants: {{ $course->max_participants }}</p>
+                                <p class="text-2xl font-bold text-green-600">
+                                    R{{ number_format($course->price, 2) }}
+                                </p>
+                            </div>
+                            <flux:button variant="primary" href="{{ route('training.show', $course->slug) }}" class="w-full">
+                                View Details & Book
+                            </flux:button>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+</x-layouts.app>
+@endvolt
+```
+
+**Acceptance Criteria:**
+- Courses display in grid
+- Price formatted correctly (ZAR)
+- Links navigate to detail pages
+- Responsive layout
+- SEO meta tags present
+
+---
+
+### 6.2 Create Training Course Detail Page with Booking Form
+**File:** `resources/views/livewire/training/show.blade.php`
+
+**Requirements:**
+- Breadcrumb (Home > Training > [Course Name])
+- Course details (name, image, description, duration, participants, price)
+- **Upcoming Schedules Section:**
+  - Table/cards of schedules
+  - Columns: Date/Time, Location, Available Seats
+  - Color-coded seats (green/orange/red)
+  - "Book Now" button per schedule
+- **Booking Modal/Form (Livewire Volt functional):**
+  - Appears when "Book Now" clicked
+  - Fields: Name, Email, Phone, Company (optional)
+  - Selected schedule pre-filled (hidden field)
+  - Validation
+  - Submit creates `TrainingBooking` with status 'pending'
+  - Success message: "Booking request submitted! We'll contact you shortly."
+  - Send email notification to admins
+
+**Data:**
+```php
+use function Livewire\Volt\{state, computed};
+
+state([
+    'course',
+    'showBookingForm' => false,
+    'selectedSchedule' => null,
+    'name' => '',
+    'email' => '',
+    'phone' => '',
+    'company' => '',
+]);
+
+$upcomingSchedules = computed(fn() =>
+    TrainingSchedule::where('training_course_id', $this->course->id)
+        ->where('start_datetime', '>=', now())
+        ->orderBy('start_datetime')
+        ->get()
+);
+
+$openBookingForm = fn($scheduleId) => [
+    $this->selectedSchedule = $scheduleId,
+    $this->showBookingForm = true,
+];
+
+$closeBookingForm = fn() => [
+    $this->showBookingForm = false,
+    $this->reset(['name', 'email', 'phone', 'company', 'selectedSchedule']),
+];
+
+$submitBooking = function() {
+    $validated = $this->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255',
+        'phone' => 'required|string|max:20',
+        'company' => 'nullable|string|max:255',
+    ]);
+
+    TrainingBooking::create([
+        'training_schedule_id' => $this->selectedSchedule,
+        'name' => $this->name,
+        'email' => $this->email,
+        'phone' => $this->phone,
+        'company' => $this->company,
+        'status' => 'pending',
+    ]);
+
+    // Send notification email (TODO)
+
+    session()->flash('success', "Booking request submitted! We'll contact you shortly.");
+    $this->closeBookingForm();
+};
+```
+
+**Implementation:**
+```blade
+@volt('training.show')
+<x-layouts.app :title="$course->meta_title ?? $course->name . ' | Training | KMG'"
+               :description="$course->meta_description">
+    <x-breadcrumb :items="[
+        ['label' => 'Home', 'url' => route('home')],
+        ['label' => 'Training', 'url' => route('training.index')],
+        ['label' => $course->name],
+    ]" />
+
+    <section class="py-16">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div class="md:col-span-2">
+                    <h1 class="text-5xl font-bold mb-4">{{ $course->name }}</h1>
+
+                    @if($course->featured_image)
+                        <img src="{{ Storage::url($course->featured_image) }}"
+                             alt="{{ $course->name }}"
+                             class="w-full rounded-lg mb-6">
+                    @endif
+
+                    <div class="prose prose-lg max-w-none">
+                        {!! $course->description !!}
+                    </div>
+                </div>
+
+                <div>
+                    <div class="bg-white rounded-lg shadow-lg p-6 sticky top-4">
+                        <h3 class="text-2xl font-bold mb-4">Course Details</h3>
+                        <div class="space-y-3 mb-6">
+                            <p class="flex items-center gap-2">
+                                <span class="font-semibold">Duration:</span>
+                                {{ $course->duration }}
+                            </p>
+                            <p class="flex items-center gap-2">
+                                <span class="font-semibold">Max Participants:</span>
+                                {{ $course->max_participants }}
+                            </p>
+                            <p class="text-3xl font-bold text-green-600">
+                                R{{ number_format($course->price, 2) }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upcoming Schedules -->
+            <h2 class="text-3xl font-bold mb-6">Upcoming Schedules</h2>
+
+            @if($this->upcomingSchedules->count() > 0)
+                <div class="space-y-4 mb-12">
+                    @foreach($this->upcomingSchedules as $schedule)
+                        <div class="bg-white rounded-lg shadow-md p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <div class="flex-grow">
+                                <p class="text-lg font-semibold">
+                                    {{ $schedule->start_datetime->format('D, M j, Y') }}
+                                </p>
+                                <p class="text-gray-600">
+                                    {{ $schedule->start_datetime->format('h:i A') }} - {{ $schedule->end_datetime->format('h:i A') }}
+                                </p>
+                                <p class="text-gray-600">📍 {{ $schedule->location }}</p>
+                            </div>
+
+                            <div class="flex items-center gap-4">
+                                <flux:badge :color="match(true) {
+                                    $schedule->available_seats > 5 => 'success',
+                                    $schedule->available_seats >= 1 => 'warning',
+                                    default => 'danger'
+                                }">
+                                    {{ $schedule->available_seats }} seats available
+                                </flux:badge>
+
+                                @if($schedule->available_seats > 0)
+                                    <flux:button variant="primary"
+                                                 wire:click="openBookingForm({{ $schedule->id }})">
+                                        Book Now
+                                    </flux:button>
+                                @else
+                                    <flux:button variant="ghost" disabled>
+                                        Fully Booked
+                                    </flux:button>
+                                @endif
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @else
+                <p class="text-gray-600 mb-12">
+                    No upcoming schedules available. Please check back later or contact us for more information.
+                </p>
+            @endif
+
+            <!-- Booking Modal -->
+            @if($showBookingForm)
+                <flux:modal wire:model="showBookingForm">
+                    <flux:modal.header>
+                        <flux:heading>Book Training Course</flux:heading>
+                    </flux:modal.header>
+
+                    <form wire:submit="submitBooking">
+                        <div class="space-y-4">
+                            <flux:field>
+                                <flux:label>Name *</flux:label>
+                                <flux:input wire:model="name" required />
+                                <flux:error name="name" />
+                            </flux:field>
+
+                            <flux:field>
+                                <flux:label>Email *</flux:label>
+                                <flux:input type="email" wire:model="email" required />
+                                <flux:error name="email" />
+                            </flux:field>
+
+                            <flux:field>
+                                <flux:label>Phone *</flux:label>
+                                <flux:input wire:model="phone" required />
+                                <flux:error name="phone" />
+                            </flux:field>
+
+                            <flux:field>
+                                <flux:label>Company (Optional)</flux:label>
+                                <flux:input wire:model="company" />
+                            </flux:field>
+                        </div>
+
+                        <flux:modal.footer>
+                            <flux:button type="button" variant="ghost" wire:click="closeBookingForm">
+                                Cancel
+                            </flux:button>
+                            <flux:button type="submit" variant="primary">
+                                Submit Booking Request
+                            </flux:button>
+                        </flux:modal.footer>
+                    </form>
+                </flux:modal>
+            @endif
+
+            @if(session()->has('success'))
+                <div class="fixed top-4 right-4 bg-green-100 border border-green-400 text-green-700 px-6 py-4 rounded-lg shadow-lg"
+                     x-data="{ show: true }"
+                     x-show="show"
+                     x-init="setTimeout(() => show = false, 5000)">
+                    {{ session('success') }}
+                </div>
+            @endif
+        </div>
+    </section>
+</x-layouts.app>
+@endvolt
+```
+
+**Acceptance Criteria:**
+- Course details display correctly
+- Upcoming schedules listed
+- Available seats color-coded correctly
+- "Book Now" button opens modal
+- Booking form validates
+- Booking creates database record with status 'pending'
+- Success message displays
+- Modal closes after submission
+- SEO meta tags present
+- Responsive layout
+
+---
+
+## Task Group 7: Equipment Pages (4-5 hours)
+
+### 7.1 Create Equipment Catalog Page
+**File:** `resources/views/livewire/equipment/index.blade.php`
+
+**Requirements:**
+- Breadcrumb
+- Page heading and intro
+- Filter by category dropdown
+- Grid of equipment cards (3 cols)
+- Each card: featured image, name, category, rental rates (daily/weekly/monthly), "View Details" button
+- Show only available equipment
+- Pagination
+
+**Data:**
+```php
+state(['category' => '']);
+
+$equipment = computed(fn() =>
+    Equipment::where('available', true)
+        ->when($this->category, fn($q) => $q->where('equipment_category_id', $this->category))
+        ->with('equipmentCategory')
+        ->orderBy('name')
+        ->paginate(12)
+);
+
+$categories = computed(fn() => EquipmentCategory::orderBy('name')->get());
+```
+
+**Implementation:**
+```blade
+@volt('equipment.index')
+<x-layouts.app title="Equipment Rental | KMG Environmental Solutions">
+    <x-breadcrumb :items="[
+        ['label' => 'Home', 'url' => route('home')],
+        ['label' => 'Equipment'],
+    ]" />
+
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h1 class="text-5xl font-bold mb-6">Equipment Rental</h1>
+            <p class="text-xl text-gray-600 mb-8">
+                Quality environmental equipment available for rent with flexible rates.
+            </p>
+
+            <!-- Category Filter -->
+            <div class="mb-8">
+                <label class="block text-sm font-medium mb-2">Filter by Category</label>
+                <select wire:model.live="category" class="rounded-md border-gray-300 w-full md:w-64">
+                    <option value="">All Categories</option>
+                    @foreach($this->categories as $cat)
+                        <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <!-- Equipment Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                @forelse($this->equipment as $item)
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">
+                        @if($item->featured_image)
+                            <img src="{{ Storage::url($item->featured_image) }}"
+                                 alt="{{ $item->name }}"
+                                 class="w-full h-48 object-cover">
+                        @endif
+                        <div class="p-6">
+                            <flux:badge class="mb-2">{{ $item->equipmentCategory->name }}</flux:badge>
+                            <h2 class="text-2xl font-semibold mb-4">{{ $item->name }}</h2>
+
+                            <div class="space-y-2 mb-4 text-sm">
+                                @if($item->daily_rate)
+                                    <p>Daily: <span class="font-semibold">R{{ number_format($item->daily_rate, 2) }}</span></p>
+                                @endif
+                                @if($item->weekly_rate)
+                                    <p>Weekly: <span class="font-semibold">R{{ number_format($item->weekly_rate, 2) }}</span></p>
+                                @endif
+                                @if($item->monthly_rate)
+                                    <p>Monthly: <span class="font-semibold">R{{ number_format($item->monthly_rate, 2) }}</span></p>
+                                @endif
+                            </div>
+
+                            <flux:button variant="primary" href="{{ route('equipment.show', $item->slug) }}" class="w-full">
+                                View Details & Request Quote
+                            </flux:button>
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-span-3 text-center py-12 text-gray-500">
+                        No equipment available in this category.
+                    </div>
+                @endforelse
+            </div>
+
+            <!-- Pagination -->
+            <div>
+                {{ $this->equipment->links() }}
+            </div>
+        </div>
+    </section>
+</x-layouts.app>
+@endvolt
+```
+
+**Acceptance Criteria:**
+- Equipment displays in grid
+- Category filter works
+- Rental rates display correctly (ZAR)
+- Pagination works
+- Links navigate to detail pages
+- Responsive layout
+- SEO meta tags present
+
+---
+
+### 7.2 Create Equipment Detail Page with Quote Form
+**File:** `resources/views/livewire/equipment/show.blade.php`
+
+**Requirements:**
+- Breadcrumb (Home > Equipment > [Equipment Name])
+- Equipment details (name, category, featured image, gallery, description)
+- Rental rates table (daily/weekly/monthly)
+- **Quote Request Form (Livewire Volt):**
+  - Fields: Name, Email, Phone, Company, Start Date, End Date, Notes
+  - Auto-calculate duration in days
+  - Auto-calculate estimated total price
+  - Validation
+  - Submit creates `EquipmentRentalQuote` with status 'pending'
+  - Success message
+  - Email notification
+
+**Data:**
+```php
+use function Livewire\Volt\{state, computed};
+
+state([
+    'equipment',
+    'name' => '',
+    'email' => '',
+    'phone' => '',
+    'company' => '',
+    'start_date' => '',
+    'end_date' => '',
+    'notes' => '',
+]);
+
+$duration = computed(function() {
+    if (!$this->start_date || !$this->end_date) return null;
+    return Carbon::parse($this->end_date)->diffInDays(Carbon::parse($this->start_date)) + 1;
+});
+
+$estimatedTotal = computed(function() {
+    if (!$this->duration) return null;
+
+    $days = $this->duration;
+
+    // Calculate based on most economical rate
+    if ($days >= 30 && $this->equipment->monthly_rate) {
+        $months = ceil($days / 30);
+        return $months * $this->equipment->monthly_rate;
+    } elseif ($days >= 7 && $this->equipment->weekly_rate) {
+        $weeks = ceil($days / 7);
+        return $weeks * $this->equipment->weekly_rate;
+    } elseif ($this->equipment->daily_rate) {
+        return $days * $this->equipment->daily_rate;
+    }
+
+    return null;
+});
+
+$submitQuote = function() {
+    $validated = $this->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255',
+        'phone' => 'required|string|max:20',
+        'company' => 'nullable|string|max:255',
+        'start_date' => 'required|date|after:today',
+        'end_date' => 'required|date|after:start_date',
+        'notes' => 'nullable|string|max:1000',
+    ]);
+
+    EquipmentRentalQuote::create([
+        'equipment_id' => $this->equipment->id,
+        'name' => $this->name,
+        'email' => $this->email,
+        'phone' => $this->phone,
+        'company' => $this->company,
+        'start_date' => $this->start_date,
+        'end_date' => $this->end_date,
+        'duration_days' => $this->duration,
+        'total_price' => $this->estimatedTotal,
+        'notes' => $this->notes,
+        'status' => 'pending',
+    ]);
+
+    // Send notification (TODO)
+
+    session()->flash('success', "Quote request submitted! We'll respond within 24 hours.");
+    $this->reset(['name', 'email', 'phone', 'company', 'start_date', 'end_date', 'notes']);
+};
+```
+
+**Implementation:**
+```blade
+@volt('equipment.show')
+<x-layouts.app :title="$equipment->meta_title ?? $equipment->name . ' | Equipment Rental | KMG'"
+               :description="$equipment->meta_description">
+    <x-breadcrumb :items="[
+        ['label' => 'Home', 'url' => route('home')],
+        ['label' => 'Equipment', 'url' => route('equipment.index')],
+        ['label' => $equipment->name],
+    ]" />
+
+    <section class="py-16">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <div>
+                    <flux:badge class="mb-4">{{ $equipment->equipmentCategory->name }}</flux:badge>
+                    <h1 class="text-4xl font-bold mb-6">{{ $equipment->name }}</h1>
+
+                    @if($equipment->featured_image)
+                        <img src="{{ Storage::url($equipment->featured_image) }}"
+                             alt="{{ $equipment->name }}"
+                             class="w-full rounded-lg mb-4">
+                    @endif
+
+                    @if($equipment->gallery_images && count($equipment->gallery_images) > 0)
+                        <div class="grid grid-cols-3 gap-2">
+                            @foreach($equipment->gallery_images as $image)
+                                <img src="{{ Storage::url($image) }}"
+                                     alt="Gallery"
+                                     class="w-full h-24 object-cover rounded">
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-bold mb-4">Rental Rates</h2>
+                    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                        <table class="w-full">
+                            @if($equipment->daily_rate)
+                                <tr class="border-b">
+                                    <td class="py-3 font-semibold">Daily Rate:</td>
+                                    <td class="py-3 text-right text-lg">R{{ number_format($equipment->daily_rate, 2) }}</td>
+                                </tr>
+                            @endif
+                            @if($equipment->weekly_rate)
+                                <tr class="border-b">
+                                    <td class="py-3 font-semibold">Weekly Rate:</td>
+                                    <td class="py-3 text-right text-lg">R{{ number_format($equipment->weekly_rate, 2) }}</td>
+                                </tr>
+                            @endif
+                            @if($equipment->monthly_rate)
+                                <tr>
+                                    <td class="py-3 font-semibold">Monthly Rate:</td>
+                                    <td class="py-3 text-right text-lg">R{{ number_format($equipment->monthly_rate, 2) }}</td>
+                                </tr>
+                            @endif
+                        </table>
+                    </div>
+
+                    <div class="prose max-w-none">
+                        {!! $equipment->description !!}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quote Request Form -->
+            <div class="bg-gray-50 rounded-lg p-8">
+                <h2 class="text-3xl font-bold mb-6">Request a Quote</h2>
+
+                @if(session()->has('success'))
+                    <div class="bg-green-100 border border-green-400 text-green-700 px-6 py-4 rounded-lg mb-6">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                <form wire:submit="submitQuote">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <flux:field>
+                            <flux:label>Name *</flux:label>
+                            <flux:input wire:model="name" required />
+                            <flux:error name="name" />
+                        </flux:field>
+
+                        <flux:field>
+                            <flux:label>Email *</flux:label>
+                            <flux:input type="email" wire:model="email" required />
+                            <flux:error name="email" />
+                        </flux:field>
+
+                        <flux:field>
+                            <flux:label>Phone *</flux:label>
+                            <flux:input wire:model="phone" required />
+                            <flux:error name="phone" />
+                        </flux:field>
+
+                        <flux:field>
+                            <flux:label>Company (Optional)</flux:label>
+                            <flux:input wire:model="company" />
+                        </flux:field>
+
+                        <flux:field>
+                            <flux:label>Start Date *</flux:label>
+                            <flux:input type="date" wire:model.live="start_date" required />
+                            <flux:error name="start_date" />
+                        </flux:field>
+
+                        <flux:field>
+                            <flux:label>End Date *</flux:label>
+                            <flux:input type="date" wire:model.live="end_date" required />
+                            <flux:error name="end_date" />
+                        </flux:field>
+                    </div>
+
+                    @if($this->duration)
+                        <div class="bg-white rounded-lg p-4 mb-6">
+                            <p class="text-lg">
+                                <span class="font-semibold">Rental Duration:</span> {{ $this->duration }} days
+                            </p>
+                            @if($this->estimatedTotal)
+                                <p class="text-2xl font-bold text-green-600 mt-2">
+                                    Estimated Total: R{{ number_format($this->estimatedTotal, 2) }}
+                                </p>
+                                <p class="text-sm text-gray-600">* Final price may vary based on actual rental period</p>
+                            @endif
+                        </div>
+                    @endif
+
+                    <flux:field class="mb-6">
+                        <flux:label>Additional Notes (Optional)</flux:label>
+                        <flux:textarea wire:model="notes" rows="4" />
+                    </flux:field>
+
+                    <flux:button type="submit" variant="primary" size="lg">
+                        Submit Quote Request
+                    </flux:button>
+                </form>
+            </div>
+        </div>
+    </section>
+</x-layouts.app>
+@endvolt
+```
+
+**Acceptance Criteria:**
+- Equipment details display correctly
+- Rental rates table shows all available rates
+- Gallery images render
+- Quote form validates correctly
+- Duration auto-calculates
+- Estimated total auto-calculates based on most economical rate
+- Quote creates database record with status 'pending'
+- Success message displays
+- Form resets after submission
+- SEO meta tags present
+- Responsive layout
+
+---
+
+## Task Group 8: Blog Pages (3-4 hours)
+
+### 8.1 Create Blog Listing Page
+**File:** `resources/views/livewire/blog/index.blade.php`
+
+**Requirements:**
+- Breadcrumb
+- Page heading and intro
+- Grid of blog post cards (3 cols desktop, 2 tablet, 1 mobile)
+- Use `<x-blog-post-card>` component
+- Show only published posts
+- Pagination (10 per page)
+
+**Data:**
+```php
+$posts = computed(fn() =>
+    BlogPost::where('published', true)
+        ->latest('published_at')
+        ->paginate(10)
+);
+```
+
+**Implementation:**
+```blade
+@volt('blog.index')
+<x-layouts.app title="Blog | Environmental Insights | KMG">
+    <x-breadcrumb :items="[
+        ['label' => 'Home', 'url' => route('home')],
+        ['label' => 'Blog'],
+    ]" />
+
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h1 class="text-5xl font-bold mb-6">Blog</h1>
+            <p class="text-xl text-gray-600 mb-12 max-w-3xl">
+                Insights, news, and updates from the world of environmental consultancy.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+                @foreach($this->posts as $post)
+                    <x-blog-post-card :post="$post" />
+                @endforeach
+            </div>
+
+            <div>
+                {{ $this->posts->links() }}
+            </div>
+        </div>
+    </section>
+</x-layouts.app>
+@endvolt
+```
+
+**Acceptance Criteria:**
+- Blog posts display in grid
+- Only published posts shown
+- Pagination works
+- Post cards render correctly
+- Responsive layout
+- SEO meta tags present
+
+---
+
+### 8.2 Create Blog Post Detail Page
+**File:** `resources/views/livewire/blog/show.blade.php`
+
+**Requirements:**
+- Breadcrumb (Home > Blog > [Post Title])
+- Post title
+- Metadata: Author, Published Date
+- Featured image (large)
+- Full content (rich text)
+- Related posts section (2-3 recent posts, excluding current)
+- CTA: "Contact us for more information"
+
+**Data:**
+```php
+state(['post']);
+
+$relatedPosts = computed(fn() =>
+    BlogPost::where('published', true)
+        ->where('id', '!=', $this->post->id)
+        ->latest('published_at')
+        ->limit(3)
+        ->get()
+);
+```
+
+**Implementation:**
+```blade
+@volt('blog.show')
+<x-layouts.app :title="$post->meta_title ?? $post->title . ' | KMG Blog'"
+               :description="$post->meta_description ?? $post->excerpt">
+    <x-breadcrumb :items="[
+        ['label' => 'Home', 'url' => route('home')],
+        ['label' => 'Blog', 'url' => route('blog.index')],
+        ['label' => $post->title],
+    ]" />
+
+    <article class="py-16">
+        <div class="max-w-4xl mx-auto px-4">
+            <h1 class="text-5xl font-bold mb-4">{{ $post->title }}</h1>
+
+            <div class="flex items-center gap-4 text-gray-600 mb-8">
+                <span>By {{ $post->author }}</span>
+                <span>•</span>
+                <time>{{ $post->published_at->format('F j, Y') }}</time>
+            </div>
+
+            @if($post->featured_image)
+                <img src="{{ Storage::url($post->featured_image) }}"
+                     alt="{{ $post->title }}"
+                     class="w-full rounded-lg mb-8">
+            @endif
+
+            <div class="prose prose-lg max-w-none mb-12">
+                {!! $post->content !!}
+            </div>
+
+            <div class="border-t pt-8 mb-12">
+                <p class="text-lg text-gray-700 mb-4">
+                    Have questions about this topic? We're here to help.
+                </p>
+                <flux:button variant="primary" href="{{ route('contact') }}">
+                    Contact Us
+                </flux:button>
+            </div>
+
+            @if($this->relatedPosts->count() > 0)
+                <h2 class="text-3xl font-bold mb-6">Related Articles</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    @foreach($this->relatedPosts as $related)
+                        <x-blog-post-card :post="$related" />
+                    @endforeach
+                </div>
+            @endif
+        </div>
+    </article>
+</x-layouts.app>
+@endvolt
+```
+
+**Acceptance Criteria:**
+- Post displays correctly
+- Featured image and content render
+- Rich text formatting preserved
+- Related posts display (if available)
+- CTA navigates to contact page
+- SEO meta tags from model or fallback
+- Responsive layout
+
+---
+
+## Task Group 9: Resources & Contact Pages (4-5 hours)
+
+### 9.1 Create Resources (Downloads) Page
+**File:** `resources/views/livewire/resources.blade.php`
+
+**Requirements:**
+- Breadcrumb
+- Page heading and intro
+- Filter by category dropdown (All, Guide, Report, Brochure, Form, Template, Other)
+- Table or cards of resources
+- Columns: Name, Category, File Size, Downloads, Download Button
+- Download button opens file in new tab, increments counter
+
+**Data:**
+```php
+state(['category' => '']);
+
+$resources = computed(fn() =>
+    \App\Models\Resource::where('active', true)
+        ->when($this->category, fn($q) => $q->where('category', $this->category))
+        ->orderBy('name')
+        ->get()
+);
+
+$download = fn($resourceId) => [
+    $resource = \App\Models\Resource::findOrFail($resourceId),
+    $resource->increment('download_count'),
+    redirect()->to(Storage::url($resource->file)),
+];
+```
+
+**Implementation:**
+```blade
+@volt('resources')
+<x-layouts.app title="Resources & Downloads | KMG Environmental Solutions">
+    <x-breadcrumb :items="[
+        ['label' => 'Home', 'url' => route('home')],
+        ['label' => 'Resources'],
+    ]" />
+
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h1 class="text-5xl font-bold mb-6">Resources & Downloads</h1>
+            <p class="text-xl text-gray-600 mb-8">
+                Free downloadable resources including guides, reports, and templates.
+            </p>
+
+            <!-- Category Filter -->
+            <div class="mb-8">
+                <label class="block text-sm font-medium mb-2">Filter by Category</label>
+                <select wire:model.live="category" class="rounded-md border-gray-300 w-full md:w-64">
+                    <option value="">All Categories</option>
+                    <option value="guide">Guides</option>
+                    <option value="report">Reports</option>
+                    <option value="brochure">Brochures</option>
+                    <option value="form">Forms</option>
+                    <option value="template">Templates</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <!-- Resources Table -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Name
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Category
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Downloads
+                            </th>
+                            <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        @foreach($this->resources as $resource)
+                            <tr>
+                                <td class="px-6 py-4">
+                                    <div class="text-sm font-medium text-gray-900">{{ $resource->name }}</div>
+                                    @if($resource->description)
+                                        <div class="text-sm text-gray-500">{{ Str::limit($resource->description, 80) }}</div>
+                                    @endif
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <flux:badge>{{ ucfirst($resource->category) }}</flux:badge>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    {{ $resource->download_count }} downloads
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <flux:button variant="primary"
+                                                 wire:click="download({{ $resource->id }})"
+                                                 target="_blank">
+                                        Download
+                                    </flux:button>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</x-layouts.app>
+@endvolt
+```
+
+**Acceptance Criteria:**
+- Resources display in table
+- Category filter works
+- Download button increments counter
+- File opens in new tab
+- Responsive table (or cards on mobile)
+- SEO meta tags present
+
+---
+
+### 9.2 Create Contact Page with Form
+**File:** `resources/views/livewire/contact.blade.php`
+
+**Requirements:**
+- Breadcrumb
+- Page heading and intro
+- **Contact Form:**
+  - Name, Email, Phone (required)
+  - Company (optional)
+  - Subject Type dropdown (General, Service, Training, Equipment, Quote)
+  - Message textarea (required)
+  - Validation
+  - Creates `ContactSubmission` with status 'new'
+  - Email notification to admins
+  - Success message
+- **Contact Information Section:**
+  - Physical address (placeholder for now)
+  - Phone number (placeholder)
+  - Email address (placeholder)
+  - Business hours (placeholder)
+- **Social Media Links** (optional, placeholder)
+
+**Data:**
+```php
+use function Livewire\Volt\{state};
+
+state([
+    'name' => '',
+    'email' => '',
+    'phone' => '',
+    'company' => '',
+    'subject_type' => 'general_inquiry',
+    'message' => '',
+]);
+
+$submit = function() {
+    $validated = $this->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255',
+        'phone' => 'required|string|max:20',
+        'company' => 'nullable|string|max:255',
+        'subject_type' => 'required|in:general_inquiry,service_inquiry,training_inquiry,equipment_inquiry,quote_request',
+        'message' => 'required|string|max:2000',
+    ]);
+
+    ContactSubmission::create([
+        ...$validated,
+        'status' => 'new',
+    ]);
+
+    // Send notification email (TODO)
+
+    session()->flash('success', "Thank you for contacting us! We'll respond within 24 hours.");
+    $this->reset();
+};
+```
+
+**Implementation:**
+```blade
+@volt('contact')
+<x-layouts.app title="Contact Us | KMG Environmental Solutions">
+    <x-breadcrumb :items="[
+        ['label' => 'Home', 'url' => route('home')],
+        ['label' => 'Contact'],
+    ]" />
+
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h1 class="text-5xl font-bold mb-6">Contact Us</h1>
+            <p class="text-xl text-gray-600 mb-12 max-w-3xl">
+                Get in touch with our team. We're here to answer your questions and discuss
+                how we can help with your environmental consultancy needs.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div>
+                    <h2 class="text-2xl font-bold mb-6">Send us a Message</h2>
+
+                    @if(session()->has('success'))
+                        <div class="bg-green-100 border border-green-400 text-green-700 px-6 py-4 rounded-lg mb-6">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    <form wire:submit="submit" class="space-y-6">
+                        <flux:field>
+                            <flux:label>Name *</flux:label>
+                            <flux:input wire:model="name" required />
+                            <flux:error name="name" />
+                        </flux:field>
+
+                        <flux:field>
+                            <flux:label>Email *</flux:label>
+                            <flux:input type="email" wire:model="email" required />
+                            <flux:error name="email" />
+                        </flux:field>
+
+                        <flux:field>
+                            <flux:label>Phone *</flux:label>
+                            <flux:input wire:model="phone" required />
+                            <flux:error name="phone" />
+                        </flux:field>
+
+                        <flux:field>
+                            <flux:label>Company (Optional)</flux:label>
+                            <flux:input wire:model="company" />
+                        </flux:field>
+
+                        <flux:field>
+                            <flux:label>Subject Type *</flux:label>
+                            <flux:select wire:model="subject_type" required>
+                                <option value="general_inquiry">General Inquiry</option>
+                                <option value="service_inquiry">Service Inquiry</option>
+                                <option value="training_inquiry">Training Inquiry</option>
+                                <option value="equipment_inquiry">Equipment Inquiry</option>
+                                <option value="quote_request">Quote Request</option>
+                            </flux:select>
+                            <flux:error name="subject_type" />
+                        </flux:field>
+
+                        <flux:field>
+                            <flux:label>Message *</flux:label>
+                            <flux:textarea wire:model="message" rows="6" required />
+                            <flux:error name="message" />
+                        </flux:field>
+
+                        <flux:button type="submit" variant="primary" size="lg">
+                            Send Message
+                        </flux:button>
+                    </form>
+                </div>
+
+                <!-- Contact Information -->
+                <div>
+                    <h2 class="text-2xl font-bold mb-6">Contact Information</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="font-semibold text-lg mb-2">📍 Address</h3>
+                            <p class="text-gray-600">
+                                [Address to be added]<br>
+                                South Africa
+                            </p>
+                        </div>
+
+                        <div>
+                            <h3 class="font-semibold text-lg mb-2">📞 Phone</h3>
+                            <p class="text-gray-600">[Phone to be added]</p>
+                        </div>
+
+                        <div>
+                            <h3 class="font-semibold text-lg mb-2">✉️ Email</h3>
+                            <p class="text-gray-600">[Email to be added]</p>
+                        </div>
+
+                        <div>
+                            <h3 class="font-semibold text-lg mb-2">🕒 Business Hours</h3>
+                            <p class="text-gray-600">
+                                Monday - Friday: 8:00 AM - 5:00 PM<br>
+                                Saturday - Sunday: Closed
+                            </p>
+                        </div>
+
+                        <div>
+                            <h3 class="font-semibold text-lg mb-2">🌐 Follow Us</h3>
+                            <div class="flex gap-4">
+                                <!-- Social media icons/links to be added -->
+                                <p class="text-gray-600">[Social media links to be added]</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</x-layouts.app>
+@endvolt
+```
+
+**Acceptance Criteria:**
+- Contact form validates correctly
+- Contact submission creates database record with status 'new'
+- Success message displays after submission
+- Form resets after submission
+- Contact information displays (even as placeholders)
+- Responsive layout (form and info stack on mobile)
+- SEO meta tags present
+
+---
+
+## Task Group 10: Testing & Optimization (6-8 hours)
+
+### 10.1 Write Feature Tests for Public Pages
+
+**File:** `tests/Feature/PublicPagesTest.php`
+
+**Tests to create:**
+```php
+test('homepage renders correctly', function() {
+    $response = $this->get('/');
+    $response->assertStatus(200);
+    $response->assertSee('Environmental Solutions for Sustainable Growth');
+});
+
+test('services listing page renders', function() {
+    ServiceCategory::factory()->create(['active' => true]);
+    $response = $this->get(route('services.index'));
+    $response->assertStatus(200);
+});
+
+test('service detail page renders', function() {
+    $service = Service::factory()->create(['active' => true]);
+    $response = $this->get(route('services.show', $service->slug));
+    $response->assertStatus(200);
+    $response->assertSee($service->name);
+});
+
+test('projects listing page renders with filters', function() {
+    Project::factory(5)->create();
+    $response = $this->get(route('projects.index'));
+    $response->assertStatus(200);
+});
+
+test('training course page renders with schedules', function() {
+    $course = TrainingCourse::factory()->create(['active' => true]);
+    TrainingSchedule::factory()->create([
+        'training_course_id' => $course->id,
+        'start_datetime' => now()->addDays(7),
+    ]);
+    $response = $this->get(route('training.show', $course->slug));
+    $response->assertStatus(200);
+});
+
+test('contact form submission works', function() {
+    Livewire::test('contact')
+        ->set('name', 'Test User')
+        ->set('email', 'test@example.com')
+        ->set('phone', '0123456789')
+        ->set('subject_type', 'general_inquiry')
+        ->set('message', 'This is a test message')
+        ->call('submit')
+        ->assertHasNoErrors();
+
+    $this->assertDatabaseHas('contact_submissions', [
+        'email' => 'test@example.com',
+        'status' => 'new',
+    ]);
+});
+
+test('training booking form submission works', function() {
+    $schedule = TrainingSchedule::factory()->create([
+        'start_datetime' => now()->addDays(7),
+    ]);
+
+    Livewire::test('training.show', ['course' => $schedule->trainingCourse])
+        ->call('openBookingForm', $schedule->id)
+        ->set('name', 'Test Booking')
+        ->set('email', 'booking@test.com')
+        ->set('phone', '0123456789')
+        ->call('submitBooking')
+        ->assertHasNoErrors();
+
+    $this->assertDatabaseHas('training_bookings', [
+        'email' => 'booking@test.com',
+        'status' => 'pending',
+    ]);
+});
+
+test('equipment quote form submission works', function() {
+    $equipment = Equipment::factory()->create(['available' => true]);
+
+    Livewire::test('equipment.show', ['equipment' => $equipment])
+        ->set('name', 'Test Quote')
+        ->set('email', 'quote@test.com')
+        ->set('phone', '0123456789')
+        ->set('start_date', now()->addDays(2)->format('Y-m-d'))
+        ->set('end_date', now()->addDays(5)->format('Y-m-d'))
+        ->call('submitQuote')
+        ->assertHasNoErrors();
+
+    $this->assertDatabaseHas('equipment_rental_quotes', [
+        'email' => 'quote@test.com',
+        'status' => 'pending',
+    ]);
+});
+
+test('blog listing shows only published posts', function() {
+    BlogPost::factory()->create(['published' => true]);
+    BlogPost::factory()->create(['published' => false]);
+
+    $response = $this->get(route('blog.index'));
+    $response->assertStatus(200);
+
+    $publishedPost = BlogPost::where('published', true)->first();
+    $unpublishedPost = BlogPost::where('published', false)->first();
+
+    $response->assertSee($publishedPost->title);
+    $response->assertDontSee($unpublishedPost->title);
+});
+```
+
+**Acceptance Criteria:**
+- All 9+ feature tests created
+- Tests pass when run with `php artisan test`
+- Test coverage for major functionality
+
+---
+
+### 10.2 Run Laravel Pint for Code Formatting
+
+**Command:**
+```bash
+vendor/bin/pint
+```
+
+**Acceptance Criteria:**
+- All code formatted to Laravel standards
+- No style issues reported
+
+---
+
+### 10.3 SEO Optimization
+
+**Tasks:**
+1. **Create sitemap.xml** (manual or package like `spatie/laravel-sitemap`)
+2. **Update robots.txt**
+3. **Verify meta tags on all pages**
+4. **Add Schema.org JSON-LD** (Organization, LocalBusiness)
+5. **Optimize images** (compress, WebP where applicable)
+
+**Sitemap Routes to Include:**
+- Homepage
+- About pages (About, Team, Accreditations)
+- Services listing + all service detail pages
+- Projects listing + all project detail pages
+- Training listing + all course detail pages
+- Equipment listing + all equipment detail pages
+- Blog listing + all blog post detail pages
+- Resources
+- Contact
+
+**Acceptance Criteria:**
+- sitemap.xml generated and accessible at `/sitemap.xml`
+- robots.txt updated
+- All pages have unique title/description
+- Schema.org markup present on homepage
+
+---
+
+### 10.4 Performance Optimization
+
+**Tasks:**
+1. **Enable caching:**
+   - Route caching: `php artisan route:cache`
+   - Config caching: `php artisan config:cache`
+   - View caching: `php artisan view:cache`
+2. **Optimize images** (compress, lazy loading)
+3. **Minify CSS/JS** (Vite production build: `npm run build`)
+4. **Add browser caching headers** (in `.htaccess` or server config)
+5. **Database query optimization** (eager loading, indexes)
+
+**Run Lighthouse Audit:**
+- Desktop and mobile
+- Target scores: Performance > 90, Accessibility > 90, Best Practices > 90, SEO > 90
+
+**Acceptance Criteria:**
+- Production assets built and optimized
+- Lighthouse scores meet targets
+- Page load times < 3 seconds
+
+---
+
+### 10.5 Create Phase 3 Completion Summary
+
+**File:** `agent-os/product/phase-3-completion.md`
+
+**Content:**
+- List of all pages implemented (15+)
+- Interactive features completed (3 forms)
+- SEO optimizations applied
+- Performance metrics (Lighthouse scores)
+- Test coverage summary
+- Next steps (Phase 4/5)
+
+**Acceptance Criteria:**
+- Completion summary document created
+- Comprehensive overview of Phase 3 deliverables
+
+---
+
+## Summary
+
+**Total Tasks:** 36 tasks across 10 task groups
+
+**Estimated Timeline:**
+- Week 1: Layout & Foundation, Homepage, About Pages (Tasks 1-3)
+- Week 2: Services, Sectors & Projects (Tasks 4-5)
+- Week 3: Training, Equipment, Blog (Tasks 6-8)
+- Week 4: Resources, Contact, Testing & Optimization (Tasks 9-10)
+
+**Total Effort:** 45-58 hours (approximately 3-4 weeks at normal pace)
+
+**Key Deliverables:**
+- 15+ public pages fully functional
+- 3 interactive forms (contact, training booking, equipment quote)
+- Responsive design across all devices
+- SEO-optimized pages with meta tags and sitemap
+- Performance-optimized (Lighthouse > 90)
+- Comprehensive test coverage
+- Code formatted to Laravel standards
+
+**Success Criteria:**
+- All public pages render correctly
+- All forms validate and create database records
+- All navigation links work
+- Responsive design verified on mobile/tablet/desktop
+- SEO meta tags present on all pages
+- All tests passing
+- Lighthouse scores > 90
+- Phase 3 ready for client review
