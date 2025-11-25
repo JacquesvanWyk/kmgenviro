@@ -1,22 +1,532 @@
 <?php
 
-use function Livewire\Volt\{layout, title};
+use function Livewire\Volt\{computed, layout, title};
+use App\Models\{TeamMember, Accreditation};
 
 layout('components.layouts.public');
 title('About Us | KMG Environmental Solutions');
 
+$teamMembers = computed(fn() =>
+    TeamMember::where('is_active', true)
+        ->orderBy('sort_order')
+        ->get()
+);
+
+$accreditations = computed(fn() =>
+    Accreditation::where('is_active', true)
+        ->orderBy('sort_order')
+        ->get()
+);
+
 ?>
 
-<div>
-    <x-public.breadcrumb :items="[
-        ['label' => 'Home', 'url' => route('home')],
-        ['label' => 'About Us'],
-    ]" />
+<div class="bg-white">
+    <!-- Hero Section -->
+    <section class="relative py-24 bg-zinc-900 overflow-hidden">
+        @if(file_exists(public_path('images/about/kmg-vehicle-1.jpg')))
+            <img src="{{ asset('images/about/kmg-vehicle-1.jpg') }}"
+                 alt="KMG Environmental Solutions"
+                 class="absolute inset-0 w-full h-full object-cover opacity-30">
+        @endif
+        <div class="absolute inset-0 bg-gradient-to-b from-zinc-900/80 to-zinc-900/95"></div>
 
-    <section class="py-16">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <h1 class="text-5xl font-bold mb-6">About Us</h1>
-            <p class="text-xl text-gray-600">Coming soon...</p>
+        <div class="relative z-10 max-w-7xl mx-auto px-4">
+            <x-public.breadcrumb :items="[
+                ['label' => 'Home', 'url' => route('home')],
+                ['label' => 'About Us'],
+            ]" class="mb-8" />
+
+            <div class="max-w-4xl">
+                <h1 class="text-5xl md:text-6xl font-black text-white mb-6">
+                    About <span class="text-green-500">KMG</span>
+                </h1>
+                <p class="text-xl text-zinc-300 leading-relaxed">
+                    Accredited environmental consultancy delivering scientifically robust, regulation-aligned solutions across South Africa and the SADC region since 2008.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who We Are Section -->
+    <section class="py-24">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <div class="mb-8 border-l-4 border-green-500 pl-6">
+                        <h2 class="text-4xl md:text-5xl font-black text-zinc-950 mb-4">
+                            Who We Are
+                        </h2>
+                    </div>
+
+                    <div class="prose prose-lg max-w-none text-zinc-600">
+                        <p>
+                            KMG Environmental Solutions (Pty) Ltd is a leading South African environmental consultancy providing expert services across the full spectrum of environmental management, ESG compliance, occupational hygiene, and professional training.
+                        </p>
+
+                        <p>
+                            Founded in 2008, we have grown to become a trusted partner for clients in mining, industrial, infrastructure, and renewable energy sectors. Our multidisciplinary team of registered professionals brings together expertise in environmental science, chemistry, occupational hygiene, waste management, and regulatory compliance.
+                        </p>
+
+                        <p>
+                            We deliver scientifically defensible solutions that meet the highest regulatory standards while remaining practical and cost-effective. Our work spans all nine provinces of South Africa and extends into the broader SADC region, including notable projects in Lesotho, Botswana, and Mozambique.
+                        </p>
+
+                        <p>
+                            As a DoEL-approved asbestos contractor, SACNASP-registered training provider, and EAPASA-accredited organisation, we maintain the credentials and expertise necessary to handle complex environmental challenges with confidence and precision.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    @if(file_exists(public_path('images/about/kmg-vehicle-2.jpg')))
+                        <img src="{{ asset('images/about/kmg-vehicle-2.jpg') }}"
+                             alt="KMG Environmental team in the field"
+                             class="w-full h-auto rounded-lg shadow-xl">
+                    @endif
+
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-zinc-50 p-6 rounded-lg text-center">
+                            <div class="text-4xl font-black text-green-500 mb-2">15+</div>
+                            <div class="text-sm text-zinc-600">Years Experience</div>
+                        </div>
+                        <div class="bg-zinc-50 p-6 rounded-lg text-center">
+                            <div class="text-4xl font-black text-green-500 mb-2">9</div>
+                            <div class="text-sm text-zinc-600">SA Provinces</div>
+                        </div>
+                        <div class="bg-zinc-50 p-6 rounded-lg text-center">
+                            <div class="text-4xl font-black text-green-500 mb-2">500+</div>
+                            <div class="text-sm text-zinc-600">Projects Completed</div>
+                        </div>
+                        <div class="bg-zinc-50 p-6 rounded-lg text-center">
+                            <div class="text-4xl font-black text-green-500 mb-2">B-BBEE</div>
+                            <div class="text-sm text-zinc-600">Level 2 Contributor</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission, Vision & Values -->
+    <section class="py-24 bg-zinc-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-black text-zinc-950 mb-4">
+                    Mission, Vision & Values
+                </h2>
+                <p class="text-xl text-zinc-500 max-w-3xl mx-auto">
+                    The principles that guide everything we do
+                </p>
+            </div>
+
+            <!-- Mission & Vision -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                <div class="bg-white p-8 rounded-lg shadow-sm border-l-4 border-green-500">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                            <x-solar-icon name="target" size="24" class="text-white" />
+                        </div>
+                        <h3 class="text-2xl font-bold text-zinc-950">Our Mission</h3>
+                    </div>
+                    <p class="text-zinc-600 leading-relaxed">
+                        To provide scientifically robust, regulation-aligned environmental solutions that protect ecosystems, ensure compliance, and enable sustainable development for our clients across South Africa and the SADC region.
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-lg shadow-sm border-l-4 border-green-500">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                            <x-solar-icon name="eye" size="24" class="text-white" />
+                        </div>
+                        <h3 class="text-2xl font-bold text-zinc-950">Our Vision</h3>
+                    </div>
+                    <p class="text-zinc-600 leading-relaxed">
+                        To be the most trusted environmental consultancy in Southern Africa, recognised for our scientific excellence, professional integrity, and commitment to sustainable development that balances economic growth with environmental stewardship.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Core Values -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-sm text-center group hover:shadow-lg transition-all">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-500 transition-colors">
+                        <x-solar-icon name="shield-check" size="32" class="text-green-600 group-hover:text-white transition-colors" />
+                    </div>
+                    <h4 class="font-bold text-zinc-950 mb-2">Integrity</h4>
+                    <p class="text-sm text-zinc-500">Honest, ethical conduct in all dealings</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm text-center group hover:shadow-lg transition-all">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-500 transition-colors">
+                        <x-solar-icon name="cup-star" size="32" class="text-green-600 group-hover:text-white transition-colors" />
+                    </div>
+                    <h4 class="font-bold text-zinc-950 mb-2">Excellence</h4>
+                    <p class="text-sm text-zinc-500">Highest scientific & professional standards</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm text-center group hover:shadow-lg transition-all">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-500 transition-colors">
+                        <x-solar-icon name="leaf" size="32" class="text-green-600 group-hover:text-white transition-colors" />
+                    </div>
+                    <h4 class="font-bold text-zinc-950 mb-2">Sustainability</h4>
+                    <p class="text-sm text-zinc-500">Long-term environmental stewardship</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm text-center group hover:shadow-lg transition-all">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-500 transition-colors">
+                        <x-solar-icon name="diploma" size="32" class="text-green-600 group-hover:text-white transition-colors" />
+                    </div>
+                    <h4 class="font-bold text-zinc-950 mb-2">Professionalism</h4>
+                    <p class="text-sm text-zinc-500">Registered, accredited expertise</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm text-center group hover:shadow-lg transition-all">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-500 transition-colors">
+                        <x-solar-icon name="lightbulb" size="32" class="text-green-600 group-hover:text-white transition-colors" />
+                    </div>
+                    <h4 class="font-bold text-zinc-950 mb-2">Innovation</h4>
+                    <p class="text-sm text-zinc-500">Modern solutions to complex challenges</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm text-center group hover:shadow-lg transition-all">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-500 transition-colors">
+                        <x-solar-icon name="handshake" size="32" class="text-green-600 group-hover:text-white transition-colors" />
+                    </div>
+                    <h4 class="font-bold text-zinc-950 mb-2">Partnership</h4>
+                    <p class="text-sm text-zinc-500">Collaborative client relationships</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Accreditations & Memberships -->
+    <section class="py-24">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-black text-zinc-950 mb-4">
+                    Accreditations & Memberships
+                </h2>
+                <p class="text-xl text-zinc-500 max-w-3xl mx-auto">
+                    Our credentials demonstrate our commitment to professional excellence and regulatory compliance
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- DoEL -->
+                <div class="bg-zinc-50 p-6 rounded-lg">
+                    <div class="flex items-start gap-4">
+                        <div class="w-16 h-16 bg-green-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <x-solar-icon name="verified-check" size="32" class="text-white" />
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-zinc-950 mb-1">DoEL Approved</h3>
+                            <p class="text-green-600 font-semibold text-sm mb-2">RAC2024-CI/100</p>
+                            <p class="text-zinc-600 text-sm">Department of Employment and Labour approved asbestos contractor for consulting and inspection services.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SACNASP -->
+                <div class="bg-zinc-50 p-6 rounded-lg">
+                    <div class="flex items-start gap-4">
+                        <div class="w-16 h-16 bg-green-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <x-solar-icon name="verified-check" size="32" class="text-white" />
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-zinc-950 mb-1">SACNASP</h3>
+                            <p class="text-green-600 font-semibold text-sm mb-2">Registered Training Provider</p>
+                            <p class="text-zinc-600 text-sm">South African Council for Natural Scientific Professions registered professionals and accredited training provider.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EAPASA -->
+                <div class="bg-zinc-50 p-6 rounded-lg">
+                    <div class="flex items-start gap-4">
+                        <div class="w-16 h-16 bg-green-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <x-solar-icon name="verified-check" size="32" class="text-white" />
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-zinc-950 mb-1">EAPASA</h3>
+                            <p class="text-green-600 font-semibold text-sm mb-2">Accredited Training Provider</p>
+                            <p class="text-zinc-600 text-sm">Environmental Assessment Practitioners Association of South Africa accredited for professional training.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GBCSA -->
+                <div class="bg-zinc-50 p-6 rounded-lg">
+                    <div class="flex items-start gap-4">
+                        <div class="w-16 h-16 bg-green-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <x-solar-icon name="verified-check" size="32" class="text-white" />
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-zinc-950 mb-1">GBCSA</h3>
+                            <p class="text-green-600 font-semibold text-sm mb-2">Professional Member</p>
+                            <p class="text-zinc-600 text-sm">Green Building Council South Africa member supporting sustainable building practices.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SAIOH -->
+                <div class="bg-zinc-50 p-6 rounded-lg">
+                    <div class="flex items-start gap-4">
+                        <div class="w-16 h-16 bg-green-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <x-solar-icon name="verified-check" size="32" class="text-white" />
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-zinc-950 mb-1">SAIOH</h3>
+                            <p class="text-green-600 font-semibold text-sm mb-2">Member</p>
+                            <p class="text-zinc-600 text-sm">Southern African Institute for Occupational Hygiene member for occupational health expertise.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other Memberships -->
+                <div class="bg-zinc-50 p-6 rounded-lg">
+                    <div class="flex items-start gap-4">
+                        <div class="w-16 h-16 bg-green-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <x-solar-icon name="verified-check" size="32" class="text-white" />
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-zinc-950 mb-1">Additional Memberships</h3>
+                            <p class="text-green-600 font-semibold text-sm mb-2">Professional Bodies</p>
+                            <p class="text-zinc-600 text-sm">WISA, IIAV, IAIAsa, and other professional bodies for water, acoustics, and impact assessment.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="{{ route('accreditations') }}"
+                   class="inline-flex items-center gap-3 px-8 py-4 text-lg font-bold text-zinc-950 bg-green-500 hover:bg-green-400 transition-all">
+                    <span>View All Accreditations</span>
+                    <x-solar-icon name="alt-arrow-right" size="24" />
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Approach / Methodology -->
+    <section class="py-24 bg-zinc-900 text-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-black mb-4">
+                    Our Approach
+                </h2>
+                <p class="text-xl text-zinc-400 max-w-3xl mx-auto">
+                    A systematic methodology ensuring comprehensive environmental management
+                </p>
+            </div>
+
+            <!-- Methodology Flow -->
+            <div class="relative">
+                <!-- Desktop Flow -->
+                <div class="hidden lg:flex items-center justify-between gap-4">
+                    <div class="flex-1 text-center">
+                        <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-black text-zinc-900">1</span>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">Baseline</h3>
+                        <p class="text-sm text-zinc-400">Environmental baseline studies & site characterisation</p>
+                    </div>
+
+                    <x-solar-icon name="arrow-right" size="32" class="text-green-500 flex-shrink-0" />
+
+                    <div class="flex-1 text-center">
+                        <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-black text-zinc-900">2</span>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">Impact Assessment</h3>
+                        <p class="text-sm text-zinc-400">Comprehensive environmental & social impact assessment</p>
+                    </div>
+
+                    <x-solar-icon name="arrow-right" size="32" class="text-green-500 flex-shrink-0" />
+
+                    <div class="flex-1 text-center">
+                        <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-black text-zinc-900">3</span>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">Compliance</h3>
+                        <p class="text-sm text-zinc-400">Regulatory compliance assessment & permitting</p>
+                    </div>
+
+                    <x-solar-icon name="arrow-right" size="32" class="text-green-500 flex-shrink-0" />
+
+                    <div class="flex-1 text-center">
+                        <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-black text-zinc-900">4</span>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">Mitigation</h3>
+                        <p class="text-sm text-zinc-400">Practical mitigation strategies & management plans</p>
+                    </div>
+
+                    <x-solar-icon name="arrow-right" size="32" class="text-green-500 flex-shrink-0" />
+
+                    <div class="flex-1 text-center">
+                        <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-black text-zinc-900">5</span>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">Implementation</h3>
+                        <p class="text-sm text-zinc-400">On-site support & implementation assistance</p>
+                    </div>
+
+                    <x-solar-icon name="arrow-right" size="32" class="text-green-500 flex-shrink-0" />
+
+                    <div class="flex-1 text-center">
+                        <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-black text-zinc-900">6</span>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">Improvement</h3>
+                        <p class="text-sm text-zinc-400">Continuous monitoring & adaptive management</p>
+                    </div>
+                </div>
+
+                <!-- Mobile/Tablet Flow -->
+                <div class="lg:hidden grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <span class="text-xl font-black text-zinc-900">1</span>
+                        </div>
+                        <h3 class="text-base font-bold mb-1">Baseline</h3>
+                        <p class="text-xs text-zinc-400">Environmental baseline studies</p>
+                    </div>
+
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <span class="text-xl font-black text-zinc-900">2</span>
+                        </div>
+                        <h3 class="text-base font-bold mb-1">Impact Assessment</h3>
+                        <p class="text-xs text-zinc-400">Environmental & social impact</p>
+                    </div>
+
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <span class="text-xl font-black text-zinc-900">3</span>
+                        </div>
+                        <h3 class="text-base font-bold mb-1">Compliance</h3>
+                        <p class="text-xs text-zinc-400">Regulatory assessment</p>
+                    </div>
+
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <span class="text-xl font-black text-zinc-900">4</span>
+                        </div>
+                        <h3 class="text-base font-bold mb-1">Mitigation</h3>
+                        <p class="text-xs text-zinc-400">Mitigation strategies</p>
+                    </div>
+
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <span class="text-xl font-black text-zinc-900">5</span>
+                        </div>
+                        <h3 class="text-base font-bold mb-1">Implementation</h3>
+                        <p class="text-xs text-zinc-400">On-site support</p>
+                    </div>
+
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <span class="text-xl font-black text-zinc-900">6</span>
+                        </div>
+                        <h3 class="text-base font-bold mb-1">Improvement</h3>
+                        <p class="text-xs text-zinc-400">Continuous monitoring</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Team -->
+    <section class="py-24">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-black text-zinc-950 mb-4">
+                    Our Team
+                </h2>
+                <p class="text-xl text-zinc-500 max-w-3xl mx-auto">
+                    Registered professionals with extensive experience in environmental consulting
+                </p>
+            </div>
+
+            @if($this->teamMembers->count() > 0)
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    @foreach($this->teamMembers as $member)
+                        <div class="bg-zinc-50 rounded-lg overflow-hidden group">
+                            <div class="aspect-square bg-zinc-200 relative overflow-hidden">
+                                @if($member->photo && file_exists(public_path('storage/' . $member->photo)))
+                                    <img src="{{ asset('storage/' . $member->photo) }}"
+                                         alt="{{ $member->name }}"
+                                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                @else
+                                    <div class="w-full h-full flex items-center justify-center">
+                                        <x-solar-icon name="user-circle" size="96" class="text-zinc-400" />
+                                    </div>
+                                @endif
+                            </div>
+
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-zinc-950 mb-1">{{ $member->name }}</h3>
+                                <p class="text-green-600 font-semibold mb-3">{{ $member->title }}</p>
+
+                                @if($member->registrations)
+                                    <p class="text-sm text-zinc-500 mb-3">
+                                        <span class="font-medium">Registrations:</span> {{ $member->registrations }}
+                                    </p>
+                                @endif
+
+                                @if($member->bio)
+                                    <p class="text-zinc-600 text-sm leading-relaxed">
+                                        {{ Str::limit($member->bio, 150) }}
+                                    </p>
+                                @endif
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @else
+                <div class="text-center py-12 bg-zinc-50 rounded-lg">
+                    <x-solar-icon name="users-group-two-rounded" size="64" class="text-zinc-300 mx-auto mb-4" />
+                    <p class="text-zinc-500">Team profiles coming soon.</p>
+                </div>
+            @endif
+
+            <div class="text-center mt-12">
+                <a href="{{ route('team') }}"
+                   class="inline-flex items-center gap-3 px-8 py-4 text-lg font-bold text-white bg-zinc-900 hover:bg-zinc-800 transition-all">
+                    <span>View Full Team</span>
+                    <x-solar-icon name="alt-arrow-right" size="24" />
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-green-500">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-black text-zinc-950 mb-2">
+                        Ready to Work With Us?
+                    </h2>
+                    <p class="text-lg text-zinc-800">
+                        Get expert environmental consulting from our team of registered professionals
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="{{ route('contact') }}"
+                       class="inline-flex items-center gap-3 px-8 py-4 text-lg font-bold text-white bg-zinc-900 hover:bg-zinc-800 transition-all">
+                        <x-solar-icon name="chat-round-money" size="24" />
+                        <span>Request a Quote</span>
+                    </a>
+
+                    <a href="tel:0119696184"
+                       class="inline-flex items-center gap-3 px-8 py-4 text-lg font-bold text-zinc-950 bg-white hover:bg-zinc-100 transition-all">
+                        <x-solar-icon name="phone-calling" size="24" />
+                        <span>011 969 6184</span>
+                    </a>
+                </div>
+            </div>
         </div>
     </section>
 </div>
