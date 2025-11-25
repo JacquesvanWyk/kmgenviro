@@ -55,6 +55,8 @@
 
     <x-public.footer />
 
+    <x-public.floating-buttons />
+
     @fluxScripts
     @stack('scripts')
 </body>
