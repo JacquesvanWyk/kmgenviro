@@ -339,7 +339,7 @@ $projectCount = computed(fn() => Project::count());
             @if($this->sectors->count() > 0)
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                     @foreach($this->sectors as $sector)
-                        <a href="{{ route('sectors.show', $sector) }}"
+                        <a href="{{ route('sectors.index') }}#{{ $sector->slug }}"
                            class="group relative aspect-square overflow-hidden rounded-lg bg-zinc-200">
                             @php
                                 $sectorSlug = Str::slug($sector->name);
