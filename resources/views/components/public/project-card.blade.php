@@ -4,7 +4,7 @@
     @if($project->featured_image)
         <div class="aspect-video bg-gray-200">
             <img src="{{ Storage::url($project->featured_image) }}"
-                 alt="{{ $project->name }}"
+                 alt="{{ $project->title }}"
                  class="w-full h-full object-cover">
         </div>
     @else
@@ -16,7 +16,7 @@
     @endif
 
     <div class="p-6 flex-grow flex flex-col">
-        <h3 class="text-xl font-semibold mb-2 text-gray-900">{{ $project->name }}</h3>
+        <h3 class="text-xl font-semibold mb-2 text-gray-900">{{ $project->title }}</h3>
 
         <div class="flex flex-wrap gap-2 mb-3">
             @if($project->sector)

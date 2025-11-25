@@ -1,0 +1,273 @@
+<?php
+
+use function Livewire\Volt\{computed, layout, title};
+use App\Models\{ServiceCategory, Project, ClientLogo, BlogPost, TeamMember, Accreditation};
+
+layout('components.layouts.public');
+title('KMG Environmental Solutions | Environmental Consultancy South Africa');
+
+$serviceCategories = computed(fn() =>
+    ServiceCategory::where('is_active', true)
+        ->orderBy('sort_order')
+        ->limit(6)
+        ->get()
+);
+
+$featuredProjects = computed(fn() =>
+    Project::where('is_featured', true)
+        ->where('is_active', true)
+        ->with('sector')
+        ->latest('completion_date')
+        ->limit(3)
+        ->get()
+);
+
+$clientLogos = computed(fn() =>
+    ClientLogo::where('is_active', true)
+        ->orderBy('sort_order')
+        ->get()
+);
+
+$latestPosts = computed(fn() =>
+    BlogPost::where('is_published', true)
+        ->latest('published_at')
+        ->limit(3)
+        ->get()
+);
+
+$teamCount = computed(fn() => TeamMember::where('is_active', true)->count());
+$accreditationCount = computed(fn() => Accreditation::where('is_active', true)->count());
+$projectCount = computed(fn() => Project::count());
+
+?>
+
+<div class="bg-zinc-950">
+    <!-- Hero Section with Liquid Glass Effect -->
+    <section class="relative min-h-screen flex items-center justify-center liquid-glass noise-texture overflow-hidden">
+        <!-- Grid pattern overlay -->
+        <div class="absolute inset-0 grid-pattern opacity-30"></div>
+
+        <!-- Content -->
+        <div class="relative z-10 max-w-7xl mx-auto px-4 py-32">
+            <div class="text-center">
+                <!-- Badge -->
+                <div class="inline-flex items-center gap-2 mb-8 px-4 py-2 bg-zinc-900/50 border border-zinc-700 backdrop-blur-sm">
+                    <x-solar-icon name="verified-check" size="20" class="text-green-500" />
+                    <span class="text-zinc-300 text-sm font-medium">DoEL Approved Asbestos Contractor | SACNASP & EAPASA Accredited</span>
+                </div>
+
+                <!-- Main Heading -->
+                <h1 class="text-6xl md:text-8xl font-black text-zinc-50 mb-8 text-display leading-none">
+                    Environmental
+                    <span class="block text-green-500">Solutions</span>
+                    <span class="block text-zinc-400 text-5xl md:text-7xl">for Sustainable Growth</span>
+                </h1>
+
+                <p class="text-xl md:text-2xl text-zinc-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+                    Accredited environmental consultancy delivering scientifically robust, regulation-aligned solutions across South Africa and the SADC region
+                </p>
+
+                <!-- CTA Buttons with Border Beam -->
+                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                    <a href="{{ route('services.index') }}"
+                       class="group relative inline-flex items-center gap-3 px-8 py-4 text-lg font-bold text-zinc-950 bg-green-500 hover:bg-green-400 transition-all duration-300 overflow-hidden btn-beam">
+                        <x-solar-icon name="library" size="24" />
+                        <span>Explore Services</span>
+                        <x-solar-icon name="alt-arrow-right" size="24" class="group-hover:translate-x-1 transition-transform" />
+                    </a>
+
+                    <a href="{{ route('contact') }}"
+                       class="group relative inline-flex items-center gap-3 px-8 py-4 text-lg font-bold text-zinc-50 bg-transparent border-2 border-zinc-700 hover:border-green-500 transition-all duration-300 border-beam">
+                        <x-solar-icon name="chat-round-money" size="24" />
+                        <span>Request Quote</span>
+                    </a>
+                </div>
+
+                <!-- Stats Bar -->
+                <div class="mt-20 grid grid-cols-3 gap-8 max-w-3xl mx-auto">
+                    <div class="text-center elevated-section p-6">
+                        <div class="text-4xl font-black text-green-500 mb-2">{{ $this->teamCount }}+</div>
+                        <div class="text-sm text-zinc-400 uppercase tracking-wider">Specialists</div>
+                    </div>
+                    <div class="text-center elevated-section p-6">
+                        <div class="text-4xl font-black text-green-500 mb-2">{{ $this->accreditationCount }}+</div>
+                        <div class="text-sm text-zinc-400 uppercase tracking-wider">Accreditations</div>
+                    </div>
+                    <div class="text-center elevated-section p-6">
+                        <div class="text-4xl font-black text-green-500 mb-2">{{ $this->projectCount }}+</div>
+                        <div class="text-sm text-zinc-400 uppercase tracking-wider">Projects</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+            <x-solar-icon name="double-alt-arrow-down" size="32" class="text-zinc-600" />
+        </div>
+    </section>
+
+    <!-- Services Overview -->
+    @if($this->serviceCategories->count() > 0)
+        <section class="py-32 bg-zinc-950 relative">
+            <!-- Section divider -->
+            <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-700 to-transparent"></div>
+
+            <div class="max-w-7xl mx-auto px-4">
+                <!-- Section Header -->
+                <div class="mb-16 border-l-4 border-green-500 pl-6">
+                    <h2 class="text-5xl md:text-6xl font-black text-zinc-50 mb-4">
+                        Our Services
+                    </h2>
+                    <p class="text-xl text-zinc-400">
+                        Comprehensive environmental solutions from accredited specialists
+                    </p>
+                </div>
+
+                <!-- Services Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                    @foreach($this->serviceCategories as $category)
+                        <div class="card-sharp p-8 group cursor-pointer">
+                            <div class="flex items-start gap-4 mb-6">
+                                <div class="text-5xl flex-shrink-0">{{ $category->icon }}</div>
+                                <div class="flex-1">
+                                    <h3 class="text-2xl font-bold text-zinc-50 mb-2 group-hover:text-green-500 transition-colors">
+                                        {{ $category->name }}
+                                    </h3>
+                                </div>
+                            </div>
+
+                            <p class="text-zinc-400 mb-6 leading-relaxed">
+                                {{ Str::limit(strip_tags($category->description), 120) }}
+                            </p>
+
+                            <a href="{{ route('services.index') }}#category-{{ $category->slug }}"
+                               class="inline-flex items-center gap-2 text-green-500 font-semibold group-hover:gap-4 transition-all">
+                                <span>View Services</span>
+                                <x-solar-icon name="arrow-right" size="20" />
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+
+                <!-- View All Button -->
+                <div class="text-center">
+                    <a href="{{ route('services.index') }}"
+                       class="inline-flex items-center gap-3 px-8 py-4 text-lg font-bold text-zinc-950 bg-green-500 hover:bg-green-400 transition-all btn-beam">
+                        <span>View All Services</span>
+                        <x-solar-icon name="alt-arrow-right" size="24" />
+                    </a>
+                </div>
+            </div>
+        </section>
+    @endif
+
+    <!-- Why Choose KMG -->
+    <section class="py-32 bg-zinc-900 relative">
+        <!-- Section divider -->
+        <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-700 to-transparent"></div>
+
+        <div class="max-w-7xl mx-auto px-4">
+            <!-- Section Header -->
+            <div class="mb-16 border-l-4 border-green-500 pl-6">
+                <h2 class="text-5xl md:text-6xl font-black text-zinc-50 mb-4">
+                    Why Choose KMG
+                </h2>
+                <p class="text-xl text-zinc-400">
+                    Accredited expertise delivering measurable environmental outcomes
+                </p>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="elevated-section p-8 group">
+                    <div class="mb-6">
+                        <x-solar-icon name="verified-check" size="64" class="text-green-500" />
+                    </div>
+                    <h3 class="text-2xl font-bold text-zinc-50 mb-4">Accredited & Recognized</h3>
+                    <p class="text-zinc-400 leading-relaxed">
+                        DoEL-approved asbestos contractor, SACNASP & EAPASA-accredited training provider, GBCSA member. Professionally registered team ensures high scientific and regulatory standards.
+                    </p>
+                </div>
+
+                <div class="elevated-section p-8 group">
+                    <div class="mb-6">
+                        <x-solar-icon name="users-group-two-rounded" size="64" class="text-green-500" />
+                    </div>
+                    <h3 class="text-2xl font-bold text-zinc-50 mb-4">Expert Specialists</h3>
+                    <p class="text-zinc-400 leading-relaxed">
+                        Multidisciplinary team registered with SACNASP, EAPASA, WISA, IIAV, SAIOH, IAIAsa. Covering environmental studies, monitoring, permitting, ESG, hygiene, and training.
+                    </p>
+                </div>
+
+                <div class="elevated-section p-8 group">
+                    <div class="mb-6">
+                        <x-solar-icon name="globus" size="64" class="text-green-500" />
+                    </div>
+                    <h3 class="text-2xl font-bold text-zinc-50 mb-4">National & SADC Reach</h3>
+                    <p class="text-zinc-400 leading-relaxed">
+                        Operating across all nine provinces of South Africa and the broader SADC region. Delivering scientifically robust, regulation-aligned solutions nationwide.
+                    </p>
+                </div>
+
+                <div class="elevated-section p-8 group">
+                    <div class="mb-6">
+                        <x-solar-icon name="document-text" size="64" class="text-green-500" />
+                    </div>
+                    <h3 class="text-2xl font-bold text-zinc-50 mb-4">Defendable Outputs</h3>
+                    <p class="text-zinc-400 leading-relaxed">
+                        All reports and deliverables meet the highest scientific and regulatory standards. Evidence-based environmental solutions protecting ecosystems and enabling compliance.
+                    </p>
+                </div>
+
+                <div class="elevated-section p-8 group">
+                    <div class="mb-6">
+                        <x-solar-icon name="settings" size="64" class="text-green-500" />
+                    </div>
+                    <h3 class="text-2xl font-bold text-zinc-50 mb-4">Tailored Solutions</h3>
+                    <p class="text-zinc-400 leading-relaxed">
+                        Client-centric approaches balancing compliance, practicality, and sustainability. Customized strategies supporting mining, infrastructure, municipal, and renewable energy sectors.
+                    </p>
+                </div>
+
+                <div class="elevated-section p-8 group">
+                    <div class="mb-6">
+                        <x-solar-icon name="chart-2" size="64" class="text-green-500" />
+                    </div>
+                    <h3 class="text-2xl font-bold text-zinc-50 mb-4">Continuous Improvement</h3>
+                    <p class="text-zinc-400 leading-relaxed">
+                        Adaptive management, performance tracking, and knowledge transfer enhance long-term outcomes. Scientific excellence with practical compliance solutions.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-32 bg-zinc-950 relative overflow-hidden liquid-glass">
+        <div class="absolute inset-0 grid-pattern opacity-20"></div>
+
+        <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-5xl md:text-6xl font-black text-zinc-50 mb-8">
+                Ready to Start Your Project?
+            </h2>
+            <p class="text-xl text-zinc-300 mb-12">
+                Get expert environmental consulting from SACNASP-registered professionals
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                <a href="{{ route('contact') }}"
+                   class="inline-flex items-center gap-3 px-8 py-4 text-lg font-bold text-zinc-950 bg-green-500 hover:bg-green-400 transition-all btn-beam">
+                    <x-solar-icon name="chat-round-money" size="24" />
+                    <span>Request a Quote</span>
+                </a>
+
+                <a href="{{ route('services.index') }}"
+                   class="inline-flex items-center gap-3 px-8 py-4 text-lg font-bold text-zinc-50 bg-transparent border-2 border-zinc-700 hover:border-green-500 transition-all border-beam">
+                    <x-solar-icon name="phone-calling" size="24" />
+                    <span>011 969 6184</span>
+                </a>
+            </div>
+        </div>
+    </section>
+</div>

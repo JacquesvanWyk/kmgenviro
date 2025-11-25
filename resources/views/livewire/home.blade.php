@@ -15,6 +15,8 @@ $serviceCategories = computed(fn() =>
 
 $featuredProjects = computed(fn() =>
     Project::where('is_featured', true)
+        ->where('is_active', true)
+        ->with('sector')
         ->latest('completion_date')
         ->limit(3)
         ->get()
@@ -39,48 +41,132 @@ $projectCount = computed(fn() => Project::count());
 
 ?>
 
-<div>
+<div class="bg-zinc-50">
     <!-- Hero Section -->
-    <section class="relative h-screen min-h-[600px] flex items-center justify-center bg-cover bg-center"
-             style="background-image: url('{{ asset('images/hero-bg.jpg') }}')">
-        <div class="absolute inset-0 bg-gradient-to-r from-green-900/80 to-green-700/80"></div>
-        <div class="relative z-10 max-w-4xl mx-auto px-4 text-center text-white">
-            <h1 class="text-5xl md:text-6xl font-bold mb-6">
-                Environmental Solutions for Sustainable Growth
-            </h1>
-            <p class="text-xl md:text-2xl mb-8 text-gray-100">
-                Leading environmental consultancy providing expert solutions across South Africa
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="{{ route('services.index') }}"
-                   class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-green-600 hover:bg-green-700 rounded-lg transition">
-                    Our Services
-                </a>
-                <a href="{{ route('contact') }}"
-                   class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-green-600 bg-white hover:bg-gray-100 rounded-lg transition">
-                    Get a Quote
-                </a>
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden liquid-glass">
+        @if(file_exists(public_path('images/hero-1.jpg')))
+            <!-- Background Image -->
+            <img src="{{ asset('images/hero-1.jpg') }}"
+                 alt="KMG Environmental fieldwork - Professional environmental consultants conducting on-site assessment"
+                 class="absolute inset-0 w-full h-full object-cover object-center"
+                 loading="eager">
+
+            <!-- Light Gradient Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-b from-white/90 via-white/85 to-white/92"></div>
+        @endif
+
+        <!-- Grid pattern overlay -->
+        <div class="absolute inset-0 grid-pattern opacity-20"></div>
+
+        <!-- Content -->
+        <div class="relative z-10 max-w-7xl mx-auto px-4 py-32">
+            <div class="text-center">
+                <!-- Badge -->
+                <div class="inline-flex items-center gap-2 mb-8 px-4 py-2 bg-white/80 border border-green-600 backdrop-blur-sm">
+                    <x-solar-icon name="verified-check" size="20" class="text-green-600" />
+                    <span class="text-zinc-950 text-sm font-medium">DoEL Approved Asbestos Contractor | SACNASP & EAPASA Accredited</span>
+                </div>
+
+                <!-- Main Heading -->
+                <h1 class="text-6xl md:text-8xl font-black text-zinc-950 mb-8 text-display leading-none">
+                    Environmental
+                    <span class="block text-green-600">Solutions</span>
+                    <span class="block text-zinc-900 text-5xl md:text-7xl">for Sustainable Growth</span>
+                </h1>
+
+                <p class="text-xl md:text-2xl text-zinc-700 mb-12 max-w-3xl mx-auto leading-relaxed">
+                    Accredited environmental consultancy delivering scientifically robust, regulation-aligned solutions across South Africa and the SADC region
+                </p>
+
+                <!-- CTA Buttons with Border Beam -->
+                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                    <a href="{{ route('services.index') }}"
+                       class="group relative inline-flex items-center gap-3 px-8 py-4 text-lg font-bold text-zinc-950 bg-green-600 hover:bg-green-500 transition-all duration-300 overflow-hidden btn-beam">
+                        <x-solar-icon name="library" size="24" />
+                        <span>Explore Services</span>
+                        <x-solar-icon name="alt-arrow-right" size="24" class="group-hover:translate-x-1 transition-transform" />
+                    </a>
+
+                    <a href="{{ route('contact') }}"
+                       class="group relative inline-flex items-center gap-3 px-8 py-4 text-lg font-bold text-zinc-950 bg-white hover:bg-zinc-50 border-2 border-zinc-300 hover:border-green-600 transition-all duration-300 border-beam">
+                        <x-solar-icon name="chat-round-money" size="24" />
+                        <span>Request Quote</span>
+                    </a>
+                </div>
+
+                <!-- Stats Bar -->
+                <div class="mt-20 grid grid-cols-3 gap-8 max-w-3xl mx-auto">
+                    <div class="text-center glass-card-glow p-6">
+                        <div class="text-4xl font-black text-green-600 mb-2">{{ $this->teamCount }}+</div>
+                        <div class="text-sm text-zinc-700 uppercase tracking-wider">Specialists</div>
+                    </div>
+                    <div class="text-center glass-card-glow p-6">
+                        <div class="text-4xl font-black text-green-600 mb-2">{{ $this->accreditationCount }}+</div>
+                        <div class="text-sm text-zinc-700 uppercase tracking-wider">Accreditations</div>
+                    </div>
+                    <div class="text-center glass-card-glow p-6">
+                        <div class="text-4xl font-black text-green-600 mb-2">{{ $this->projectCount }}+</div>
+                        <div class="text-sm text-zinc-700 uppercase tracking-wider">Projects</div>
+                    </div>
+                </div>
             </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+            <x-solar-icon name="double-alt-arrow-down" size="32" class="text-zinc-500" />
         </div>
     </section>
 
     <!-- Services Overview -->
     @if($this->serviceCategories->count() > 0)
-        <section class="py-16 bg-gray-50">
+        <section class="py-32 bg-zinc-50 relative">
+            <!-- Section divider -->
+            <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-700 to-transparent"></div>
+
             <div class="max-w-7xl mx-auto px-4">
-                <h2 class="text-4xl font-bold text-center mb-12">Our Services</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+                <!-- Section Header -->
+                <div class="mb-16 border-l-4 border-green-500 pl-6">
+                    <h2 class="text-5xl md:text-6xl font-black text-zinc-950 mb-4">
+                        Our Services
+                    </h2>
+                    <p class="text-xl text-zinc-500">
+                        Comprehensive environmental solutions from accredited specialists
+                    </p>
+                </div>
+
+                <!-- Services Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                     @foreach($this->serviceCategories as $category)
-                        <x-public.service-card :service="$category" />
+                        <div class="card-sharp glass-card-beam p-8 group cursor-pointer">
+                            <div class="flex items-start gap-4 mb-6">
+                                <div class="text-5xl flex-shrink-0">{{ $category->icon }}</div>
+                                <div class="flex-1">
+                                    <h3 class="text-2xl font-bold text-zinc-950 mb-2 group-hover:text-green-600 transition-colors">
+                                        {{ $category->name }}
+                                    </h3>
+                                </div>
+                            </div>
+
+                            <p class="text-zinc-500 mb-6 leading-relaxed">
+                                {{ Str::limit(strip_tags($category->description), 120) }}
+                            </p>
+
+                            <a href="{{ route('services.index') }}#category-{{ $category->slug }}"
+                               class="inline-flex items-center gap-2 text-green-600 font-semibold group-hover:gap-4 transition-all">
+                                <span>View Services</span>
+                                <x-solar-icon name="arrow-right" size="20" />
+                            </a>
+                        </div>
                     @endforeach
                 </div>
+
+                <!-- View All Button -->
                 <div class="text-center">
                     <a href="{{ route('services.index') }}"
-                       class="text-green-600 hover:text-green-700 font-semibold text-lg inline-flex items-center gap-1">
-                        View All Services
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                        </svg>
+                       class="inline-flex items-center gap-3 px-8 py-4 text-lg font-bold text-zinc-950 bg-green-600 hover:bg-green-500 transition-all btn-beam">
+                        <span>View All Services</span>
+                        <x-solar-icon name="alt-arrow-right" size="24" />
                     </a>
                 </div>
             </div>
@@ -88,104 +174,111 @@ $projectCount = computed(fn() => Project::count());
     @endif
 
     <!-- Why Choose KMG -->
-    <section class="py-16">
+    <section class="py-32 bg-white relative">
+        <!-- Section divider -->
+        <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-700 to-transparent"></div>
+
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12">Why Choose KMG</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="text-center">
-                    <div class="text-5xl mb-4">👥</div>
-                    <h3 class="text-2xl font-semibold mb-2">Expert Team</h3>
-                    <p class="text-gray-600">{{ $this->teamCount }}+ environmental professionals</p>
+            <!-- Section Header -->
+            <div class="mb-16 border-l-4 border-green-500 pl-6">
+                <h2 class="text-5xl md:text-6xl font-black text-zinc-950 mb-4">
+                    Why Choose KMG
+                </h2>
+                <p class="text-xl text-zinc-500">
+                    Accredited expertise delivering measurable environmental outcomes
+                </p>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="elevated-section glass-card-beam p-8 group">
+                    <div class="mb-6">
+                        <x-solar-icon name="verified-check" size="64" class="text-green-600" />
+                    </div>
+                    <h3 class="text-2xl font-bold text-zinc-950 mb-4">Accredited & Recognized</h3>
+                    <p class="text-zinc-500 leading-relaxed">
+                        DoEL-approved asbestos contractor, SACNASP & EAPASA-accredited training provider, GBCSA member. Professionally registered team ensures high scientific and regulatory standards.
+                    </p>
                 </div>
-                <div class="text-center">
-                    <div class="text-5xl mb-4">🏆</div>
-                    <h3 class="text-2xl font-semibold mb-2">Accredited & Certified</h3>
-                    <p class="text-gray-600">{{ $this->accreditationCount }}+ industry accreditations</p>
+
+                <div class="elevated-section glass-card-beam p-8 group">
+                    <div class="mb-6">
+                        <x-solar-icon name="users-group-two-rounded" size="64" class="text-green-600" />
+                    </div>
+                    <h3 class="text-2xl font-bold text-zinc-950 mb-4">Expert Specialists</h3>
+                    <p class="text-zinc-500 leading-relaxed">
+                        Multidisciplinary team registered with SACNASP, EAPASA, WISA, IIAV, SAIOH, IAIAsa. Covering environmental studies, monitoring, permitting, ESG, hygiene, and training.
+                    </p>
                 </div>
-                <div class="text-center">
-                    <div class="text-5xl mb-4">📊</div>
-                    <h3 class="text-2xl font-semibold mb-2">Proven Track Record</h3>
-                    <p class="text-gray-600">{{ $this->projectCount }}+ successful projects</p>
+
+                <div class="elevated-section glass-card-beam p-8 group">
+                    <div class="mb-6">
+                        <x-solar-icon name="globus" size="64" class="text-green-600" />
+                    </div>
+                    <h3 class="text-2xl font-bold text-zinc-950 mb-4">National & SADC Reach</h3>
+                    <p class="text-zinc-500 leading-relaxed">
+                        Operating across all nine provinces of South Africa and the broader SADC region. Delivering scientifically robust, regulation-aligned solutions nationwide.
+                    </p>
+                </div>
+
+                <div class="elevated-section glass-card-beam p-8 group">
+                    <div class="mb-6">
+                        <x-solar-icon name="document-text" size="64" class="text-green-600" />
+                    </div>
+                    <h3 class="text-2xl font-bold text-zinc-950 mb-4">Defendable Outputs</h3>
+                    <p class="text-zinc-500 leading-relaxed">
+                        All reports and deliverables meet the highest scientific and regulatory standards. Evidence-based environmental solutions protecting ecosystems and enabling compliance.
+                    </p>
+                </div>
+
+                <div class="elevated-section glass-card-beam p-8 group">
+                    <div class="mb-6">
+                        <x-solar-icon name="settings" size="64" class="text-green-600" />
+                    </div>
+                    <h3 class="text-2xl font-bold text-zinc-950 mb-4">Tailored Solutions</h3>
+                    <p class="text-zinc-500 leading-relaxed">
+                        Client-centric approaches balancing compliance, practicality, and sustainability. Customized strategies supporting mining, infrastructure, municipal, and renewable energy sectors.
+                    </p>
+                </div>
+
+                <div class="elevated-section glass-card-beam p-8 group">
+                    <div class="mb-6">
+                        <x-solar-icon name="chart-2" size="64" class="text-green-600" />
+                    </div>
+                    <h3 class="text-2xl font-bold text-zinc-950 mb-4">Continuous Improvement</h3>
+                    <p class="text-zinc-500 leading-relaxed">
+                        Adaptive management, performance tracking, and knowledge transfer enhance long-term outcomes. Scientific excellence with practical compliance solutions.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Featured Projects -->
-    @if($this->featuredProjects->count() > 0)
-        <section class="py-16 bg-gray-50">
-            <div class="max-w-7xl mx-auto px-4">
-                <h2 class="text-4xl font-bold text-center mb-12">Featured Projects</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-                    @foreach($this->featuredProjects as $project)
-                        <x-public.project-card :project="$project" />
-                    @endforeach
-                </div>
-                <div class="text-center">
-                    <a href="{{ route('projects.index') }}"
-                       class="text-green-600 hover:text-green-700 font-semibold text-lg inline-flex items-center gap-1">
-                        View All Projects
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </section>
-    @endif
+    <!-- CTA Section -->
+    <section class="py-32 bg-zinc-50 relative overflow-hidden liquid-glass">
+        <div class="absolute inset-0 grid-pattern opacity-20"></div>
 
-    <!-- Client Logos -->
-    @if($this->clientLogos->count() > 0)
-        <section class="py-16">
-            <div class="max-w-7xl mx-auto px-4">
-                <h2 class="text-4xl font-bold text-center mb-12">Trusted by Leading Organizations</h2>
-                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center">
-                    @foreach($this->clientLogos as $logo)
-                        <div class="flex items-center justify-center grayscale hover:grayscale-0 transition">
-                            <img src="{{ Storage::url($logo->logo) }}"
-                                 alt="{{ $logo->name }}"
-                                 class="max-h-20 w-auto">
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </section>
-    @endif
-
-    <!-- Latest Blog Posts -->
-    @if($this->latestPosts->count() > 0)
-        <section class="py-16 bg-gray-50">
-            <div class="max-w-7xl mx-auto px-4">
-                <h2 class="text-4xl font-bold text-center mb-12">Latest Insights</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-                    @foreach($this->latestPosts as $post)
-                        <x-public.blog-post-card :post="$post" />
-                    @endforeach
-                </div>
-                <div class="text-center">
-                    <a href="{{ route('blog.index') }}"
-                       class="text-green-600 hover:text-green-700 font-semibold text-lg inline-flex items-center gap-1">
-                        Read Our Blog
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </section>
-    @endif
-
-    <!-- Contact CTA -->
-    <section class="py-16 bg-gradient-to-r from-green-700 to-green-600 text-white">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <h2 class="text-4xl font-bold mb-6">Ready to Get Started?</h2>
-            <p class="text-xl mb-8">
-                Contact us today to discuss your environmental consultancy needs
+        <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-5xl md:text-6xl font-black text-zinc-950 mb-8">
+                Ready to Start Your Project?
+            </h2>
+            <p class="text-xl text-zinc-700 mb-12">
+                Get expert environmental consulting from SACNASP-registered professionals
             </p>
-            <a href="{{ route('contact') }}"
-               class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-green-600 bg-white hover:bg-gray-100 rounded-lg transition">
-                Contact Us
-            </a>
+
+            <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                <a href="{{ route('contact') }}"
+                   class="inline-flex items-center gap-3 px-8 py-4 text-lg font-bold text-zinc-950 bg-green-600 hover:bg-green-500 transition-all btn-beam">
+                    <x-solar-icon name="chat-round-money" size="24" />
+                    <span>Request a Quote</span>
+                </a>
+
+                <a href="{{ route('services.index') }}"
+                   class="inline-flex items-center gap-3 px-8 py-4 text-lg font-bold text-zinc-950 bg-transparent border-2 border-zinc-300 hover:border-green-600 transition-all border-beam">
+                    <x-solar-icon name="phone-calling" size="24" />
+                    <span>011 969 6184</span>
+                </a>
+            </div>
         </div>
     </section>
 </div>

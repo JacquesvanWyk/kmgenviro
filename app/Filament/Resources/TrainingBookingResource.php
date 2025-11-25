@@ -26,7 +26,6 @@ class TrainingBookingResource extends Resource
             ->schema([
                 Forms\Components\Select::make('training_course_id')
                     ->relationship('trainingCourse', 'name')
-                    ->required()
                     ->disabled(),
                 Forms\Components\Select::make('training_schedule_id')
                     ->relationship('trainingSchedule', 'start_date')
@@ -35,25 +34,21 @@ class TrainingBookingResource extends Resource
                 Forms\Components\Grid::make(2)
                     ->schema([
                         Forms\Components\TextInput::make('name')
-                            ->required()
                             ->disabled(),
                         Forms\Components\TextInput::make('email')
                             ->email()
-                            ->required()
                             ->disabled(),
                     ]),
                 Forms\Components\Grid::make(2)
                     ->schema([
                         Forms\Components\TextInput::make('phone')
                             ->tel()
-                            ->required()
                             ->disabled(),
                         Forms\Components\TextInput::make('company')
                             ->disabled(),
                     ]),
                 Forms\Components\TextInput::make('number_of_delegates')
                     ->numeric()
-                    ->required()
                     ->disabled(),
                 Forms\Components\Textarea::make('delegate_names')
                     ->rows(3)

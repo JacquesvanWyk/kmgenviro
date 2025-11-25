@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>{{ $title ?? 'KMG Environmental Solutions | Environmental Consultancy South Africa' }}</title>
     <meta name="description" content="{{ $description ?? 'Leading environmental consultancy providing expert solutions across South Africa. Accredited specialists in environmental compliance, training, and equipment rental.' }}">
 
@@ -28,11 +30,13 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="{{ url()->current() }}">
 
-    <!-- Favicon -->
+    <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
+    <link rel="manifest" href="{{ asset('site.webmanifest') }}">
+    <meta name="theme-color" content="#22c55e">
 
     <!-- Styles -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -40,7 +44,7 @@
     <!-- Additional Head Content -->
     {{ $head ?? '' }}
 </head>
-<body class="font-sans antialiased bg-white text-gray-900">
+<body class="min-h-screen font-sans antialiased bg-white text-zinc-950">
     <x-public.header />
 
     <main>
@@ -48,5 +52,8 @@
     </main>
 
     <x-public.footer />
+
+    @fluxScripts
+    @stack('scripts')
 </body>
 </html>
