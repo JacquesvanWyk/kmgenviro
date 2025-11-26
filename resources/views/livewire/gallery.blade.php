@@ -70,18 +70,30 @@ title('Gallery | KMG Environmental Solutions');
     @keydown.arrow-right.window="if(open) next()"
     @keydown.arrow-left.window="if(open) prev()"
 >
-    <x-public.breadcrumb :items="[
-        ['label' => 'Home', 'url' => route('home')],
-        ['label' => 'Gallery']
-    ]" />
+    <!-- Hero Section -->
+    <section class="relative py-24 bg-zinc-900 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-zinc-900/80 to-zinc-900/95"></div>
 
-    <section class="py-16">
+        <div class="relative z-10 max-w-7xl mx-auto px-4">
+            <x-public.breadcrumb :items="[
+                ['label' => 'Home', 'url' => route('home')],
+                ['label' => 'Gallery']
+            ]" class="mb-8" />
+
+            <div class="max-w-4xl">
+                <h1 class="text-5xl md:text-6xl font-black text-white mb-6">
+                    Photo <span class="text-green-500">Gallery</span>
+                </h1>
+                <p class="text-xl text-zinc-300 leading-relaxed">
+                    Explore our work across South Africa and the SADC region. From environmental monitoring
+                    to specialist studies, see our team in action.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4">
-            <h1 class="text-5xl font-bold mb-6 text-gray-900">Photo Gallery</h1>
-            <p class="text-xl text-gray-600 mb-12 max-w-3xl">
-                Explore our work across South Africa and the SADC region. From environmental monitoring
-                to specialist studies, see our team in action.
-            </p>
 
             <!-- Category Filter -->
             <div class="flex flex-wrap gap-3 mb-10">

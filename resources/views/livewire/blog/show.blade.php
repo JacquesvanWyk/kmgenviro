@@ -21,18 +21,26 @@ $relatedPosts = computed(fn() =>
 ?>
 
 <div>
-    <x-public.breadcrumb :items="[
-        ['label' => 'Home', 'url' => route('home')],
-        ['label' => 'Blog', 'url' => route('blog.index')],
-        ['label' => $post->title]
-    ]" />
+    <!-- Hero Section -->
+    <section class="relative py-24 bg-zinc-900 overflow-hidden">
+        @if($post->featured_image)
+            <img src="{{ str_starts_with($post->featured_image, '/') ? asset($post->featured_image) : Storage::url($post->featured_image) }}"
+                 alt="{{ $post->title }}"
+                 class="absolute inset-0 w-full h-full object-cover opacity-20">
+        @endif
+        <div class="absolute inset-0 bg-gradient-to-b from-zinc-900/80 to-zinc-900/95"></div>
 
-    <article class="py-16">
-        <div class="max-w-4xl mx-auto px-4">
-            <header class="mb-8">
-                <h1 class="text-5xl font-bold mb-6 text-gray-900">{{ $post->title }}</h1>
+        <div class="relative z-10 max-w-7xl mx-auto px-4">
+            <x-public.breadcrumb :items="[
+                ['label' => 'Home', 'url' => route('home')],
+                ['label' => 'Blog', 'url' => route('blog.index')],
+                ['label' => $post->title]
+            ]" class="mb-8" />
 
-                <div class="flex items-center gap-4 text-gray-600">
+            <div class="max-w-4xl">
+                <h1 class="text-4xl md:text-5xl font-black text-white mb-6">{{ $post->title }}</h1>
+
+                <div class="flex flex-wrap items-center gap-4 text-zinc-300">
                     <div class="flex items-center gap-2">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
@@ -40,7 +48,7 @@ $relatedPosts = computed(fn() =>
                         <span>{{ $post->author }}</span>
                     </div>
 
-                    <span>•</span>
+                    <span class="text-zinc-500">•</span>
 
                     <div class="flex items-center gap-2">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -52,19 +60,15 @@ $relatedPosts = computed(fn() =>
                     </div>
 
                     @if($post->is_featured)
-                        <flux:badge color="amber">Featured</flux:badge>
+                        <span class="px-3 py-1 bg-amber-500/20 backdrop-blur text-amber-400 rounded-full text-sm font-medium">Featured</span>
                     @endif
                 </div>
-            </header>
+            </div>
+        </div>
+    </section>
 
-            @if($post->featured_image)
-                <div class="mb-8 rounded-lg overflow-hidden shadow-lg">
-                    <img src="{{ Storage::url($post->featured_image) }}"
-                         alt="{{ $post->title }}"
-                         class="w-full h-auto">
-                </div>
-            @endif
-
+    <article class="py-16">
+        <div class="max-w-4xl mx-auto px-4">
             @if($post->excerpt)
                 <div class="bg-green-50 border-l-4 border-green-600 p-6 mb-8">
                     <p class="text-lg text-gray-700">{{ $post->excerpt }}</p>

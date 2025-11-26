@@ -43,6 +43,12 @@ $upcomingTraining = computed(fn() =>
         ->get()
 );
 
+$clientLogos = computed(fn() =>
+    ClientLogo::where('is_active', true)
+        ->orderBy('sort_order')
+        ->get()
+);
+
 $teamCount = computed(fn() => TeamMember::where('is_active', true)->count());
 $accreditationCount = computed(fn() => Accreditation::where('is_active', true)->count());
 $projectCount = computed(fn() => Project::count());
@@ -190,8 +196,8 @@ $projectCount = computed(fn() => Project::count());
 
                 <!-- Image -->
                 <div class="relative">
-                    @if(file_exists(public_path('images/about/kmg-vehicle-1.jpg')))
-                        <img src="{{ asset('images/about/kmg-vehicle-1.jpg') }}"
+                    @if(file_exists(public_path('images/about/kmg-vehicle-bakkie.jpg')))
+                        <img src="{{ asset('images/about/kmg-vehicle-bakkie.jpg') }}"
                              alt="KMG Environmental Solutions team vehicle"
                              class="w-full h-auto rounded-lg shadow-xl">
                     @else
@@ -250,63 +256,114 @@ $projectCount = computed(fn() => Project::count());
         </div>
     </section>
 
-    <!-- Accreditations Logos -->
-    <section class="py-16 bg-white border-y border-zinc-100">
+    <!-- Key Accreditations & Memberships -->
+    <section class="py-16 bg-zinc-50">
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-2xl font-bold text-zinc-950 mb-2">Key Accreditations & Registrations</h2>
-                <p class="text-zinc-500">Trusted by leading regulatory bodies</p>
+                <h2 class="text-3xl md:text-4xl font-black text-zinc-950 mb-4">
+                    Key Accreditations & <span class="text-green-500">Memberships</span>
+                </h2>
+                <p class="text-zinc-500 max-w-2xl mx-auto">
+                    Recognized by leading industry bodies for our commitment to excellence and compliance
+                </p>
             </div>
 
-            <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12">
-                @if($this->accreditations->count() > 0)
-                    @foreach($this->accreditations as $accreditation)
-                        @if($accreditation->logo_path && file_exists(public_path('storage/' . $accreditation->logo_path)))
-                            <img src="{{ asset('storage/' . $accreditation->logo_path) }}"
-                                 alt="{{ $accreditation->name }}"
-                                 class="h-12 md:h-16 w-auto grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100"
-                                 title="{{ $accreditation->name }}">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <!-- DoEL -->
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-48 h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
+                        @if(file_exists(public_path('images/accreditations/doel.jpg')))
+                            <img src="{{ asset('images/accreditations/doel.jpg') }}" alt="DoEL" class="w-full h-full object-contain">
                         @else
-                            <div class="flex items-center gap-2 px-4 py-2 bg-zinc-50 rounded">
-                                <x-solar-icon name="verified-check" size="20" class="text-green-500" />
-                                <span class="text-sm font-medium text-zinc-700">{{ $accreditation->abbreviation ?? $accreditation->name }}</span>
-                            </div>
+                            <div class="text-sm font-bold text-zinc-700">DoEL</div>
                         @endif
-                    @endforeach
-                @else
-                    <!-- Fallback accreditation badges -->
-                    <div class="flex items-center gap-2 px-4 py-2 bg-zinc-50 rounded">
-                        <x-solar-icon name="verified-check" size="20" class="text-green-500" />
-                        <span class="text-sm font-medium text-zinc-700">DoEL Approved</span>
                     </div>
-                    <div class="flex items-center gap-2 px-4 py-2 bg-zinc-50 rounded">
-                        <x-solar-icon name="verified-check" size="20" class="text-green-500" />
-                        <span class="text-sm font-medium text-zinc-700">SACNASP</span>
-                    </div>
-                    <div class="flex items-center gap-2 px-4 py-2 bg-zinc-50 rounded">
-                        <x-solar-icon name="verified-check" size="20" class="text-green-500" />
-                        <span class="text-sm font-medium text-zinc-700">EAPASA</span>
-                    </div>
-                    <div class="flex items-center gap-2 px-4 py-2 bg-zinc-50 rounded">
-                        <x-solar-icon name="verified-check" size="20" class="text-green-500" />
-                        <span class="text-sm font-medium text-zinc-700">GBCSA</span>
-                    </div>
-                    <div class="flex items-center gap-2 px-4 py-2 bg-zinc-50 rounded">
-                        <x-solar-icon name="verified-check" size="20" class="text-green-500" />
-                        <span class="text-sm font-medium text-zinc-700">SAIOH</span>
-                    </div>
-                    <div class="flex items-center gap-2 px-4 py-2 bg-zinc-50 rounded">
-                        <x-solar-icon name="verified-check" size="20" class="text-green-500" />
-                        <span class="text-sm font-medium text-zinc-700">IAIAsa</span>
-                    </div>
-                @endif
-            </div>
+                    <div class="font-bold text-zinc-950 mb-1">DoEL</div>
+                </div>
 
-            <div class="text-center mt-8">
-                <a href="{{ route('accreditations') }}" class="text-green-600 hover:text-green-700 font-semibold inline-flex items-center gap-2">
-                    View All Accreditations
-                    <x-solar-icon name="alt-arrow-right" size="16" />
-                </a>
+                <!-- SACNASP -->
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-48 h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
+                        @if(file_exists(public_path('images/accreditations/sacnasp.png')))
+                            <img src="{{ asset('images/accreditations/sacnasp.png') }}" alt="SACNASP" class="w-full h-full object-contain">
+                        @else
+                            <div class="text-sm font-bold text-zinc-700">SACNASP</div>
+                        @endif
+                    </div>
+                    <div class="font-bold text-zinc-950 mb-1">SACNASP</div>
+                </div>
+
+                <!-- EAPASA -->
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-48 h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
+                        @if(file_exists(public_path('images/accreditations/eapasa.png')))
+                            <img src="{{ asset('images/accreditations/eapasa.png') }}" alt="EAPASA" class="w-full h-full object-contain">
+                        @else
+                            <div class="text-sm font-bold text-zinc-700">EAPASA</div>
+                        @endif
+                    </div>
+                    <div class="font-bold text-zinc-950 mb-1">EAPASA</div>
+                </div>
+
+                <!-- GBCSA -->
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-48 h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
+                        @if(file_exists(public_path('images/accreditations/GBCSA-logo.png')))
+                            <img src="{{ asset('images/accreditations/GBCSA-logo.png') }}" alt="GBCSA" class="w-full h-full object-contain">
+                        @else
+                            <div class="text-sm font-bold text-zinc-700">GBCSA</div>
+                        @endif
+                    </div>
+                    <div class="font-bold text-zinc-950 mb-1">GBCSA</div>
+                </div>
+
+                <!-- WISA -->
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-48 h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
+                        @if(file_exists(public_path('images/accreditations/WISA.png')))
+                            <img src="{{ asset('images/accreditations/WISA.png') }}" alt="WISA" class="w-full h-full object-contain">
+                        @else
+                            <div class="text-sm font-bold text-zinc-700">WISA</div>
+                        @endif
+                    </div>
+                    <div class="font-bold text-zinc-950 mb-1">WISA</div>
+                </div>
+
+                <!-- SAIOH -->
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-48 h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
+                        @if(file_exists(public_path('images/accreditations/SAIOH.jpeg')))
+                            <img src="{{ asset('images/accreditations/SAIOH.jpeg') }}" alt="SAIOH" class="w-full h-full object-contain">
+                        @else
+                            <div class="text-sm font-bold text-zinc-700">SAIOH</div>
+                        @endif
+                    </div>
+                    <div class="font-bold text-zinc-950 mb-1">SAIOH</div>
+                </div>
+
+                <!-- IIAV -->
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-48 h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
+                        @if(file_exists(public_path('images/accreditations/IIAV.png')))
+                            <img src="{{ asset('images/accreditations/IIAV.png') }}" alt="IIAV" class="w-full h-full object-contain">
+                        @else
+                            <div class="text-sm font-bold text-zinc-700">IIAV</div>
+                        @endif
+                    </div>
+                    <div class="font-bold text-zinc-950 mb-1">IIAV</div>
+                </div>
+
+                <!-- IAIAsa -->
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-48 h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
+                        @if(file_exists(public_path('images/accreditations/IAIAsa.png')))
+                            <img src="{{ asset('images/accreditations/IAIAsa.png') }}" alt="IAIAsa" class="w-full h-full object-contain">
+                        @else
+                            <div class="text-sm font-bold text-zinc-700">IAIAsa</div>
+                        @endif
+                    </div>
+                    <div class="font-bold text-zinc-950 mb-1">IAIAsa</div>
+                </div>
             </div>
         </div>
     </section>
@@ -323,72 +380,97 @@ $projectCount = computed(fn() => Project::count());
                 </p>
             </div>
 
-            @php
-                $sectorImages = [
-                    'mining' => 'sectors/mining-site.jpg',
-                    'industrial' => 'sectors/industrial-site.jpg',
-                    'infrastructure' => 'sectors/infrastructure-site.jpg',
-                    'rail' => 'sectors/rail-site.jpg',
-                    'energy' => 'sectors/energy-site.jpg',
-                    'municipal' => 'sectors/municipal-site.jpg',
-                    'healthcare' => 'sectors/healthcare-site.jpg',
-                    'property' => 'sectors/property-site.jpg',
-                ];
-            @endphp
-
-            @if($this->sectors->count() > 0)
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    @foreach($this->sectors as $sector)
-                        <a href="{{ route('sectors.index') }}#{{ $sector->slug }}"
-                           class="group relative aspect-square overflow-hidden rounded-lg bg-zinc-200">
-                            @php
-                                $sectorSlug = Str::slug($sector->name);
-                                $imagePath = $sectorImages[$sectorSlug] ?? null;
-                            @endphp
-
-                            @if($imagePath && file_exists(public_path('images/' . $imagePath)))
-                                <img src="{{ asset('images/' . $imagePath) }}"
-                                     alt="{{ $sector->name }}"
-                                     class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            @elseif($sector->image_path && file_exists(public_path('storage/' . $sector->image_path)))
-                                <img src="{{ asset('storage/' . $sector->image_path) }}"
-                                     alt="{{ $sector->name }}"
-                                     class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            @endif
-
-                            <div class="absolute inset-0 bg-gradient-to-t from-zinc-900/90 via-zinc-900/40 to-transparent"></div>
-
-                            <div class="absolute bottom-0 left-0 right-0 p-4">
-                                <h3 class="text-lg font-bold text-white">{{ $sector->name }}</h3>
-                            </div>
-                        </a>
-                    @endforeach
+            <!-- Industry Icons/Badges Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <!-- Mining & Minerals -->
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-24 h-24 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow">
+                        <svg class="w-10 h-10 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-zinc-950 mb-1">Mining & Minerals</h3>
+                    <p class="text-sm text-zinc-600">Environmental assessments & compliance</p>
                 </div>
-            @else
-                <!-- Fallback sectors grid -->
-                @php
-                    $defaultSectors = [
-                        ['name' => 'Mining & Resources', 'icon' => 'mining'],
-                        ['name' => 'Industrial & Manufacturing', 'icon' => 'factory'],
-                        ['name' => 'Infrastructure & Transport', 'icon' => 'road'],
-                        ['name' => 'Rail & Logistics', 'icon' => 'train'],
-                        ['name' => 'Renewable Energy', 'icon' => 'bolt'],
-                        ['name' => 'Municipal & Government', 'icon' => 'buildings'],
-                        ['name' => 'Healthcare & Medical Waste', 'icon' => 'hospital'],
-                        ['name' => 'Property & Land Development', 'icon' => 'home'],
-                    ];
-                @endphp
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    @foreach($defaultSectors as $sector)
-                        <div class="group relative aspect-square overflow-hidden rounded-lg bg-zinc-800 flex items-center justify-center">
-                            <div class="text-center p-4">
-                                <x-solar-icon name="{{ $sector['icon'] }}" size="48" class="text-green-500 mx-auto mb-3" />
-                                <h3 class="text-lg font-bold text-white">{{ $sector['name'] }}</h3>
-                            </div>
-                        </div>
-                    @endforeach
+
+                <!-- Infrastructure & Transport -->
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-24 h-24 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow">
+                        <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-zinc-950 mb-1">Infrastructure & Transport</h3>
+                    <p class="text-sm text-zinc-600">Large-scale project management</p>
                 </div>
-            @endif
+
+                <!-- Municipal & Public Sector -->
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-24 h-24 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow">
+                        <svg class="w-10 h-10 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-zinc-950 mb-1">Municipal & Public Sector</h3>
+                    <p class="text-sm text-zinc-600">Public service environmental support</p>
+                </div>
+
+                <!-- Renewable Energy -->
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-24 h-24 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow">
+                        <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-zinc-950 mb-1">Renewable Energy</h3>
+                    <p class="text-sm text-zinc-600">Sustainable energy solutions</p>
+                </div>
+
+                <!-- Industrial & Manufacturing -->
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-24 h-24 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow">
+                        <svg class="w-10 h-10 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-zinc-950 mb-1">Industrial & Manufacturing</h3>
+                    <p class="text-sm text-zinc-600">Industrial environmental compliance</p>
+                </div>
+
+                <!-- Water & Sanitation -->
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-24 h-24 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow">
+                        <svg class="w-10 h-10 text-cyan-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-zinc-950 mb-1">Water & Sanitation</h3>
+                    <p class="text-sm text-zinc-600">Water resource management</p>
+                </div>
+
+                <!-- Healthcare & Medical Waste -->
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-24 h-24 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow">
+                        <svg class="w-10 h-10 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-zinc-950 mb-1">Healthcare & Medical Waste</h3>
+                    <p class="text-sm text-zinc-600">Medical waste management</p>
+                </div>
+
+                <!-- Property & Land Development -->
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-24 h-24 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow">
+                        <svg class="w-10 h-10 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bold text-zinc-950 mb-1">Property & Land Development</h3>
+                    <p class="text-sm text-zinc-600">Property environmental assessments</p>
+                </div>
+            </div>
 
             <div class="text-center mt-12">
                 <a href="{{ route('sectors.index') }}"
@@ -399,6 +481,34 @@ $projectCount = computed(fn() => Project::count());
             </div>
         </div>
     </section>
+
+
+    <!-- Our Clients -->
+    @if($this->clientLogos->count() > 0)
+        <section class="py-16 bg-white border-y border-zinc-100">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-2xl font-bold text-zinc-950 mb-2">Our Clients</h2>
+                    <p class="text-zinc-500">Trusted by leading organisations across industries</p>
+                </div>
+
+                <div class="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-6">
+                    @foreach($this->clientLogos as $client)
+                        <div class="flex items-center justify-center p-4 bg-zinc-50 rounded-lg aspect-square">
+                            @if($client->logo && file_exists(public_path($client->logo)))
+                                <img src="{{ asset($client->logo) }}"
+                                     alt="{{ $client->name }}"
+                                     class="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100"
+                                     title="{{ $client->name }}">
+                            @else
+                                <x-solar-icon name="buildings" size="32" class="text-zinc-300" />
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
 
     <!-- Featured Projects -->
     @if($this->featuredProjects->count() > 0)
@@ -468,7 +578,7 @@ $projectCount = computed(fn() => Project::count());
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div>
                     <div class="mb-8 border-l-4 border-green-500 pl-6">
-                        <h2 class="text-4xl md:text-5xl font-black mb-4">
+                        <h2 class="text-4xl md:text-5xl font-black text-white mb-4">
                             Training & Events
                         </h2>
                     </div>

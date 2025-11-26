@@ -147,7 +147,7 @@ $accreditations = computed(fn() =>
             </div>
 
             <!-- Core Values -->
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
                 <div class="bg-white p-6 rounded-lg shadow-sm text-center group hover:shadow-lg transition-all">
                     <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-500 transition-colors">
                         <x-solar-icon name="shield-check" size="32" class="text-green-600 group-hover:text-white transition-colors" />
@@ -200,107 +200,127 @@ $accreditations = computed(fn() =>
     </section>
 
     <!-- Accreditations & Memberships -->
-    <section class="py-24">
+    <section class="py-24 bg-zinc-50">
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-black text-zinc-950 mb-4">
-                    Accreditations & Memberships
+                    Accreditations & <span class="text-green-500">Memberships</span>
                 </h2>
                 <p class="text-xl text-zinc-500 max-w-3xl mx-auto">
                     Our credentials demonstrate our commitment to professional excellence and regulatory compliance
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
                 <!-- DoEL -->
-                <div class="bg-zinc-50 p-6 rounded-lg">
-                    <div class="flex items-start gap-4">
-                        <div class="w-16 h-16 bg-green-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <x-solar-icon name="verified-check" size="32" class="text-white" />
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-zinc-950 mb-1">DoEL Approved</h3>
-                            <p class="text-green-600 font-semibold text-sm mb-2">RAC2024-CI/100</p>
-                            <p class="text-zinc-600 text-sm">Department of Employment and Labour approved asbestos contractor for consulting and inspection services.</p>
-                        </div>
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-full h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
+                        @if(file_exists(public_path('images/accreditations/doel.jpg')))
+                            <img src="{{ asset('images/accreditations/doel.jpg') }}" alt="DoEL" class="w-full h-full object-contain">
+                        @else
+                            <div class="text-sm font-bold text-zinc-700">DoEL</div>
+                        @endif
                     </div>
+                    <div class="font-bold text-zinc-950 mb-1">DoEL</div>
+                    <p class="text-xs text-zinc-500">Approved Asbestos Contractor</p>
                 </div>
 
                 <!-- SACNASP -->
-                <div class="bg-zinc-50 p-6 rounded-lg">
-                    <div class="flex items-start gap-4">
-                        <div class="w-16 h-16 bg-green-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <x-solar-icon name="verified-check" size="32" class="text-white" />
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-zinc-950 mb-1">SACNASP</h3>
-                            <p class="text-green-600 font-semibold text-sm mb-2">Registered Training Provider</p>
-                            <p class="text-zinc-600 text-sm">South African Council for Natural Scientific Professions registered professionals and accredited training provider.</p>
-                        </div>
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-full h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
+                        @if(file_exists(public_path('images/accreditations/sacnasp.png')))
+                            <img src="{{ asset('images/accreditations/sacnasp.png') }}" alt="SACNASP" class="w-full h-full object-contain">
+                        @else
+                            <div class="text-sm font-bold text-zinc-700">SACNASP</div>
+                        @endif
                     </div>
+                    <div class="font-bold text-zinc-950 mb-1">SACNASP</div>
+                    <p class="text-xs text-zinc-500">Registered Professionals</p>
                 </div>
 
                 <!-- EAPASA -->
-                <div class="bg-zinc-50 p-6 rounded-lg">
-                    <div class="flex items-start gap-4">
-                        <div class="w-16 h-16 bg-green-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <x-solar-icon name="verified-check" size="32" class="text-white" />
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-zinc-950 mb-1">EAPASA</h3>
-                            <p class="text-green-600 font-semibold text-sm mb-2">Accredited Training Provider</p>
-                            <p class="text-zinc-600 text-sm">Environmental Assessment Practitioners Association of South Africa accredited for professional training.</p>
-                        </div>
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-full h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
+                        @if(file_exists(public_path('images/accreditations/eapasa.png')))
+                            <img src="{{ asset('images/accreditations/eapasa.png') }}" alt="EAPASA" class="w-full h-full object-contain">
+                        @else
+                            <div class="text-sm font-bold text-zinc-700">EAPASA</div>
+                        @endif
                     </div>
+                    <div class="font-bold text-zinc-950 mb-1">EAPASA</div>
+                    <p class="text-xs text-zinc-500">Accredited Training Provider</p>
                 </div>
 
                 <!-- GBCSA -->
-                <div class="bg-zinc-50 p-6 rounded-lg">
-                    <div class="flex items-start gap-4">
-                        <div class="w-16 h-16 bg-green-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <x-solar-icon name="verified-check" size="32" class="text-white" />
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-zinc-950 mb-1">GBCSA</h3>
-                            <p class="text-green-600 font-semibold text-sm mb-2">Professional Member</p>
-                            <p class="text-zinc-600 text-sm">Green Building Council South Africa member supporting sustainable building practices.</p>
-                        </div>
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-full h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
+                        @if(file_exists(public_path('images/accreditations/GBCSA-logo.png')))
+                            <img src="{{ asset('images/accreditations/GBCSA-logo.png') }}" alt="GBCSA" class="w-full h-full object-contain">
+                        @else
+                            <div class="text-sm font-bold text-zinc-700">GBCSA</div>
+                        @endif
                     </div>
+                    <div class="font-bold text-zinc-950 mb-1">GBCSA</div>
+                    <p class="text-xs text-zinc-500">Professional Member</p>
+                </div>
+
+                <!-- WISA -->
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-full h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
+                        @if(file_exists(public_path('images/accreditations/WISA.png')))
+                            <img src="{{ asset('images/accreditations/WISA.png') }}" alt="WISA" class="w-full h-full object-contain">
+                        @else
+                            <div class="text-sm font-bold text-zinc-700">WISA</div>
+                        @endif
+                    </div>
+                    <div class="font-bold text-zinc-950 mb-1">WISA</div>
+                    <p class="text-xs text-zinc-500">Water Institute Member</p>
                 </div>
 
                 <!-- SAIOH -->
-                <div class="bg-zinc-50 p-6 rounded-lg">
-                    <div class="flex items-start gap-4">
-                        <div class="w-16 h-16 bg-green-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <x-solar-icon name="verified-check" size="32" class="text-white" />
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-zinc-950 mb-1">SAIOH</h3>
-                            <p class="text-green-600 font-semibold text-sm mb-2">Member</p>
-                            <p class="text-zinc-600 text-sm">Southern African Institute for Occupational Hygiene member for occupational health expertise.</p>
-                        </div>
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-full h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
+                        @if(file_exists(public_path('images/accreditations/SAIOH.jpeg')))
+                            <img src="{{ asset('images/accreditations/SAIOH.jpeg') }}" alt="SAIOH" class="w-full h-full object-contain">
+                        @else
+                            <div class="text-sm font-bold text-zinc-700">SAIOH</div>
+                        @endif
                     </div>
+                    <div class="font-bold text-zinc-950 mb-1">SAIOH</div>
+                    <p class="text-xs text-zinc-500">Occupational Hygiene</p>
                 </div>
 
-                <!-- Other Memberships -->
-                <div class="bg-zinc-50 p-6 rounded-lg">
-                    <div class="flex items-start gap-4">
-                        <div class="w-16 h-16 bg-green-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <x-solar-icon name="verified-check" size="32" class="text-white" />
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-zinc-950 mb-1">Additional Memberships</h3>
-                            <p class="text-green-600 font-semibold text-sm mb-2">Professional Bodies</p>
-                            <p class="text-zinc-600 text-sm">WISA, IIAV, IAIAsa, and other professional bodies for water, acoustics, and impact assessment.</p>
-                        </div>
+                <!-- IIAV -->
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-full h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
+                        @if(file_exists(public_path('images/accreditations/IIAV.png')))
+                            <img src="{{ asset('images/accreditations/IIAV.png') }}" alt="IIAV" class="w-full h-full object-contain">
+                        @else
+                            <div class="text-sm font-bold text-zinc-700">IIAV</div>
+                        @endif
                     </div>
+                    <div class="font-bold text-zinc-950 mb-1">IIAV</div>
+                    <p class="text-xs text-zinc-500">Acoustics & Vibration</p>
+                </div>
+
+                <!-- IAIAsa -->
+                <div class="flex flex-col items-center text-center">
+                    <div class="w-full h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
+                        @if(file_exists(public_path('images/accreditations/IAIAsa.png')))
+                            <img src="{{ asset('images/accreditations/IAIAsa.png') }}" alt="IAIAsa" class="w-full h-full object-contain">
+                        @else
+                            <div class="text-sm font-bold text-zinc-700">IAIAsa</div>
+                        @endif
+                    </div>
+                    <div class="font-bold text-zinc-950 mb-1">IAIAsa</div>
+                    <p class="text-xs text-zinc-500">Impact Assessment</p>
                 </div>
             </div>
 
             <div class="text-center mt-12">
-                <a href="{{ route('accreditations') }}"
+                <a href="{{ route('contact') }}"
                    class="inline-flex items-center gap-3 px-8 py-4 text-lg font-bold text-zinc-950 bg-green-500 hover:bg-green-400 transition-all">
-                    <span>View All Accreditations</span>
+                    <span>Get in Touch</span>
                     <x-solar-icon name="alt-arrow-right" size="24" />
                 </a>
             </div>
@@ -311,7 +331,7 @@ $accreditations = computed(fn() =>
     <section class="py-24 bg-zinc-900 text-white">
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-black mb-4">
+                <h2 class="text-white text-4xl md:text-5xl font-black mb-4">
                     Our Approach
                 </h2>
                 <p class="text-xl text-zinc-400 max-w-3xl mx-auto">
@@ -327,7 +347,7 @@ $accreditations = computed(fn() =>
                         <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
                             <span class="text-2xl font-black text-zinc-900">1</span>
                         </div>
-                        <h3 class="text-lg font-bold mb-2">Baseline</h3>
+                        <h3 class="text-lg font-bold text-white mb-2">Baseline</h3>
                         <p class="text-sm text-zinc-400">Environmental baseline studies & site characterisation</p>
                     </div>
 
@@ -337,7 +357,7 @@ $accreditations = computed(fn() =>
                         <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
                             <span class="text-2xl font-black text-zinc-900">2</span>
                         </div>
-                        <h3 class="text-lg font-bold mb-2">Impact Assessment</h3>
+                        <h3 class="text-lg font-bold text-white mb-2">Impact Assessment</h3>
                         <p class="text-sm text-zinc-400">Comprehensive environmental & social impact assessment</p>
                     </div>
 
@@ -347,7 +367,7 @@ $accreditations = computed(fn() =>
                         <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
                             <span class="text-2xl font-black text-zinc-900">3</span>
                         </div>
-                        <h3 class="text-lg font-bold mb-2">Compliance</h3>
+                        <h3 class="text-lg font-bold text-white mb-2">Compliance</h3>
                         <p class="text-sm text-zinc-400">Regulatory compliance assessment & permitting</p>
                     </div>
 
@@ -357,7 +377,7 @@ $accreditations = computed(fn() =>
                         <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
                             <span class="text-2xl font-black text-zinc-900">4</span>
                         </div>
-                        <h3 class="text-lg font-bold mb-2">Mitigation</h3>
+                        <h3 class="text-lg font-bold text-white mb-2">Mitigation</h3>
                         <p class="text-sm text-zinc-400">Practical mitigation strategies & management plans</p>
                     </div>
 
@@ -367,7 +387,7 @@ $accreditations = computed(fn() =>
                         <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
                             <span class="text-2xl font-black text-zinc-900">5</span>
                         </div>
-                        <h3 class="text-lg font-bold mb-2">Implementation</h3>
+                        <h3 class="text-lg font-bold text-white mb-2">Implementation</h3>
                         <p class="text-sm text-zinc-400">On-site support & implementation assistance</p>
                     </div>
 
@@ -377,7 +397,7 @@ $accreditations = computed(fn() =>
                         <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
                             <span class="text-2xl font-black text-zinc-900">6</span>
                         </div>
-                        <h3 class="text-lg font-bold mb-2">Improvement</h3>
+                        <h3 class="text-lg font-bold text-white mb-2">Improvement</h3>
                         <p class="text-sm text-zinc-400">Continuous monitoring & adaptive management</p>
                     </div>
                 </div>
@@ -388,7 +408,7 @@ $accreditations = computed(fn() =>
                         <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
                             <span class="text-xl font-black text-zinc-900">1</span>
                         </div>
-                        <h3 class="text-base font-bold mb-1">Baseline</h3>
+                        <h3 class="text-base font-bold text-white mb-1">Baseline</h3>
                         <p class="text-xs text-zinc-400">Environmental baseline studies</p>
                     </div>
 
@@ -396,7 +416,7 @@ $accreditations = computed(fn() =>
                         <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
                             <span class="text-xl font-black text-zinc-900">2</span>
                         </div>
-                        <h3 class="text-base font-bold mb-1">Impact Assessment</h3>
+                        <h3 class="text-base font-bold text-white mb-1">Impact Assessment</h3>
                         <p class="text-xs text-zinc-400">Environmental & social impact</p>
                     </div>
 
@@ -404,7 +424,7 @@ $accreditations = computed(fn() =>
                         <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
                             <span class="text-xl font-black text-zinc-900">3</span>
                         </div>
-                        <h3 class="text-base font-bold mb-1">Compliance</h3>
+                        <h3 class="text-base font-bold text-white mb-1">Compliance</h3>
                         <p class="text-xs text-zinc-400">Regulatory assessment</p>
                     </div>
 
@@ -412,7 +432,7 @@ $accreditations = computed(fn() =>
                         <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
                             <span class="text-xl font-black text-zinc-900">4</span>
                         </div>
-                        <h3 class="text-base font-bold mb-1">Mitigation</h3>
+                        <h3 class="text-base font-bold text-white mb-1">Mitigation</h3>
                         <p class="text-xs text-zinc-400">Mitigation strategies</p>
                     </div>
 
@@ -420,7 +440,7 @@ $accreditations = computed(fn() =>
                         <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
                             <span class="text-xl font-black text-zinc-900">5</span>
                         </div>
-                        <h3 class="text-base font-bold mb-1">Implementation</h3>
+                        <h3 class="text-base font-bold text-white mb-1">Implementation</h3>
                         <p class="text-xs text-zinc-400">On-site support</p>
                     </div>
 
@@ -428,7 +448,7 @@ $accreditations = computed(fn() =>
                         <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
                             <span class="text-xl font-black text-zinc-900">6</span>
                         </div>
-                        <h3 class="text-base font-bold mb-1">Improvement</h3>
+                        <h3 class="text-base font-bold text-white mb-1">Improvement</h3>
                         <p class="text-xs text-zinc-400">Continuous monitoring</p>
                     </div>
                 </div>
@@ -468,15 +488,16 @@ $accreditations = computed(fn() =>
                                 <h3 class="text-xl font-bold text-zinc-950 mb-1">{{ $member->name }}</h3>
                                 <p class="text-green-600 font-semibold mb-3">{{ $member->title }}</p>
 
-                                @if($member->registrations)
+                                @if($member->registrations && count($member->registrations) > 0)
                                     <p class="text-sm text-zinc-500 mb-3">
-                                        <span class="font-medium">Registrations:</span> {{ $member->registrations }}
+                                        <span class="font-medium">Registrations:</span>
+                                        {{ collect($member->registrations)->pluck('organization')->join(', ') }}
                                     </p>
                                 @endif
 
                                 @if($member->bio)
                                     <p class="text-zinc-600 text-sm leading-relaxed">
-                                        {{ Str::limit($member->bio, 150) }}
+                                        {!! Str::limit($member->bio, 150) !!}
                                     </p>
                                 @endif
                             </div>
@@ -490,14 +511,7 @@ $accreditations = computed(fn() =>
                 </div>
             @endif
 
-            <div class="text-center mt-12">
-                <a href="{{ route('team') }}"
-                   class="inline-flex items-center gap-3 px-8 py-4 text-lg font-bold text-white bg-zinc-900 hover:bg-zinc-800 transition-all">
-                    <span>View Full Team</span>
-                    <x-solar-icon name="alt-arrow-right" size="24" />
-                </a>
-            </div>
-        </div>
+          </div>
     </section>
 
     <!-- CTA Section -->

@@ -498,7 +498,7 @@ $submitLeadAndDownload = function () {
                            class="group bg-white border border-zinc-200 rounded-lg overflow-hidden hover:shadow-lg hover:border-green-500 transition-all">
                             @if($post->featured_image)
                                 <div class="h-48 overflow-hidden">
-                                    <img src="{{ Storage::url($post->featured_image) }}"
+                                    <img src="{{ str_starts_with($post->featured_image, '/') ? asset($post->featured_image) : Storage::url($post->featured_image) }}"
                                          alt="{{ $post->title }}"
                                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                                 </div>
@@ -603,7 +603,7 @@ $submitLeadAndDownload = function () {
         <div class="max-w-4xl mx-auto px-4 text-center">
             <x-solar-icon name="letter-opened" size="64" class="text-green-500 mx-auto mb-6" />
 
-            <h2 class="text-3xl md:text-4xl font-black mb-4">
+            <h2 class="text-white text-3xl md:text-4xl font-black mb-4">
                 Stay <span class="text-green-500">Informed</span>
             </h2>
 

@@ -71,26 +71,28 @@ $submitBooking = function() {
 ?>
 
 <div>
-    <x-public.breadcrumb :items="[
-        ['label' => 'Home', 'url' => route('home')],
-        ['label' => 'Training', 'url' => route('training.index')],
-        ['label' => $course->name]
-    ]" />
+    <!-- Hero Section -->
+    <section class="relative py-24 bg-zinc-900 overflow-hidden">
+        @if($course->thumbnail)
+            <img src="{{ Storage::url($course->thumbnail) }}"
+                 alt="{{ $course->name }}"
+                 class="absolute inset-0 w-full h-full object-cover opacity-20">
+        @endif
+        <div class="absolute inset-0 bg-gradient-to-b from-zinc-900/80 to-zinc-900/95"></div>
 
-    <section class="py-16">
-        <div class="max-w-5xl mx-auto px-4">
-            @if(session('success'))
-                <div class="mb-8 bg-green-50 border-l-4 border-green-600 p-4 rounded">
-                    <p class="text-green-800">{{ session('success') }}</p>
-                </div>
-            @endif
+        <div class="relative z-10 max-w-7xl mx-auto px-4">
+            <x-public.breadcrumb :items="[
+                ['label' => 'Home', 'url' => route('home')],
+                ['label' => 'Training', 'url' => route('training.index')],
+                ['label' => $course->name]
+            ]" class="mb-8" />
 
-            <div class="mb-8">
-                <h1 class="text-5xl font-bold mb-4 text-gray-900">{{ $course->name }}</h1>
+            <div class="max-w-4xl">
+                <h1 class="text-4xl md:text-5xl font-black text-white mb-6">{{ $course->name }}</h1>
 
-                <div class="flex flex-wrap gap-4 mb-6">
+                <div class="flex flex-wrap gap-3">
                     @if($course->duration)
-                        <span class="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 text-blue-800 rounded-full font-medium text-sm">
+                        <span class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur text-white rounded-full font-medium text-sm">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
@@ -99,7 +101,7 @@ $submitBooking = function() {
                     @endif
 
                     @if($course->accreditation)
-                        <span class="inline-flex items-center gap-1 px-3 py-1 bg-green-100 text-green-800 rounded-full font-medium text-sm">
+                        <span class="inline-flex items-center gap-2 px-4 py-2 bg-green-500/20 backdrop-blur text-green-400 rounded-full font-medium text-sm">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
                             </svg>
@@ -108,18 +110,20 @@ $submitBooking = function() {
                     @endif
 
                     @if($course->price)
-                        <span class="inline-flex items-center gap-1 px-3 py-1 bg-amber-100 text-amber-800 rounded-full font-bold">
+                        <span class="inline-flex items-center gap-2 px-4 py-2 bg-amber-500/20 backdrop-blur text-amber-400 rounded-full font-bold text-sm">
                             R {{ number_format($course->price, 2) }}
                         </span>
                     @endif
                 </div>
             </div>
+        </div>
+    </section>
 
-            @if($course->thumbnail)
-                <div class="mb-8 rounded-lg overflow-hidden shadow-lg">
-                    <img src="{{ Storage::url($course->thumbnail) }}"
-                         alt="{{ $course->name }}"
-                         class="w-full h-auto">
+    <section class="py-16">
+        <div class="max-w-5xl mx-auto px-4">
+            @if(session('success'))
+                <div class="mb-8 bg-green-50 border-l-4 border-green-600 p-4 rounded">
+                    <p class="text-green-800">{{ session('success') }}</p>
                 </div>
             @endif
 

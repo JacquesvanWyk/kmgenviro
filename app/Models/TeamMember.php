@@ -39,6 +39,7 @@ class TeamMember extends Model
         return [
             'id' => 'integer',
             'is_active' => 'boolean',
+            'registrations' => 'array',
         ];
     }
 }

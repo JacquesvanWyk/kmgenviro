@@ -20,7 +20,7 @@
     <p class="text-green-600 font-medium mb-3">{{ $member->position }}</p>
 
     <p class="text-gray-600 text-sm mb-4 flex-grow line-clamp-3">
-        {{ Str::limit($member->bio, 120) }}
+        {{ Str::limit(strip_tags($member->bio), 120) }}
     </p>
 
     @if($member->registrations && count($member->registrations) > 0)
@@ -31,7 +31,7 @@
             <div class="space-y-1">
                 @foreach(array_slice($member->registrations, 0, 2) as $registration)
                     <p class="text-xs text-gray-600">
-                        {{ $registration['organization'] }}: {{ $registration['number'] }}
+                        {{ $registration['organization'] ?? '' }}: {{ $registration['registration_number'] ?? '' }}
                     </p>
                 @endforeach
                 @if(count($member->registrations) > 2)

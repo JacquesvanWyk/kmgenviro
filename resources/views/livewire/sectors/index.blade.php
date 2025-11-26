@@ -6,7 +6,7 @@ use App\Models\{Sector, Project, ServiceCategory};
 layout('components.layouts.public');
 title('Industry Sectors | Our Track Record | KMG Environmental');
 
-state(['activeTab' => null]);
+state(['activeTab' => 'mining-mineral-resources']);
 
 $sectors = computed(fn() =>
     Sector::where('is_active', true)
@@ -15,12 +15,6 @@ $sectors = computed(fn() =>
         ->orderBy('sort_order')
         ->get()
 );
-
-$mounted = function () {
-    if ($this->sectors->count() > 0) {
-        $this->activeTab = $this->sectors->first()->slug;
-    }
-};
 
 ?>
 
@@ -419,7 +413,7 @@ $mounted = function () {
     <!-- View All Projects CTA -->
     <section class="py-16 bg-zinc-900 text-white">
         <div class="max-w-4xl mx-auto px-4 text-center">
-            <h2 class="text-3xl md:text-4xl font-black mb-4">
+            <h2 class="text-white text-3xl md:text-4xl font-black mb-4">
                 View Our Complete <span class="text-green-500">Project Portfolio</span>
             </h2>
             <p class="text-lg text-zinc-400 mb-8 max-w-2xl mx-auto">

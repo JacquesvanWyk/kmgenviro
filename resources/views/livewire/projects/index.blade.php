@@ -47,18 +47,30 @@ $provinces = computed(fn() => [
 
 ?>
 
-<div>
-    <x-public.breadcrumb :items="[
-        ['label' => 'Home', 'url' => route('home')],
-        ['label' => 'Projects']
-    ]" />
+<div class="bg-white">
+    <!-- Hero Section -->
+    <section class="relative py-24 bg-zinc-900 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-zinc-900/80 to-zinc-900/95"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4">
+            <x-public.breadcrumb :items="[
+                ['label' => 'Home', 'url' => route('home')],
+                ['label' => 'Projects']
+            ]" class="mb-8" />
+
+            <div class="max-w-4xl">
+                <h1 class="text-5xl md:text-6xl font-black text-white mb-6">
+                    Our <span class="text-green-500">Projects</span>
+                </h1>
+                <p class="text-xl text-zinc-300 leading-relaxed">
+                    Explore our portfolio of successful environmental consultancy projects across South Africa.
+                </p>
+            </div>
+        </div>
+    </section>
 
     <section class="py-16">
         <div class="max-w-7xl mx-auto px-4">
-            <h1 class="text-5xl font-bold mb-6 text-gray-900">Our Projects</h1>
-            <p class="text-xl text-gray-600 mb-12 max-w-3xl">
-                Explore our portfolio of successful environmental consultancy projects across South Africa.
-            </p>
 
             <div class="bg-white rounded-lg shadow-md p-6 mb-12">
                 <h2 class="text-lg font-semibold mb-4 text-gray-900">Filter Projects</h2>

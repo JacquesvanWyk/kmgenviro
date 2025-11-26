@@ -3,7 +3,7 @@
 <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition h-full flex flex-col">
     @if($post->featured_image)
         <div class="aspect-video bg-gray-200">
-            <img src="{{ Storage::url($post->featured_image) }}"
+            <img src="{{ str_starts_with($post->featured_image, '/') ? asset($post->featured_image) : Storage::url($post->featured_image) }}"
                  alt="{{ $post->title }}"
                  class="w-full h-full object-cover">
         </div>

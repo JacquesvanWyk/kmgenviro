@@ -11,8 +11,6 @@ use Livewire\Volt\Volt;
 // Public Routes
 Volt::route('/', 'home')->name('home');
 Volt::route('/about', 'about')->name('about');
-Volt::route('/team', 'team')->name('team');
-Volt::route('/accreditations', 'accreditations')->name('accreditations');
 
 Volt::route('/services', 'services.index')->name('services.index');
 Volt::route('/services/category/{category:slug}', 'services.category')->name('services.category');

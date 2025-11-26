@@ -690,7 +690,7 @@ $openBookingForm = function ($courseId = null, $scheduleId = null) {
         <div class="max-w-4xl mx-auto px-4 text-center">
             <x-solar-icon name="document-text" size="64" class="text-green-500 mx-auto mb-6" />
 
-            <h2 class="text-3xl md:text-4xl font-black mb-4">
+            <h2 class="text-3xl md:text-4xl font-black text-white mb-4">
                 Download Our <span class="text-green-500">Training Prospectus</span>
             </h2>
 
