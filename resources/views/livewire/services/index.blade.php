@@ -60,50 +60,42 @@ $categories = computed(fn() =>
 
             @php
                 // Define service category details with icons and descriptions
+                // All icons use green background for consistency
                 $categoryDetails = [
                     'environmental-monitoring' => [
                         'icon' => 'chart-2',
-                        'color' => 'bg-blue-500',
                         'description' => 'Water, air, noise, and soil quality monitoring with accredited laboratory analysis.',
                     ],
                     'environmental-impact-specialist-studies' => [
                         'icon' => 'document-text',
-                        'color' => 'bg-green-500',
                         'description' => 'EIA, specialist studies, and environmental assessments for projects of all sizes.',
                     ],
                     'permitting-compliance' => [
                         'icon' => 'diploma',
-                        'color' => 'bg-purple-500',
                         'description' => 'Environmental permits, licenses, and regulatory compliance management.',
                     ],
                     'waste-asbestos-management' => [
                         'icon' => 'trash-bin-minimalistic',
-                        'color' => 'bg-orange-500',
                         'description' => 'Hazardous waste management, asbestos surveys, and DoEL-approved abatement.',
                     ],
                     'climate-carbon-esg' => [
                         'icon' => 'leaf',
-                        'color' => 'bg-emerald-500',
                         'description' => 'Carbon footprinting, climate risk, and ESG strategy development.',
                     ],
                     'occupational-hygiene-ohs' => [
                         'icon' => 'shield-user',
-                        'color' => 'bg-red-500',
                         'description' => 'Workplace exposure assessments, OHS compliance, and health risk management.',
                     ],
                     'training-capacity-building' => [
                         'icon' => 'graduation-cap',
-                        'color' => 'bg-indigo-500',
                         'description' => 'EAPASA-accredited training courses for environmental professionals.',
                     ],
                     'equipment-rental' => [
                         'icon' => 'settings',
-                        'color' => 'bg-zinc-600',
                         'description' => 'Professional environmental monitoring equipment available for hire.',
                     ],
                     'environmental-ohs-esg-auditing' => [
                         'icon' => 'clipboard-check',
-                        'color' => 'bg-cyan-500',
                         'description' => 'Compliance audits, due diligence, and management system assessments.',
                     ],
                 ];
@@ -118,7 +110,6 @@ $categories = computed(fn() =>
                     // Default
                     return [
                         'icon' => 'folder',
-                        'color' => 'bg-green-500',
                         'description' => 'Professional environmental consulting services.',
                     ];
                 }
@@ -136,12 +127,8 @@ $categories = computed(fn() =>
                             <!-- Category Header -->
                             <div class="p-6 border-b border-zinc-100">
                                 <div class="flex items-start gap-4">
-                                    <div class="w-14 h-14 {{ $details['color'] }} rounded-lg flex items-center justify-center flex-shrink-0">
-                                        @if($category->icon)
-                                            <span class="text-2xl">{{ $category->icon }}</span>
-                                        @else
-                                            <x-solar-icon name="{{ $details['icon'] }}" size="28" class="text-white" />
-                                        @endif
+                                    <div class="w-14 h-14 bg-green-500 flex items-center justify-center flex-shrink-0">
+                                        <x-solar-icon name="{{ $details['icon'] }}" size="28" class="text-white" />
                                     </div>
                                     <div class="flex-1">
                                         <h3 class="text-xl font-bold text-zinc-950 group-hover:text-green-600 transition-colors mb-1">
