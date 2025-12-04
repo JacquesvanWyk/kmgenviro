@@ -36,8 +36,11 @@ $categories = computed(fn() =>
                 <h1 class="text-5xl md:text-6xl font-black text-white mb-6">
                     Our <span class="text-green-500">Services</span>
                 </h1>
-                <p class="text-xl text-zinc-300 leading-relaxed">
-                    KMG provides a comprehensive suite of environmental, ESG, and occupational services designed to help organisations achieve regulatory compliance, manage environmental risks, and drive sustainable operations across South Africa and the SADC region.
+                <p class="text-xl text-zinc-300 leading-relaxed mb-4">
+                    KMG Environmental Solutions Services (Pty) Ltd delivers a comprehensive suite of Environmental Monitoring, Environmental Compliance, ESG, and OHS services that enable organisations to meet regulatory requirements, manage environmental risks, and operate sustainably across South Africa and the SADC region.
+                </p>
+                <p class="text-lg text-zinc-400 leading-relaxed">
+                    Our capabilities include environmental monitoring, regulatory compliance management, environmental audits, OHS support, ESG advisory, authorisation and licensing, specialist environmental studies, training, and a range of tailored solutions that support responsible development and long-term environmental stewardship.
                 </p>
             </div>
         </div>
@@ -195,10 +198,10 @@ $categories = computed(fn() =>
                         <span>Request Guidance</span>
                     </a>
 
-                    <a href="tel:0119696184"
+                    <a href="tel:0114804822"
                        class="inline-flex items-center justify-center gap-3 px-8 py-4 text-lg font-bold text-zinc-950 bg-white border-2 border-zinc-200 hover:border-green-500 transition-all">
                         <x-solar-icon name="phone-calling" size="24" />
-                        <span>011 969 6184</span>
+                        <span>011 480 4822</span>
                     </a>
                 </div>
             </div>

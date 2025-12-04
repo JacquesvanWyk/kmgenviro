@@ -188,10 +188,15 @@ $resetForm = function ($form) {
                                 <x-solar-icon name="phone-calling" size="24" class="text-white" />
                             </div>
                             <div>
-                                <h3 class="font-bold text-zinc-950 mb-1">Phone</h3>
-                                <a href="tel:0119696184" class="text-zinc-600 hover:text-green-600 transition-colors text-lg font-semibold">
-                                    011 969 6184
-                                </a>
+                                <h3 class="font-bold text-zinc-950 mb-2">Phone</h3>
+                                <div class="space-y-1">
+                                    <a href="tel:0114804822" class="text-zinc-600 hover:text-green-600 transition-colors text-lg font-semibold block">
+                                        011 480 4822 <span class="text-sm font-normal text-zinc-500">(Office)</span>
+                                    </a>
+                                    <a href="tel:0725463191" class="text-zinc-600 hover:text-green-600 transition-colors block">
+                                        072 546 3191 <span class="text-sm text-zinc-500">(Cell)</span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
 
@@ -201,10 +206,15 @@ $resetForm = function ($form) {
                                 <x-solar-icon name="letter" size="24" class="text-white" />
                             </div>
                             <div>
-                                <h3 class="font-bold text-zinc-950 mb-1">Email</h3>
-                                <a href="mailto:info@kmgenviro.co.za" class="text-zinc-600 hover:text-green-600 transition-colors">
-                                    info@kmgenviro.co.za
-                                </a>
+                                <h3 class="font-bold text-zinc-950 mb-2">Email</h3>
+                                <div class="space-y-1">
+                                    <a href="mailto:info@kmgenviro.co.za" class="text-zinc-600 hover:text-green-600 transition-colors block">
+                                        info@kmgenviro.co.za <span class="text-sm text-zinc-500">(General)</span>
+                                    </a>
+                                    <a href="mailto:marabekg@kmgenviro.co.za" class="text-zinc-600 hover:text-green-600 transition-colors block">
+                                        marabekg@kmgenviro.co.za <span class="text-sm text-zinc-500">(Direct / Rentals / Training)</span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
 

@@ -42,7 +42,8 @@ $topServices = ServiceCategory::where('is_active', true)
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                         </svg>
                         <div>
-                            <div class="text-white font-semibold">011 969 6184</div>
+                            <div class="text-white font-semibold">011 480 4822</div>
+                            <div class="text-zinc-400">072 546 3191</div>
                             <div class="text-zinc-500 text-xs">Mon - Fri, 8AM - 5PM</div>
                         </div>
                     </div>
@@ -50,9 +51,14 @@ $topServices = ServiceCategory::where('is_active', true)
                         <svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
-                        <a href="mailto:info@kmgenviro.co.za" class="text-zinc-300 hover:text-green-400 transition-colors">
-                            info@kmgenviro.co.za
-                        </a>
+                        <div>
+                            <a href="mailto:info@kmgenviro.co.za" class="text-zinc-300 hover:text-green-400 transition-colors block">
+                                info@kmgenviro.co.za
+                            </a>
+                            <a href="mailto:marabekg@kmgenviro.co.za" class="text-zinc-400 hover:text-green-400 transition-colors block text-xs">
+                                marabekg@kmgenviro.co.za
+                            </a>
+                        </div>
                     </div>
                     <div class="flex items-start gap-3">
                         <svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -209,13 +215,7 @@ $topServices = ServiceCategory::where('is_active', true)
                         <svg class="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                         </svg>
-                        <span class="text-zinc-400">SAIOH Member</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <svg class="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                        </svg>
-                        <span class="text-zinc-400">IIAV Member</span>
+                        <span class="text-zinc-400">IIAV (Int'l Institute of Acoustics & Vibration)</span>
                     </li>
                     <li class="flex items-start gap-2">
                         <svg class="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">

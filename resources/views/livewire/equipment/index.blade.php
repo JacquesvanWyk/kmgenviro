@@ -626,11 +626,11 @@ $categoryDetails = [
                         </button>
 
                         <p class="text-center text-sm text-zinc-500 mt-4">
-                            Need urgent confirmation?
-                            <a href="https://wa.me/27119696184?text=Hi%20KMG%2C%20I%20need%20urgent%20equipment%20rental%20assistance."
+                            Need urgent confirmation? Email <a href="mailto:marabekg@kmgenviro.co.za" class="text-green-600 font-semibold hover:text-green-700">marabekg@kmgenviro.co.za</a> or
+                            <a href="https://wa.me/+27725463191?text=Hi%20KMG%2C%20I%20need%20urgent%20equipment%20rental%20assistance."
                                target="_blank"
                                class="text-green-600 font-semibold hover:text-green-700">
-                                Chat with us on WhatsApp
+                                Chat on WhatsApp
                             </a>
                         </p>
                     </form>
@@ -656,13 +656,19 @@ $categoryDetails = [
                     <span>Request Rental Quote</span>
                 </a>
 
-                <a href="tel:0119696184"
+                <a href="tel:0114804822"
                    class="inline-flex items-center justify-center gap-3 px-8 py-4 text-lg font-bold text-white border-2 border-zinc-600 hover:border-green-500 transition-all">
                     <x-solar-icon name="phone-calling" size="24" />
-                    <span>011 969 6184</span>
+                    <span>011 480 4822</span>
                 </a>
 
-                <a href="https://wa.me/27119696184?text=Hi%20KMG%2C%20I%20would%20like%20to%20enquire%20about%20equipment%20rental."
+                <a href="mailto:marabekg@kmgenviro.co.za"
+                   class="inline-flex items-center justify-center gap-3 px-8 py-4 text-lg font-bold text-white border-2 border-zinc-600 hover:border-green-500 transition-all">
+                    <x-solar-icon name="letter" size="24" />
+                    <span>marabekg@kmgenviro.co.za</span>
+                </a>
+
+                <a href="https://wa.me/+27725463191?text=Hi%20KMG%2C%20I%20would%20like%20to%20enquire%20about%20equipment%20rental."
                    target="_blank"
                    class="inline-flex items-center justify-center gap-3 px-8 py-4 text-lg font-bold text-white bg-[#25D366] hover:bg-[#20BD5A] transition-all">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">

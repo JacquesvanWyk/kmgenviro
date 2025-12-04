@@ -191,78 +191,36 @@ $openBookingForm = function ($courseId = null, $scheduleId = null) {
         </div>
     </section>
 
-    <!-- Training Overview -->
-    <section class="py-16 bg-white">
+    <!-- Training Overview - Compact -->
+    <section class="py-12 bg-white">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h2 class="text-4xl font-black text-zinc-950 mb-6">
-                        Why Train With KMG?
-                    </h2>
-                    <p class="text-lg text-zinc-600 mb-8">
-                        Our training programmes are designed by practicing environmental professionals who understand the real-world challenges you face. Every course combines theoretical knowledge with practical field insights and case studies from our consulting work.
-                    </p>
-
-                    <div class="space-y-4">
-                        <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                                <x-solar-icon name="user-check-rounded" size="20" class="text-green-600" />
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-zinc-950 mb-1">Expert Instructors</h3>
-                                <p class="text-sm text-zinc-600">Learn from registered scientists and practitioners with 15+ years industry experience</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                                <x-solar-icon name="map-point" size="20" class="text-green-600" />
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-zinc-950 mb-1">Field-Based Learning</h3>
-                                <p class="text-sm text-zinc-600">Practical site visits and hands-on equipment demonstrations</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                                <x-solar-icon name="diploma" size="20" class="text-green-600" />
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-zinc-950 mb-1">CPD Points</h3>
-                                <p class="text-sm text-zinc-600">EAPASA-accredited courses earning Category 2 CPD points</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                                <x-solar-icon name="buildings" size="20" class="text-green-600" />
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-zinc-950 mb-1">On-Site Training</h3>
-                                <p class="text-sm text-zinc-600">Customised training delivered at your premises for teams of 10+</p>
-                            </div>
-                        </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div class="flex items-center gap-3 p-4 bg-zinc-50">
+                    <x-solar-icon name="user-check-rounded" size="24" class="text-green-500" />
+                    <div>
+                        <div class="font-bold text-zinc-950 text-sm">Expert Instructors</div>
+                        <div class="text-xs text-zinc-500">15+ years experience</div>
                     </div>
                 </div>
-
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="bg-zinc-50 rounded-lg p-6 text-center">
-                        <x-solar-icon name="leaf" size="40" class="text-green-500 mx-auto mb-3" />
-                        <h4 class="font-bold text-zinc-950 mb-1">Environmental</h4>
-                        <p class="text-sm text-zinc-500">EIA, Awareness, Field Insight</p>
+                <div class="flex items-center gap-3 p-4 bg-zinc-50">
+                    <x-solar-icon name="map-point" size="24" class="text-green-500" />
+                    <div>
+                        <div class="font-bold text-zinc-950 text-sm">Field-Based</div>
+                        <div class="text-xs text-zinc-500">Practical learning</div>
                     </div>
-                    <div class="bg-zinc-50 rounded-lg p-6 text-center">
-                        <x-solar-icon name="trash-bin-minimalistic" size="40" class="text-orange-500 mx-auto mb-3" />
-                        <h4 class="font-bold text-zinc-950 mb-1">Waste Management</h4>
-                        <p class="text-sm text-zinc-500">Waste, Asbestos, Hazmat</p>
+                </div>
+                <div class="flex items-center gap-3 p-4 bg-zinc-50">
+                    <x-solar-icon name="diploma" size="24" class="text-green-500" />
+                    <div>
+                        <div class="font-bold text-zinc-950 text-sm">CPD Points</div>
+                        <div class="text-xs text-zinc-500">EAPASA accredited</div>
                     </div>
-                    <div class="bg-zinc-50 rounded-lg p-6 text-center">
-                        <x-solar-icon name="shield-user" size="40" class="text-red-500 mx-auto mb-3" />
-                        <h4 class="font-bold text-zinc-950 mb-1">OHS & Hygiene</h4>
-                        <p class="text-sm text-zinc-500">Safety Files, Workplace Health</p>
-                    </div>
-                    <div class="bg-zinc-50 rounded-lg p-6 text-center">
-                        <x-solar-icon name="chart-2" size="40" class="text-blue-500 mx-auto mb-3" />
-                        <h4 class="font-bold text-zinc-950 mb-1">ESG & Carbon</h4>
-                        <p class="text-sm text-zinc-500">Sustainability, Reporting</p>
+                </div>
+                <div class="flex items-center gap-3 p-4 bg-zinc-50">
+                    <x-solar-icon name="buildings" size="24" class="text-green-500" />
+                    <div>
+                        <div class="font-bold text-zinc-950 text-sm">On-Site Training</div>
+                        <div class="text-xs text-zinc-500">Teams of 10+</div>
                     </div>
                 </div>
             </div>
@@ -270,14 +228,14 @@ $openBookingForm = function ($courseId = null, $scheduleId = null) {
     </section>
 
     <!-- Upcoming Training Calendar -->
-    <section id="upcoming" class="py-16 bg-zinc-50">
+    <section id="upcoming" class="py-12 bg-zinc-50">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-black text-zinc-950 mb-4">
-                    Upcoming Training Calendar
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-black text-zinc-950 mb-2">
+                    Upcoming Training
                 </h2>
-                <p class="text-lg text-zinc-600 max-w-2xl mx-auto">
-                    Browse our scheduled training sessions and secure your spot
+                <p class="text-zinc-600">
+                    Browse scheduled sessions and book your spot
                 </p>
             </div>
 
@@ -376,19 +334,19 @@ $openBookingForm = function ($courseId = null, $scheduleId = null) {
     </section>
 
     <!-- Course Categories -->
-    <section class="py-16 bg-white">
+    <section class="py-12 bg-white">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-black text-zinc-950 mb-4">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-black text-zinc-950 mb-2">
                     Course Categories
                 </h2>
-                <p class="text-lg text-zinc-600 max-w-2xl mx-auto">
+                <p class="text-zinc-600">
                     Browse our training offerings by category
                 </p>
             </div>
 
             <!-- Category Filter Tabs -->
-            <div class="flex flex-wrap justify-center gap-3 mb-12">
+            <div class="flex flex-wrap justify-center gap-2 mb-8">
                 <button @click="activeCategory = 'all'"
                         :class="activeCategory === 'all' ? 'bg-green-500 text-zinc-950' : 'bg-zinc-100 text-zinc-700 hover:bg-zinc-200'"
                         class="px-5 py-2 font-semibold transition-colors rounded-full">
@@ -686,27 +644,23 @@ $openBookingForm = function ($courseId = null, $scheduleId = null) {
     </div>
 
     <!-- Download Prospectus CTA -->
-    <section class="py-16 bg-zinc-900 text-white">
+    <section class="py-12 bg-zinc-900 text-white">
         <div class="max-w-4xl mx-auto px-4 text-center">
-            <x-solar-icon name="document-text" size="64" class="text-green-500 mx-auto mb-6" />
-
-            <h2 class="text-3xl md:text-4xl font-black text-white mb-4">
+            <h2 class="text-2xl md:text-3xl font-black text-white mb-3">
                 Download Our <span class="text-green-500">Training Prospectus</span>
             </h2>
-
-            <p class="text-lg text-zinc-400 mb-8 max-w-2xl mx-auto">
-                Get our complete training catalogue with course outlines, pricing, and CPD point information delivered to your inbox.
+            <p class="text-zinc-400 mb-6">
+                Complete course catalogue with outlines, pricing, and CPD information.
             </p>
-
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="{{ route('contact') }}?subject=Training%20Prospectus%20Request"
-                   class="inline-flex items-center justify-center gap-3 px-10 py-5 text-lg font-bold text-zinc-950 bg-green-500 hover:bg-green-400 transition-all">
-                    <x-solar-icon name="download-minimalistic" size="24" />
-                    Download Prospectus (PDF)
+                   class="inline-flex items-center justify-center gap-2 px-8 py-3 font-bold text-zinc-950 bg-green-500 hover:bg-green-400 transition-all">
+                    <x-solar-icon name="download-minimalistic" size="20" />
+                    Download Prospectus
                 </a>
-                <a href="{{ route('contact') }}"
-                   class="inline-flex items-center justify-center gap-3 px-10 py-5 text-lg font-bold text-white bg-white/10 hover:bg-white/20 border border-white/20 transition-all">
-                    <x-solar-icon name="chat-round-dots" size="24" />
+                <a href="mailto:marabekg@kmgenviro.co.za?subject=Custom%20Training%20Request"
+                   class="inline-flex items-center justify-center gap-2 px-8 py-3 font-bold text-white bg-white/10 hover:bg-white/20 border border-white/20 transition-all">
+                    <x-solar-icon name="chat-round-dots" size="20" />
                     Request Custom Training
                 </a>
             </div>
@@ -714,45 +668,26 @@ $openBookingForm = function ($courseId = null, $scheduleId = null) {
     </section>
 
     <!-- Contact CTA -->
-    <section class="py-16 bg-zinc-50">
+    <section class="py-12 bg-zinc-50">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="bg-white rounded-lg p-8 md:p-12 shadow-sm border border-zinc-100">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div class="bg-white p-6 md:p-8 shadow-sm border border-zinc-100">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
                     <div>
-                        <h2 class="text-3xl font-black text-zinc-950 mb-4">
-                            Need Custom Training for Your Team?
+                        <h2 class="text-2xl font-black text-zinc-950 mb-2">
+                            Need Custom Training?
                         </h2>
-                        <p class="text-lg text-zinc-600 mb-6">
-                            We offer tailored on-site training programmes for organisations. Our team can design a course specific to your industry, site conditions, and compliance requirements.
+                        <p class="text-zinc-600">
+                            On-site training for teams of 10+, customised to your industry and compliance requirements.
                         </p>
-                        <ul class="space-y-2 text-zinc-600">
-                            <li class="flex items-center gap-2">
-                                <x-solar-icon name="check-circle" size="20" class="text-green-500" />
-                                Customised to your industry sector
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <x-solar-icon name="check-circle" size="20" class="text-green-500" />
-                                Delivered at your premises
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <x-solar-icon name="check-circle" size="20" class="text-green-500" />
-                                Flexible scheduling
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <x-solar-icon name="check-circle" size="20" class="text-green-500" />
-                                Group discounts available
-                            </li>
-                        </ul>
                     </div>
-                    <div class="text-center lg:text-right">
-                        <p class="text-sm text-zinc-500 mb-2">Contact our Training Coordinator</p>
-                        <a href="tel:0119696184" class="text-3xl font-black text-green-600 hover:text-green-700 transition-colors block mb-4">
-                            011 969 6184
+                    <div class="flex flex-col sm:flex-row gap-4 items-center">
+                        <a href="tel:0114804822" class="text-2xl font-black text-green-600 hover:text-green-700 transition-colors whitespace-nowrap">
+                            011 480 4822
                         </a>
-                        <a href="mailto:training@kmgenviro.co.za"
-                           class="inline-flex items-center gap-2 text-zinc-600 hover:text-green-600 transition-colors">
+                        <a href="mailto:marabekg@kmgenviro.co.za"
+                           class="inline-flex items-center gap-2 px-6 py-3 bg-green-500 hover:bg-green-400 text-zinc-950 font-bold transition-all whitespace-nowrap">
                             <x-solar-icon name="letter" size="20" />
-                            training@kmgenviro.co.za
+                            marabekg@kmgenviro.co.za
                         </a>
                     </div>
                 </div>

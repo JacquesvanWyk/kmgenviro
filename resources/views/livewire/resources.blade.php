@@ -140,7 +140,7 @@ $submitLeadAndDownload = function () {
                     Resources & <span class="text-green-500">Downloads</span>
                 </h1>
                 <p class="text-xl text-zinc-300 leading-relaxed">
-                    Access our library of environmental compliance guides, service brochures, and technical resources. Build your knowledge and stay informed on regulatory requirements.
+                    Access our library of environmental compliance guides, service brochures, and technical resources.
                 </p>
             </div>
         </div>
@@ -168,14 +168,14 @@ $submitLeadAndDownload = function () {
     </section>
 
     <!-- Downloads Section -->
-    <section class="py-16 bg-white">
+    <section class="py-12 bg-white">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-black text-zinc-950 mb-4">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-black text-zinc-950 mb-2">
                     Download Centre
                 </h2>
-                <p class="text-lg text-zinc-600 max-w-2xl mx-auto">
-                    Free resources to help you understand environmental compliance requirements
+                <p class="text-zinc-600">
+                    Free resources for environmental compliance
                 </p>
             </div>
 
@@ -480,14 +480,14 @@ $submitLeadAndDownload = function () {
     </div>
 
     <!-- Knowledge Articles / Blog Section -->
-    <section class="py-16 bg-zinc-50">
+    <section class="py-12 bg-zinc-50">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-black text-zinc-950 mb-4">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-black text-zinc-950 mb-2">
                     Knowledge Articles
                 </h2>
-                <p class="text-lg text-zinc-600 max-w-2xl mx-auto">
-                    Environmental compliance tips, regulatory updates, and industry insights
+                <p class="text-zinc-600">
+                    Compliance tips, regulatory updates, and industry insights
                 </p>
             </div>
 
@@ -599,49 +599,45 @@ $submitLeadAndDownload = function () {
     </section>
 
     <!-- Newsletter / Stay Updated CTA -->
-    <section class="py-16 bg-zinc-900 text-white">
+    <section class="py-12 bg-zinc-900 text-white">
         <div class="max-w-4xl mx-auto px-4 text-center">
-            <x-solar-icon name="letter-opened" size="64" class="text-green-500 mx-auto mb-6" />
-
-            <h2 class="text-white text-3xl md:text-4xl font-black mb-4">
+            <h2 class="text-white text-2xl md:text-3xl font-black mb-3">
                 Stay <span class="text-green-500">Informed</span>
             </h2>
-
-            <p class="text-lg text-zinc-400 mb-8 max-w-2xl mx-auto">
-                Get environmental compliance updates, new resource alerts, and training announcements delivered to your inbox.
+            <p class="text-zinc-400 mb-6">
+                Get environmental compliance updates and training announcements.
             </p>
-
             <a href="{{ route('contact') }}?subject=Newsletter%20Subscription"
-               class="inline-flex items-center justify-center gap-3 px-10 py-5 text-lg font-bold text-zinc-950 bg-green-500 hover:bg-green-400 transition-all">
-                <x-solar-icon name="letter" size="24" />
+               class="inline-flex items-center justify-center gap-2 px-8 py-3 font-bold text-zinc-950 bg-green-500 hover:bg-green-400 transition-all">
+                <x-solar-icon name="letter" size="20" />
                 Subscribe to Updates
             </a>
         </div>
     </section>
 
     <!-- Quick Help CTA -->
-    <section class="py-16 bg-white">
+    <section class="py-12 bg-white">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="bg-zinc-50 rounded-lg p-8 md:p-12 border border-zinc-100">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div class="bg-zinc-50 p-6 md:p-8 border border-zinc-100">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
                     <div>
-                        <h2 class="text-3xl font-black text-zinc-950 mb-4">
+                        <h2 class="text-2xl font-black text-zinc-950 mb-2">
                             Can't Find What You're Looking For?
                         </h2>
-                        <p class="text-lg text-zinc-600 mb-6">
-                            Our team is here to help with any environmental compliance questions. We can provide custom guidance, specific documentation, or connect you with the right specialist.
+                        <p class="text-zinc-600">
+                            Our team can provide custom guidance or connect you with the right specialist.
                         </p>
                     </div>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-end">
+                    <div class="flex flex-col sm:flex-row gap-3">
                         <a href="{{ route('contact') }}"
-                           class="inline-flex items-center justify-center gap-3 px-8 py-4 text-lg font-bold text-zinc-950 bg-green-500 hover:bg-green-400 transition-all">
-                            <x-solar-icon name="chat-round-dots" size="24" />
+                           class="inline-flex items-center justify-center gap-2 px-6 py-3 font-bold text-zinc-950 bg-green-500 hover:bg-green-400 transition-all">
+                            <x-solar-icon name="chat-round-dots" size="20" />
                             Ask a Question
                         </a>
-                        <a href="tel:0119696184"
-                           class="inline-flex items-center justify-center gap-3 px-8 py-4 text-lg font-bold text-zinc-950 bg-white border-2 border-zinc-200 hover:border-green-500 transition-all">
-                            <x-solar-icon name="phone-calling" size="24" />
-                            011 969 6184
+                        <a href="tel:0114804822"
+                           class="inline-flex items-center justify-center gap-2 px-6 py-3 font-bold text-zinc-950 bg-white border-2 border-zinc-200 hover:border-green-500 transition-all">
+                            <x-solar-icon name="phone-calling" size="20" />
+                            011 480 4822
                         </a>
                     </div>
                 </div>

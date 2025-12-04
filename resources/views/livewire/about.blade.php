@@ -1,16 +1,10 @@
 <?php
 
 use function Livewire\Volt\{computed, layout, title};
-use App\Models\{TeamMember, Accreditation};
+use App\Models\Accreditation;
 
 layout('components.layouts.public');
 title('About Us | KMG Environmental Solutions');
-
-$teamMembers = computed(fn() =>
-    TeamMember::where('is_active', true)
-        ->orderBy('sort_order')
-        ->get()
-);
 
 $accreditations = computed(fn() =>
     Accreditation::where('is_active', true)
@@ -48,7 +42,7 @@ $accreditations = computed(fn() =>
     </section>
 
     <!-- Who We Are Section -->
-    <section class="py-24">
+    <section class="py-16">
         <div class="max-w-7xl mx-auto px-4">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div>
@@ -108,19 +102,19 @@ $accreditations = computed(fn() =>
     </section>
 
     <!-- Mission, Vision & Values -->
-    <section class="py-24 bg-zinc-50">
+    <section class="py-16 bg-zinc-50">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-black text-zinc-950 mb-4">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-black text-zinc-950 mb-3">
                     Mission, Vision & Values
                 </h2>
-                <p class="text-xl text-zinc-500 max-w-3xl mx-auto">
+                <p class="text-lg text-zinc-500 max-w-3xl mx-auto">
                     The principles that guide everything we do
                 </p>
             </div>
 
             <!-- Mission & Vision -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
                 <div class="bg-white p-8 rounded-lg shadow-sm border-l-4 border-green-500">
                     <div class="flex items-center gap-4 mb-4">
                         <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
@@ -200,14 +194,14 @@ $accreditations = computed(fn() =>
     </section>
 
     <!-- Accreditations & Memberships -->
-    <section class="py-24 bg-zinc-50">
+    <section class="py-16 bg-zinc-50">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-black text-zinc-950 mb-4">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-black text-zinc-950 mb-3">
                     Accreditations & <span class="text-green-500">Memberships</span>
                 </h2>
-                <p class="text-xl text-zinc-500 max-w-3xl mx-auto">
-                    Our credentials demonstrate our commitment to professional excellence and regulatory compliance
+                <p class="text-lg text-zinc-500 max-w-3xl mx-auto">
+                    Our credentials demonstrate our commitment to professional excellence
                 </p>
             </div>
 
@@ -277,19 +271,6 @@ $accreditations = computed(fn() =>
                     <p class="text-xs text-zinc-500">Water Institute Member</p>
                 </div>
 
-                <!-- SAIOH -->
-                <div class="flex flex-col items-center text-center">
-                    <div class="w-full h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
-                        @if(file_exists(public_path('images/accreditations/SAIOH.jpeg')))
-                            <img src="{{ asset('images/accreditations/SAIOH.jpeg') }}" alt="SAIOH" class="w-full h-full object-contain">
-                        @else
-                            <div class="text-sm font-bold text-zinc-700">SAIOH</div>
-                        @endif
-                    </div>
-                    <div class="font-bold text-zinc-950 mb-1">SAIOH</div>
-                    <p class="text-xs text-zinc-500">Occupational Hygiene</p>
-                </div>
-
                 <!-- IIAV -->
                 <div class="flex flex-col items-center text-center">
                     <div class="w-full h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
@@ -300,7 +281,7 @@ $accreditations = computed(fn() =>
                         @endif
                     </div>
                     <div class="font-bold text-zinc-950 mb-1">IIAV</div>
-                    <p class="text-xs text-zinc-500">Acoustics & Vibration</p>
+                    <p class="text-xs text-zinc-500">Int'l Institute of Acoustics & Vibration</p>
                 </div>
 
                 <!-- IAIAsa -->
@@ -328,13 +309,13 @@ $accreditations = computed(fn() =>
     </section>
 
     <!-- Our Approach / Methodology -->
-    <section class="py-24 bg-zinc-900 text-white">
+    <section class="py-16 bg-zinc-900 text-white">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-white text-4xl md:text-5xl font-black mb-4">
+            <div class="text-center mb-10">
+                <h2 class="text-white text-3xl md:text-4xl font-black mb-3">
                     Our Approach
                 </h2>
-                <p class="text-xl text-zinc-400 max-w-3xl mx-auto">
+                <p class="text-lg text-zinc-400 max-w-3xl mx-auto">
                     A systematic methodology ensuring comprehensive environmental management
                 </p>
             </div>
@@ -456,62 +437,21 @@ $accreditations = computed(fn() =>
         </div>
     </section>
 
-    <!-- Our Team -->
-    <section class="py-24">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-black text-zinc-950 mb-4">
-                    Our Team
-                </h2>
-                <p class="text-xl text-zinc-500 max-w-3xl mx-auto">
-                    Registered professionals with extensive experience in environmental consulting
-                </p>
-            </div>
-
-            @if($this->teamMembers->count() > 0)
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    @foreach($this->teamMembers as $member)
-                        <div class="bg-zinc-50 rounded-lg overflow-hidden group">
-                            <div class="aspect-square bg-zinc-200 relative overflow-hidden">
-                                @if($member->photo && file_exists(public_path('storage/' . $member->photo)))
-                                    <img src="{{ asset('storage/' . $member->photo) }}"
-                                         alt="{{ $member->name }}"
-                                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                                @else
-                                    <div class="w-full h-full flex items-center justify-center">
-                                        <x-solar-icon name="user-circle" size="96" class="text-zinc-400" />
-                                    </div>
-                                @endif
-                            </div>
-
-                            <div class="p-6">
-                                <h3 class="text-xl font-bold text-zinc-950 mb-1">{{ $member->name }}</h3>
-                                <p class="text-green-600 font-semibold mb-3">{{ $member->title }}</p>
-
-                                @if($member->registrations && count($member->registrations) > 0)
-                                    <p class="text-sm text-zinc-500 mb-3">
-                                        <span class="font-medium">Registrations:</span>
-                                        {{ collect($member->registrations)->pluck('organization')->join(', ') }}
-                                    </p>
-                                @endif
-
-                                @if($member->bio)
-                                    <p class="text-zinc-600 text-sm leading-relaxed">
-                                        {!! Str::limit($member->bio, 150) !!}
-                                    </p>
-                                @endif
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            @else
-                <div class="text-center py-12 bg-zinc-50 rounded-lg">
-                    <x-solar-icon name="users-group-two-rounded" size="64" class="text-zinc-300 mx-auto mb-4" />
-                    <p class="text-zinc-500">Team profiles coming soon.</p>
-                </div>
-            @endif
-
-          </div>
+    <!-- Our Work in Action -->
+    <section class="py-16 bg-zinc-50">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-black text-zinc-950 mb-4">
+                Our Work in <span class="text-green-500">Action</span>
+            </h2>
+            <p class="text-lg text-zinc-600 mb-8 max-w-2xl mx-auto">
+                See our team in the field conducting environmental monitoring and assessments across South Africa.
+            </p>
+            <a href="{{ route('gallery') }}"
+               class="inline-flex items-center gap-3 px-8 py-4 text-lg font-bold text-white bg-zinc-900 hover:bg-zinc-800 transition-all">
+                <x-solar-icon name="gallery" size="24" />
+                <span>View Gallery</span>
+            </a>
+        </div>
     </section>
 
     <!-- CTA Section -->
@@ -534,10 +474,10 @@ $accreditations = computed(fn() =>
                         <span>Request a Quote</span>
                     </a>
 
-                    <a href="tel:0119696184"
+                    <a href="tel:0114804822"
                        class="inline-flex items-center gap-3 px-8 py-4 text-lg font-bold text-zinc-950 bg-white hover:bg-zinc-100 transition-all">
                         <x-solar-icon name="phone-calling" size="24" />
-                        <span>011 969 6184</span>
+                        <span>011 480 4822</span>
                     </a>
                 </div>
             </div>

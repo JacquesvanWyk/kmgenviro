@@ -56,18 +56,34 @@ $projectCount = computed(fn() => Project::count());
 ?>
 
 <div class="bg-zinc-50">
-    <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center overflow-hidden liquid-glass">
-        @if(file_exists(public_path('images/hero/team-water-sampling.jpg')))
-            <!-- Background Image -->
-            <img src="{{ asset('images/hero/team-water-sampling.jpg') }}"
-                 alt="KMG Environmental team conducting water quality sampling"
-                 class="absolute inset-0 w-full h-full object-cover object-center"
+    <!-- Hero Section with Auto-Slider -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden liquid-glass"
+             x-data="{
+                currentSlide: 0,
+                slides: [
+                    { image: '{{ asset('images/hero/team-water-sampling.jpg') }}', alt: 'KMG Environmental team conducting water quality sampling' },
+                    { image: '{{ asset('images/gallery/team-fieldwork.jpg') }}', alt: 'KMG team performing environmental fieldwork' },
+                    { image: '{{ asset('images/services/environmental-monitoring.jpg') }}', alt: 'Environmental monitoring equipment' },
+                    { image: '{{ asset('images/gallery/team-monitoring-mountains.jpg') }}', alt: 'KMG team monitoring in mountainous terrain' },
+                    { image: '{{ asset('images/gallery/water-sampling-river.jpg') }}', alt: 'Water sampling at river site' }
+                ],
+                init() {
+                    setInterval(() => {
+                        this.currentSlide = (this.currentSlide + 1) % this.slides.length
+                    }, 5000)
+                }
+             }">
+        <!-- Background Image Slider -->
+        <template x-for="(slide, index) in slides" :key="index">
+            <img :src="slide.image"
+                 :alt="slide.alt"
+                 class="absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-1000"
+                 :class="currentSlide === index ? 'opacity-100' : 'opacity-0'"
                  loading="eager">
+        </template>
 
-            <!-- Gradient Overlay -->
-            <div class="absolute inset-0 bg-gradient-to-b from-zinc-900/70 via-zinc-900/60 to-zinc-900/80"></div>
-        @endif
+        <!-- Gradient Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-b from-zinc-900/70 via-zinc-900/60 to-zinc-900/80"></div>
 
         <!-- Grid pattern overlay -->
         <div class="absolute inset-0 grid-pattern opacity-10"></div>
@@ -82,14 +98,13 @@ $projectCount = computed(fn() => Project::count());
                 </div>
 
                 <!-- Main Heading -->
-                <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white mb-8 leading-tight">
-                    Accredited Environmental, ESG,
-                    <span class="block text-green-500">Waste & Occupational Hygiene</span>
-                    <span class="block">Consultants</span>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 leading-tight">
+                    Your Trusted Partner in
+                    <span class="block text-green-500">Environmental Compliance</span>
                 </h1>
 
-                <p class="text-xl md:text-2xl text-zinc-300 mb-12 max-w-4xl mx-auto leading-relaxed">
-                    Delivering scientifically robust, regulation-aligned environmental solutions across South Africa and the SADC region since 2008
+                <p class="text-lg md:text-xl text-zinc-300 mb-12 max-w-5xl mx-auto leading-relaxed">
+                    Specialist Studies | Environmental Authorizations | Environmental Audits | Environmental Training | ESG Compliance | OHS
                 </p>
 
                 <!-- CTA Buttons -->
@@ -137,52 +152,45 @@ $projectCount = computed(fn() => Project::count());
     </section>
 
     <!-- Who We Are Section -->
-    <section class="py-24 bg-white relative">
+    <section class="py-20 bg-white relative">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <!-- Content -->
                 <div>
-                    <div class="mb-8 border-l-4 border-green-500 pl-6">
-                        <h2 class="text-4xl md:text-5xl font-black text-zinc-950 mb-4">
-                            Who We Are
+                    <div class="mb-6 border-l-4 border-green-500 pl-6">
+                        <h2 class="text-3xl md:text-4xl font-black text-zinc-950">
+                            We are KMG Environmental Solutions Services
                         </h2>
                     </div>
 
-                    <p class="text-lg text-zinc-600 mb-6 leading-relaxed">
-                        KMG Environmental Solutions is a leading South African environmental consultancy providing expert services across the full spectrum of environmental management, ESG compliance, occupational hygiene, and professional training.
-                    </p>
-
                     <p class="text-lg text-zinc-600 mb-8 leading-relaxed">
-                        Our multidisciplinary team of registered professionals brings together expertise in environmental science, chemistry, occupational hygiene, waste management, and regulatory compliance to deliver scientifically defensible solutions.
+                        We help organisations build projects that meet the law, respect communities, and protect the environment. Our team combines on-site monitoring, laboratory analysis, and specialist impact assessments to deliver defensible, regulator-ready reports on time and in full.
                     </p>
 
-                    <div class="grid grid-cols-2 gap-6 mb-8">
-                        <div class="flex items-start gap-3">
-                            <x-solar-icon name="verified-check" size="24" class="text-green-500 flex-shrink-0 mt-1" />
-                            <div>
-                                <div class="font-bold text-zinc-950">DoEL Approved</div>
-                                <div class="text-sm text-zinc-500">Asbestos Contractor</div>
+                    <!-- What We Do -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-bold text-zinc-950 mb-4">What We Do</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-3">
+                                <x-solar-icon name="chart-2" size="24" class="text-green-500 flex-shrink-0 mt-1" />
+                                <div>
+                                    <div class="font-bold text-zinc-950">Environmental Monitoring</div>
+                                    <div class="text-sm text-zinc-600">Ambient air & dust fallout, stack emissions, water & effluent quality, groundwater, noise, soil, and occupational hygiene.</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <x-solar-icon name="verified-check" size="24" class="text-green-500 flex-shrink-0 mt-1" />
-                            <div>
-                                <div class="font-bold text-zinc-950">SACNASP</div>
-                                <div class="text-sm text-zinc-500">Registered Professionals</div>
+                            <div class="flex items-start gap-3">
+                                <x-solar-icon name="document-text" size="24" class="text-green-500 flex-shrink-0 mt-1" />
+                                <div>
+                                    <div class="font-bold text-zinc-950">Specialist Studies</div>
+                                    <div class="text-sm text-zinc-600">Terrestrial & aquatic biodiversity, wetlands, agricultural impact, air quality impact, noise impact, visual, socio-economic, hydropedology, geohydrology, heritage & palaeontology.</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <x-solar-icon name="verified-check" size="24" class="text-green-500 flex-shrink-0 mt-1" />
-                            <div>
-                                <div class="font-bold text-zinc-950">EAPASA</div>
-                                <div class="text-sm text-zinc-500">Accredited Training</div>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <x-solar-icon name="verified-check" size="24" class="text-green-500 flex-shrink-0 mt-1" />
-                            <div>
-                                <div class="font-bold text-zinc-950">GBCSA</div>
-                                <div class="text-sm text-zinc-500">Professional Member</div>
+                            <div class="flex items-start gap-3">
+                                <x-solar-icon name="diploma" size="24" class="text-green-500 flex-shrink-0 mt-1" />
+                                <div>
+                                    <div class="font-bold text-zinc-950">Compliance & Permitting</div>
+                                    <div class="text-sm text-zinc-600">EIA/BA Authorization, WML Applications, Green Star Rating Applications, ESG Compliance, licence conditions tracking, risk matrices, mitigation design, and monitoring plans.</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -199,9 +207,9 @@ $projectCount = computed(fn() => Project::count());
                     @if(file_exists(public_path('images/about/kmg-vehicle-bakkie.jpg')))
                         <img src="{{ asset('images/about/kmg-vehicle-bakkie.jpg') }}"
                              alt="KMG Environmental Solutions team vehicle"
-                             class="w-full h-auto rounded-lg shadow-xl">
+                             class="w-full h-auto shadow-xl">
                     @else
-                        <div class="aspect-video bg-zinc-100 rounded-lg flex items-center justify-center">
+                        <div class="aspect-video bg-zinc-100 flex items-center justify-center">
                             <x-solar-icon name="buildings" size="64" class="text-zinc-300" />
                         </div>
                     @endif
@@ -210,48 +218,94 @@ $projectCount = computed(fn() => Project::count());
         </div>
     </section>
 
-    <!-- Core Services Section -->
-    <section class="py-24 bg-zinc-50 relative">
+    <!-- Why Clients Choose KMG -->
+    <section class="py-16 bg-zinc-100">
         <div class="max-w-7xl mx-auto px-4">
-            <!-- Section Header -->
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-black text-zinc-950 mb-4">
-                    Core Service Categories
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-black text-zinc-950 mb-4">
+                    Why Clients Choose <span class="text-green-500">KMG</span>
                 </h2>
-                <p class="text-xl text-zinc-500 max-w-3xl mx-auto">
-                    Comprehensive environmental solutions from accredited specialists
-                </p>
             </div>
 
-            <!-- Services Grid - 9 categories -->
-            @if($this->serviceCategories->count() > 0)
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-                    @foreach($this->serviceCategories as $category)
-                        <a href="{{ route('services.index') }}#category-{{ $category->slug }}"
-                           class="bg-white p-6 rounded-lg shadow-sm hover:shadow-lg transition-all group border border-zinc-100 hover:border-green-500">
-                            <div class="flex items-start gap-4">
-                                <div class="text-4xl flex-shrink-0">{{ $category->icon }}</div>
-                                <div class="flex-1">
-                                    <h3 class="text-xl font-bold text-zinc-950 mb-2 group-hover:text-green-600 transition-colors">
-                                        {{ $category->name }}
-                                    </h3>
-                                    <p class="text-zinc-500 text-sm leading-relaxed">
-                                        {{ Str::limit(strip_tags($category->description), 100) }}
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    @endforeach
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+                <div class="bg-white p-6 text-center">
+                    <x-solar-icon name="shield-check" size="40" class="text-green-500 mx-auto mb-4" />
+                    <h3 class="font-bold text-zinc-950 mb-2">Compliance Without Chaos</h3>
+                    <p class="text-sm text-zinc-600">We align deliverables to NEMA, NWA, NEM: AQA and licence conditions—so you avoid penalties and delays.</p>
                 </div>
-            @endif
+                <div class="bg-white p-6 text-center">
+                    <x-solar-icon name="chart-square" size="40" class="text-green-500 mx-auto mb-4" />
+                    <h3 class="font-bold text-zinc-950 mb-2">Data → Decisions</h3>
+                    <p class="text-sm text-zinc-600">Dashboards, trends, and plain-language insights your project team can act on.</p>
+                </div>
+                <div class="bg-white p-6 text-center">
+                    <x-solar-icon name="rocket" size="40" class="text-green-500 mx-auto mb-4" />
+                    <h3 class="font-bold text-zinc-950 mb-2">Speed & Reliability</h3>
+                    <p class="text-sm text-zinc-600">Rapid field mobilisation and fast reporting cycles.</p>
+                </div>
+                <div class="bg-white p-6 text-center">
+                    <x-solar-icon name="settings" size="40" class="text-green-500 mx-auto mb-4" />
+                    <h3 class="font-bold text-zinc-950 mb-2">In-House Capability</h3>
+                    <p class="text-sm text-zinc-600">Calibrated monitoring instruments (noise meters, portable ambient air units, sampling kits) and a multi-disciplinary team.</p>
+                </div>
+                <div class="bg-white p-6 text-center">
+                    <x-solar-icon name="medal-ribbons-star" size="40" class="text-green-500 mx-auto mb-4" />
+                    <h3 class="font-bold text-zinc-950 mb-2">Proven Track Record</h3>
+                    <p class="text-sm text-zinc-600">Mining, energy, transport, water utilities, and municipal projects nationwide and in SADC.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <!-- View All Button -->
-            <div class="text-center">
-                <a href="{{ route('services.index') }}"
-                   class="inline-flex items-center gap-3 px-8 py-4 text-lg font-bold text-zinc-950 bg-green-500 hover:bg-green-400 transition-all">
-                    <span>View All Services</span>
-                    <x-solar-icon name="alt-arrow-right" size="24" />
-                </a>
+    <!-- Professional Standing & Footprint -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Professional Standing -->
+                <div>
+                    <h3 class="text-2xl font-bold text-zinc-950 mb-6 border-l-4 border-green-500 pl-4">Professional Standing</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3">
+                            <x-solar-icon name="verified-check" size="20" class="text-green-500 flex-shrink-0 mt-1" />
+                            <span class="text-zinc-700">SACNASP-registered scientists</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <x-solar-icon name="verified-check" size="20" class="text-green-500 flex-shrink-0 mt-1" />
+                            <span class="text-zinc-700">WISA registered scientists</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <x-solar-icon name="verified-check" size="20" class="text-green-500 flex-shrink-0 mt-1" />
+                            <span class="text-zinc-700">Department of Employment & Labour Approved Asbestos Contractor (RAC2024-CI/100)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <x-solar-icon name="verified-check" size="20" class="text-green-500 flex-shrink-0 mt-1" />
+                            <span class="text-zinc-700">EAPASA-registered scientists and aligned practice</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <x-solar-icon name="verified-check" size="20" class="text-green-500 flex-shrink-0 mt-1" />
+                            <span class="text-zinc-700">GBCSA Member and registered EP</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Footprint -->
+                <div>
+                    <h3 class="text-2xl font-bold text-zinc-950 mb-6 border-l-4 border-green-500 pl-4">Our Footprint</h3>
+                    <div class="flex items-start gap-3 mb-4">
+                        <x-solar-icon name="map-point" size="20" class="text-green-500 flex-shrink-0 mt-1" />
+                        <div>
+                            <div class="font-bold text-zinc-950">Head Office</div>
+                            <div class="text-zinc-600">08 Hillside Road, Metropolitan Building, 1st Floor B, Parktown, Johannesburg, 2193</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <x-solar-icon name="globe" size="20" class="text-green-500 flex-shrink-0 mt-1" />
+                        <div>
+                            <div class="font-bold text-zinc-950">Projects Across</div>
+                            <div class="text-zinc-600">Gauteng, Limpopo, North West, KZN, Mpumalanga, Northern Cape, Eastern Cape, Western Cape and Lesotho/SADC</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -329,28 +383,17 @@ $projectCount = computed(fn() => Project::count());
                     <div class="font-bold text-zinc-950 mb-1">WISA</div>
                 </div>
 
-                <!-- SAIOH -->
-                <div class="flex flex-col items-center text-center">
-                    <div class="w-48 h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
-                        @if(file_exists(public_path('images/accreditations/SAIOH.jpeg')))
-                            <img src="{{ asset('images/accreditations/SAIOH.jpeg') }}" alt="SAIOH" class="w-full h-full object-contain">
-                        @else
-                            <div class="text-sm font-bold text-zinc-700">SAIOH</div>
-                        @endif
-                    </div>
-                    <div class="font-bold text-zinc-950 mb-1">SAIOH</div>
-                </div>
-
                 <!-- IIAV -->
                 <div class="flex flex-col items-center text-center">
                     <div class="w-48 h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
                         @if(file_exists(public_path('images/accreditations/IIAV.png')))
-                            <img src="{{ asset('images/accreditations/IIAV.png') }}" alt="IIAV" class="w-full h-full object-contain">
+                            <img src="{{ asset('images/accreditations/IIAV.png') }}" alt="The International Institute of Acoustics and Vibration" class="w-full h-full object-contain">
                         @else
                             <div class="text-sm font-bold text-zinc-700">IIAV</div>
                         @endif
                     </div>
-                    <div class="font-bold text-zinc-950 mb-1">IIAV</div>
+                    <div class="font-bold text-zinc-950 mb-1 text-sm">IIAV</div>
+                    <div class="text-xs text-zinc-500">Int'l Institute of Acoustics & Vibration</div>
                 </div>
 
                 <!-- IAIAsa -->
@@ -482,19 +525,64 @@ $projectCount = computed(fn() => Project::count());
         </div>
     </section>
 
+    <!-- Our Work in Action -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-black text-zinc-950 mb-4">
+                    Our Work in <span class="text-green-500">Action</span>
+                </h2>
+                <p class="text-zinc-500 max-w-2xl mx-auto">
+                    See our field monitoring activities and project highlights across South Africa and SADC
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                @php
+                    $galleryImages = [
+                        ['src' => 'images/gallery/kmg-team-air-sampling.jpg', 'alt' => 'Air quality monitoring'],
+                        ['src' => 'images/gallery/kmg-team-field-work.jpg', 'alt' => 'Environmental field work'],
+                        ['src' => 'images/gallery/kmg-team-water-sampling-2.jpg', 'alt' => 'Water sampling'],
+                        ['src' => 'images/gallery/kmg-team-noise-monitoring.jpg', 'alt' => 'Noise monitoring'],
+                    ];
+                @endphp
+                @foreach($galleryImages as $image)
+                    <div class="aspect-video bg-zinc-200 overflow-hidden group">
+                        @if(file_exists(public_path($image['src'])))
+                            <img src="{{ asset($image['src']) }}"
+                                 alt="{{ $image['alt'] }}"
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        @else
+                            <div class="w-full h-full flex items-center justify-center bg-zinc-100">
+                                <x-solar-icon name="camera" size="32" class="text-zinc-400" />
+                            </div>
+                        @endif
+                    </div>
+                @endforeach
+            </div>
+
+            <div class="text-center">
+                <a href="{{ route('gallery') }}"
+                   class="inline-flex items-center gap-3 px-6 py-3 text-lg font-bold text-zinc-950 bg-green-500 hover:bg-green-400 transition-all">
+                    <x-solar-icon name="gallery" size="24" />
+                    <span>View Full Gallery</span>
+                </a>
+            </div>
+        </div>
+    </section>
 
     <!-- Our Clients -->
-    @if($this->clientLogos->count() > 0)
-        <section class="py-16 bg-white border-y border-zinc-100">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="text-center mb-12">
-                    <h2 class="text-2xl font-bold text-zinc-950 mb-2">Our Clients</h2>
-                    <p class="text-zinc-500">Trusted by leading organisations across industries</p>
-                </div>
+    <section class="py-16 bg-zinc-50 border-y border-zinc-100">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl font-bold text-zinc-950 mb-2">Trusted by Leading Organisations</h2>
+                <p class="text-zinc-500">Our clients across South Africa and SADC</p>
+            </div>
 
+            @if($this->clientLogos->count() > 0)
                 <div class="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-6">
                     @foreach($this->clientLogos as $client)
-                        <div class="flex items-center justify-center p-4 bg-zinc-50 rounded-lg aspect-square">
+                        <div class="flex items-center justify-center p-4 bg-white aspect-square">
                             @if($client->logo && file_exists(public_path($client->logo)))
                                 <img src="{{ asset($client->logo) }}"
                                      alt="{{ $client->name }}"
@@ -506,9 +594,19 @@ $projectCount = computed(fn() => Project::count());
                         </div>
                     @endforeach
                 </div>
-            </div>
-        </section>
-    @endif
+            @else
+                <!-- Placeholder for client logos -->
+                <div class="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-6">
+                    @for($i = 0; $i < 8; $i++)
+                        <div class="flex items-center justify-center p-4 bg-white aspect-square border border-dashed border-zinc-300">
+                            <x-solar-icon name="buildings" size="32" class="text-zinc-300" />
+                        </div>
+                    @endfor
+                </div>
+                <p class="text-center text-zinc-400 text-sm mt-4">Client logos coming soon</p>
+            @endif
+        </div>
+    </section>
 
     <!-- Featured Projects -->
     @if($this->featuredProjects->count() > 0)
@@ -664,10 +762,10 @@ $projectCount = computed(fn() => Project::count());
                         <span>Request a Quote</span>
                     </a>
 
-                    <a href="tel:0119696184"
+                    <a href="tel:0114804822"
                        class="inline-flex items-center gap-3 px-8 py-4 text-lg font-bold text-zinc-950 bg-white hover:bg-zinc-100 transition-all">
                         <x-solar-icon name="phone-calling" size="24" />
-                        <span>011 969 6184</span>
+                        <span>011 480 4822</span>
                     </a>
                 </div>
             </div>
