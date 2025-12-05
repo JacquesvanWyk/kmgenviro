@@ -358,25 +358,6 @@ $categoryDetails = [
                                     </p>
                                 @endif
 
-                                @if($item->daily_rate || $item->weekly_rate || $item->monthly_rate)
-                                    <div class="border-t border-zinc-100 pt-4 mt-auto mb-4">
-                                        <div class="flex flex-wrap gap-2 text-sm">
-                                            @if($item->daily_rate)
-                                                <span class="px-3 py-1 bg-zinc-100 rounded-full">
-                                                    <span class="text-zinc-500">Daily:</span>
-                                                    <span class="font-semibold text-green-600">R{{ number_format($item->daily_rate) }}</span>
-                                                </span>
-                                            @endif
-                                            @if($item->weekly_rate)
-                                                <span class="px-3 py-1 bg-zinc-100 rounded-full">
-                                                    <span class="text-zinc-500">Weekly:</span>
-                                                    <span class="font-semibold text-green-600">R{{ number_format($item->weekly_rate) }}</span>
-                                                </span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                @endif
-
                                 <a href="#quote-form"
                                    onclick="document.getElementById('equipmentNeeded').value = '{{ $item->name }}'"
                                    class="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-green-500 hover:bg-green-400 text-zinc-950 font-bold transition-colors">
