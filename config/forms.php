@@ -13,7 +13,7 @@ return [
 
     'emails' => [
         // General contact enquiries
-        'contact' => env('FORM_EMAIL_CONTACT', 'info@kmgenviro.co.za'),
+        'contact' => env('FORM_EMAIL_CONTACT', 'jvw679@gmail.com'),
 
         // Quote/project requests
         'quote' => env('FORM_EMAIL_QUOTE', 'marabekg@kmgenviro.co.za'),
