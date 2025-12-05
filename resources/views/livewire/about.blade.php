@@ -208,7 +208,7 @@ $accreditations = computed(fn() =>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
                 <!-- DoEL -->
                 <div class="flex flex-col items-center text-center">
-                    <div class="w-full h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
+                    <div class="w-full h-32 flex items-center justify-center mb-4 p-4">
                         @if(file_exists(public_path('images/accreditations/doel.jpg')))
                             <img src="{{ asset('images/accreditations/doel.jpg') }}" alt="DoEL" class="w-full h-full object-contain">
                         @else
@@ -221,7 +221,7 @@ $accreditations = computed(fn() =>
 
                 <!-- SACNASP -->
                 <div class="flex flex-col items-center text-center">
-                    <div class="w-full h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
+                    <div class="w-full h-32 flex items-center justify-center mb-4 p-4">
                         @if(file_exists(public_path('images/accreditations/sacnasp.png')))
                             <img src="{{ asset('images/accreditations/sacnasp.png') }}" alt="SACNASP" class="w-full h-full object-contain">
                         @else
@@ -234,7 +234,7 @@ $accreditations = computed(fn() =>
 
                 <!-- EAPASA -->
                 <div class="flex flex-col items-center text-center">
-                    <div class="w-full h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
+                    <div class="w-full h-32 flex items-center justify-center mb-4 p-4">
                         @if(file_exists(public_path('images/accreditations/eapasa.png')))
                             <img src="{{ asset('images/accreditations/eapasa.png') }}" alt="EAPASA" class="w-full h-full object-contain">
                         @else
@@ -247,7 +247,7 @@ $accreditations = computed(fn() =>
 
                 <!-- GBCSA -->
                 <div class="flex flex-col items-center text-center">
-                    <div class="w-full h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
+                    <div class="w-full h-32 flex items-center justify-center mb-4 p-4">
                         @if(file_exists(public_path('images/accreditations/GBCSA-logo.png')))
                             <img src="{{ asset('images/accreditations/GBCSA-logo.png') }}" alt="GBCSA" class="w-full h-full object-contain">
                         @else
@@ -260,7 +260,7 @@ $accreditations = computed(fn() =>
 
                 <!-- WISA -->
                 <div class="flex flex-col items-center text-center">
-                    <div class="w-full h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
+                    <div class="w-full h-32 flex items-center justify-center mb-4 p-4">
                         @if(file_exists(public_path('images/accreditations/WISA.png')))
                             <img src="{{ asset('images/accreditations/WISA.png') }}" alt="WISA" class="w-full h-full object-contain">
                         @else
@@ -273,7 +273,7 @@ $accreditations = computed(fn() =>
 
                 <!-- IIAV -->
                 <div class="flex flex-col items-center text-center">
-                    <div class="w-full h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
+                    <div class="w-full h-32 flex items-center justify-center mb-4 p-4">
                         @if(file_exists(public_path('images/accreditations/IIAV.png')))
                             <img src="{{ asset('images/accreditations/IIAV.png') }}" alt="IIAV" class="w-full h-full object-contain">
                         @else
@@ -286,7 +286,7 @@ $accreditations = computed(fn() =>
 
                 <!-- IAIAsa -->
                 <div class="flex flex-col items-center text-center">
-                    <div class="w-full h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
+                    <div class="w-full h-32 flex items-center justify-center mb-4 p-4">
                         @if(file_exists(public_path('images/accreditations/IAIAsa.png')))
                             <img src="{{ asset('images/accreditations/IAIAsa.png') }}" alt="IAIAsa" class="w-full h-full object-contain">
                         @else
