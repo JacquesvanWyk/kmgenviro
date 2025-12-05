@@ -1,7 +1,9 @@
 <?php
 
+use App\Mail\NewFormSubmission;
 use App\Models\ContactSubmission;
 use App\Models\ServiceCategory;
+use Illuminate\Support\Facades\Mail;
 
 use function Livewire\Volt\computed;
 use function Livewire\Volt\layout;
@@ -71,6 +73,17 @@ $submitGeneral = function () {
         'user_agent' => request()->userAgent(),
     ]);
 
+    Mail::to(config('forms.emails.contact', config('forms.default')))
+        ->send(new NewFormSubmission('contact', [
+            'Name' => $this->name,
+            'Email' => $this->email,
+            'Phone' => $this->phone,
+            'Company' => $this->company,
+            'Subject' => $this->subject,
+            'Message' => $this->message,
+            'Referral Source' => $this->referralSource,
+        ], $this->email, $this->name));
+
     $this->generalSubmitted = true;
     $this->reset(['name', 'email', 'phone', 'company', 'subject', 'message', 'referralSource']);
 };
@@ -116,6 +129,20 @@ $submitQuote = function () {
         'ip_address' => request()->ip(),
         'user_agent' => request()->userAgent(),
     ]);
+
+    Mail::to(config('forms.emails.quote', config('forms.default')))
+        ->send(new NewFormSubmission('quote', [
+            'Name' => $this->quoteName,
+            'Email' => $this->quoteEmail,
+            'Phone' => $this->quotePhone,
+            'Company' => $this->quoteCompany,
+            'Service Type' => $this->serviceType,
+            'Project Name' => $this->projectName,
+            'Location' => $this->projectLocation,
+            'Sector' => $this->projectSector,
+            'Description' => $this->projectDescription,
+            'Timeline' => $this->projectTimeline,
+        ], $this->quoteEmail, $this->quoteName));
 
     $this->quoteSubmitted = true;
     $this->reset(['quoteName', 'quoteEmail', 'quotePhone', 'quoteCompany', 'serviceType', 'projectName', 'projectLocation', 'projectSector', 'projectDescription', 'projectTimeline', 'attachments']);

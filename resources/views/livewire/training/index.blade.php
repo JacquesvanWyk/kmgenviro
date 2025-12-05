@@ -1,8 +1,10 @@
 <?php
 
 use function Livewire\Volt\{computed, layout, state, title, rules};
+use App\Mail\NewFormSubmission;
 use App\Models\{TrainingCourse, TrainingSchedule, TrainingBooking};
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Mail;
 
 layout('components.layouts.public');
 title('Training & Events | Accredited Environmental Training | KMG');
@@ -102,6 +104,22 @@ $submitBooking = function () {
         'status' => 'pending',
         'notes' => 'Payment method: ' . $this->bookingPaymentMethod,
     ]);
+
+    $course = TrainingCourse::find($this->bookingCourseId);
+
+    Mail::to(config('forms.emails.training', config('forms.default')))
+        ->send(new NewFormSubmission('training', [
+            'Name' => $this->bookingName,
+            'Email' => $this->bookingEmail,
+            'Phone' => $this->bookingPhone,
+            'Company' => $this->bookingCompany,
+            'Course' => $course?->name ?? 'Unknown',
+            'Preferred Date' => $this->bookingPreferredDate ?: 'Flexible',
+            'Number of Delegates' => $this->bookingDelegates,
+            'Delegate Names' => $this->bookingDelegateNames,
+            'Special Requirements' => $this->bookingSpecialRequirements,
+            'Payment Method' => $this->bookingPaymentMethod,
+        ], $this->bookingEmail, $this->bookingName));
 
     $this->bookingSubmitted = true;
     $this->reset(['bookingName', 'bookingEmail', 'bookingPhone', 'bookingCompany', 'bookingCourseId', 'bookingScheduleId', 'bookingPreferredDate', 'bookingDelegates', 'bookingDelegateNames', 'bookingSpecialRequirements']);

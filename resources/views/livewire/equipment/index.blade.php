@@ -1,7 +1,9 @@
 <?php
 
+use App\Mail\NewFormSubmission;
 use App\Models\Equipment;
 use App\Models\EquipmentCategory;
+use Illuminate\Support\Facades\Mail;
 
 use function Livewire\Volt\computed;
 use function Livewire\Volt\layout;
@@ -70,6 +72,18 @@ $submitQuote = function () {
         'ip_address' => request()->ip(),
         'user_agent' => request()->userAgent(),
     ]);
+
+    Mail::to(config('forms.emails.equipment', config('forms.default')))
+        ->send(new NewFormSubmission('equipment', [
+            'Name' => $this->quoteName,
+            'Email' => $this->quoteEmail,
+            'Phone' => $this->quotePhone,
+            'Company' => $this->quoteCompany,
+            'Equipment Needed' => $this->equipmentNeeded,
+            'Rental Duration' => $this->rentalDuration,
+            'Delivery Location' => $this->deliveryLocation,
+            'Additional Notes' => $this->additionalNotes,
+        ], $this->quoteEmail, $this->quoteName));
 
     $this->quoteSubmitted = true;
     $this->reset(['quoteName', 'quoteEmail', 'quotePhone', 'quoteCompany', 'equipmentNeeded', 'rentalDuration', 'deliveryLocation', 'additionalNotes']);
