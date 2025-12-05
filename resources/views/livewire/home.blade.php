@@ -204,15 +204,9 @@ $projectCount = computed(fn() => Project::count());
 
                 <!-- Image -->
                 <div class="relative">
-                    @if(file_exists(public_path('images/about/kmg-vehicle-bakkie.jpg')))
-                        <img src="{{ asset('images/about/kmg-vehicle-bakkie.jpg') }}"
-                             alt="KMG Environmental Solutions team vehicle"
-                             class="w-full h-auto shadow-xl">
-                    @else
-                        <div class="aspect-video bg-zinc-100 flex items-center justify-center">
-                            <x-solar-icon name="buildings" size="64" class="text-zinc-300" />
-                        </div>
-                    @endif
+                    <img src="{{ asset('images/team.jpg') }}"
+                         alt="KMG Environmental Solutions team"
+                         class="w-full h-auto shadow-xl">
                 </div>
             </div>
         </div>
