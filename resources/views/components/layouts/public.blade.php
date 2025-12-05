@@ -17,15 +17,16 @@
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:title" content="{{ $title ?? 'KMG Environmental Solutions' }}">
     <meta property="og:description" content="{{ $description ?? 'Leading environmental consultancy providing expert solutions across South Africa.' }}">
-    @if(isset($ogImage))
-        <meta property="og:image" content="{{ $ogImage }}">
-    @endif
+    <meta property="og:image" content="{{ $ogImage ?? asset('images/og-homepage.jpg') }}">
+    <meta property="og:site_name" content="KMG Environmental Solutions">
+    <meta property="og:locale" content="en_ZA">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="{{ url()->current() }}">
     <meta property="twitter:title" content="{{ $title ?? 'KMG Environmental Solutions' }}">
     <meta property="twitter:description" content="{{ $description ?? 'Leading environmental consultancy providing expert solutions across South Africa.' }}">
+    <meta property="twitter:image" content="{{ $ogImage ?? asset('images/og-homepage.jpg') }}">
 
     <!-- Canonical URL -->
     <link rel="canonical" href="{{ url()->current() }}">

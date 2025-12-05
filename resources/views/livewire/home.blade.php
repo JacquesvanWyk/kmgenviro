@@ -6,6 +6,9 @@ use App\Models\{ServiceCategory, Project, ClientLogo, BlogPost, TeamMember, Accr
 layout('components.layouts.public');
 title('KMG Environmental Solutions | Environmental Consultancy South Africa');
 
+$seoDescription = 'Leading South African environmental consultancy providing expert environmental monitoring, compliance, ESG advisory, occupational hygiene, and accredited training services. DoEL approved, SACNASP, EAPASA & GBCSA registered.';
+$seoKeywords = 'environmental consultancy South Africa, environmental monitoring, environmental compliance, ESG advisory, occupational hygiene, environmental training, water quality monitoring, air quality monitoring, asbestos management, waste management, SACNASP, EAPASA, DoEL approved';
+
 $serviceCategories = computed(fn() =>
     ServiceCategory::where('is_active', true)
         ->orderBy('sort_order')
@@ -54,6 +57,9 @@ $accreditationCount = computed(fn() => Accreditation::where('is_active', true)->
 $projectCount = computed(fn() => Project::count());
 
 ?>
+
+<x-slot:description>{{ $seoDescription }}</x-slot:description>
+<x-slot:keywords>{{ $seoKeywords }}</x-slot:keywords>
 
 <div class="bg-zinc-50">
     <!-- Hero Section with Auto-Slider -->

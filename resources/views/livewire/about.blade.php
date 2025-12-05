@@ -6,6 +6,9 @@ use App\Models\Accreditation;
 layout('components.layouts.public');
 title('About Us | KMG Environmental Solutions');
 
+$seoDescription = 'Learn about KMG Environmental Solutions - a leading South African environmental consultancy with 13+ years experience. DoEL approved, SACNASP, EAPASA & GBCSA registered. B-BBEE Level 2 contributor serving all 9 provinces and SADC region.';
+$seoKeywords = 'about KMG Environmental, environmental consultancy South Africa, SACNASP registered, EAPASA accredited, DoEL approved, B-BBEE Level 2, environmental specialists, South African environmental company';
+
 $accreditations = computed(fn() =>
     Accreditation::where('is_active', true)
         ->orderBy('sort_order')
@@ -13,6 +16,9 @@ $accreditations = computed(fn() =>
 );
 
 ?>
+
+<x-slot:description>{{ $seoDescription }}</x-slot:description>
+<x-slot:keywords>{{ $seoKeywords }}</x-slot:keywords>
 
 <div class="bg-white">
     <!-- Hero Section -->

@@ -6,6 +6,9 @@ use App\Models\Sector;
 layout('components.layouts.public');
 title('Industry Sectors | KMG Environmental');
 
+$seoDescription = 'KMG Environmental Solutions serves key South African industries including mining, energy, infrastructure, manufacturing, and agriculture. Discover tailored environmental compliance solutions for your sector.';
+$seoKeywords = 'environmental services mining, industrial environmental compliance, energy sector environmental, infrastructure environmental, manufacturing environmental services, agriculture environmental consulting, South Africa industry sectors';
+
 state(['activeTab' => 'mining-mineral-resources']);
 
 $sectors = computed(fn() =>
@@ -15,6 +18,9 @@ $sectors = computed(fn() =>
 );
 
 ?>
+
+<x-slot:description>{{ $seoDescription }}</x-slot:description>
+<x-slot:keywords>{{ $seoKeywords }}</x-slot:keywords>
 
 <div x-data="{ activeTab: @entangle('activeTab') }">
     <!-- Hero Section -->

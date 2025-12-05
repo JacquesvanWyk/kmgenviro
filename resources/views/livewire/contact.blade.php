@@ -14,6 +14,9 @@ use function Livewire\Volt\usesFileUploads;
 layout('components.layouts.public');
 title('Contact Us | KMG Environmental Solutions');
 
+$seoDescription = 'Contact KMG Environmental Solutions for environmental consultancy services, quotes, and enquiries. Based in Midrand, Gauteng, serving all of South Africa and SADC region. Get in touch today.';
+$seoKeywords = 'contact KMG Environmental, environmental consultancy contact, environmental services quote, Midrand environmental consultants, South Africa environmental consultants, environmental services enquiry';
+
 usesFileUploads();
 
 state([
@@ -157,6 +160,9 @@ $resetForm = function ($form) {
 };
 
 ?>
+
+<x-slot:description>{{ $seoDescription }}</x-slot:description>
+<x-slot:keywords>{{ $seoKeywords }}</x-slot:keywords>
 
 <div class="bg-white">
     <!-- Hero Section -->
