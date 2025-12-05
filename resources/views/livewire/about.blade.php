@@ -35,7 +35,7 @@ $accreditations = computed(fn() =>
                     About <span class="text-green-500">KMG</span>
                 </h1>
                 <p class="text-xl text-zinc-300 leading-relaxed">
-                    Accredited environmental consultancy delivering scientifically robust, regulation-aligned solutions across South Africa and the SADC region since 2008.
+                    Accredited environmental consultancy delivering scientifically robust, regulation-aligned solutions across South Africa and the SADC region.
                 </p>
             </div>
         </div>
@@ -58,7 +58,7 @@ $accreditations = computed(fn() =>
                         </p>
 
                         <p>
-                            Founded in 2008, we have grown to become a trusted partner for clients in mining, industrial, infrastructure, and renewable energy sectors. Our multidisciplinary team of registered professionals brings together expertise in environmental science, chemistry, occupational hygiene, waste management, and regulatory compliance.
+                            We have grown to become a trusted partner for clients in mining, industrial, infrastructure, and renewable energy sectors. Our multidisciplinary team of registered professionals brings together expertise in environmental science, chemistry, occupational hygiene, waste management, and regulatory compliance.
                         </p>
 
                         <p>
@@ -80,7 +80,7 @@ $accreditations = computed(fn() =>
 
                     <div class="grid grid-cols-2 gap-6">
                         <div class="bg-zinc-50 p-6 rounded-lg text-center">
-                            <div class="text-4xl font-black text-green-500 mb-2">15+</div>
+                            <div class="text-4xl font-black text-green-500 mb-2">13+</div>
                             <div class="text-sm text-zinc-600">Years Experience</div>
                         </div>
                         <div class="bg-zinc-50 p-6 rounded-lg text-center">
