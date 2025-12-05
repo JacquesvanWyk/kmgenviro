@@ -9,7 +9,7 @@ $navigation = [
         ['label' => 'Downloads', 'route' => 'resources'],
         ['label' => 'Equipment Rental', 'route' => 'equipment.index'],
         ['label' => 'Gallery', 'route' => 'gallery'],
-        ['label' => 'Blog', 'route' => 'blog.index'],
+        // ['label' => 'Blog', 'route' => 'blog.index'], // Commented out for now
     ]],
     ['label' => 'Contact', 'route' => 'contact'],
 ];
