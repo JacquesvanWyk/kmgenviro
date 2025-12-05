@@ -127,12 +127,13 @@ $categories = computed(fn() =>
                            id="category-{{ $category->slug }}">
                             <!-- Category Header -->
                             <div class="p-6 border-b border-zinc-100">
-                                <div class="flex items-start gap-4">
-                                    <div class="w-14 h-14 bg-green-500 flex items-center justify-center flex-shrink-0">
-                                        <x-solar-icon name="{{ $details['icon'] }}" size="28" class="text-white" />
+                                <div class="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4">
+                                    <div class="w-12 h-12 sm:w-14 sm:h-14 bg-green-500 flex items-center justify-center flex-shrink-0">
+                                        <x-solar-icon name="{{ $details['icon'] }}" size="24" class="text-white sm:hidden" />
+                                        <x-solar-icon name="{{ $details['icon'] }}" size="28" class="text-white hidden sm:block" />
                                     </div>
-                                    <div class="flex-1">
-                                        <h3 class="text-xl font-bold text-zinc-950 group-hover:text-green-600 transition-colors mb-1">
+                                    <div class="flex-1 min-w-0">
+                                        <h3 class="text-lg sm:text-xl font-bold text-zinc-950 group-hover:text-green-600 transition-colors mb-1 break-words">
                                             {{ $category->name }}
                                         </h3>
                                         <span class="text-sm text-zinc-500">
