@@ -122,11 +122,27 @@ $topServices = ServiceCategory::where('is_active', true)
                         </a>
                     </li>
                     <li>
+                        <a href="{{ route('sectors.index') }}" class="flex items-center gap-2 text-zinc-400 hover:text-green-400 transition-colors group">
+                            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                            </svg>
+                            Sectors & Projects
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ route('training.index') }}" class="flex items-center gap-2 text-zinc-400 hover:text-green-400 transition-colors group">
                             <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                             </svg>
-                            Training
+                            Training & Events
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('resources') }}" class="flex items-center gap-2 text-zinc-400 hover:text-green-400 transition-colors group">
+                            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                            </svg>
+                            Resources
                         </a>
                     </li>
                     <li>
