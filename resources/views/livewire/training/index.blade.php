@@ -85,7 +85,7 @@ $submitBooking = function () {
         'bookingCompany' => 'nullable|string|max:255',
         'bookingCourseId' => 'required|exists:training_courses,id',
         'bookingDelegates' => 'required|integer|min:1|max:20',
-        'bookingPaymentMethod' => 'required|in:invoice,eft,card',
+        'bookingPaymentMethod' => 'required|in:invoice,eft',
     ]);
 
     TrainingBooking::create([
@@ -261,9 +261,10 @@ $openBookingForm = function ($courseId = null, $scheduleId = null) {
                                             <div class="text-sm text-zinc-500">{{ $schedule->trainingCourse->duration }}</div>
                                         </td>
                                         <td class="px-6 py-4">
-                                            <div class="font-medium text-zinc-950">{{ Carbon::parse($schedule->start_date)->format('d M Y') }}</div>
                                             @if($schedule->end_date && $schedule->end_date != $schedule->start_date)
-                                                <div class="text-sm text-zinc-500">to {{ Carbon::parse($schedule->end_date)->format('d M Y') }}</div>
+                                                <div class="font-medium text-zinc-950">{{ Carbon::parse($schedule->start_date)->format('d') }}-{{ Carbon::parse($schedule->end_date)->format('d M Y') }}</div>
+                                            @else
+                                                <div class="font-medium text-zinc-950">{{ Carbon::parse($schedule->start_date)->format('d M Y') }}</div>
                                             @endif
                                         </td>
                                         <td class="px-6 py-4">
@@ -613,13 +614,6 @@ $openBookingForm = function ($courseId = null, $scheduleId = null) {
                                         <div>
                                             <span class="font-medium text-zinc-950">EFT / Bank Transfer</span>
                                             <span class="text-sm text-zinc-500 block">We'll send banking details</span>
-                                        </div>
-                                    </label>
-                                    <label class="flex items-center gap-3 p-3 border border-zinc-200 rounded-lg cursor-pointer hover:border-green-500 transition-colors">
-                                        <input type="radio" wire:model="bookingPaymentMethod" value="card" class="text-green-500 focus:ring-green-500">
-                                        <div>
-                                            <span class="font-medium text-zinc-950">Credit/Debit Card</span>
-                                            <span class="text-sm text-zinc-500 block">Pay via secure payment link</span>
                                         </div>
                                     </label>
                                 </div>

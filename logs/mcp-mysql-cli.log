@@ -79,3 +79,40 @@
 2025-11-25T12:40:57.274Z | INFO | MCP MySQL server process started with PID: 2706
 2025-11-25T12:40:57.274Z | INFO | Signal handlers registered for SIGINT and SIGTERM
 2025-11-25T12:40:57.274Z | INFO | Press Ctrl+C to gracefully shutdown the server
+2025-11-26T07:58:37.250Z | INFO | Starting MCP MySQL server from: /Users/jacquesvanwyk/.asdf/installs/nodejs/20.19.4/lib/node_modules/@liangshanli/mcp-server-mysql/src/server-final.js
+2025-11-26T07:58:37.252Z | INFO | Starting MCP MySQL server with environment: | {"MYSQL_HOST":"127.0.0.1","MYSQL_PORT":"3306","MYSQL_USER":"root","MYSQL_DATABASE":""}
+2025-11-26T07:58:37.253Z | INFO | MCP MySQL server process started with PID: 73345
+2025-11-26T07:58:37.254Z | INFO | Signal handlers registered for SIGINT and SIGTERM
+2025-11-26T07:58:37.254Z | INFO | Press Ctrl+C to gracefully shutdown the server
+2025-11-26T09:56:48.231Z | INFO | Received SIGINT, shutting down server...
+2025-11-26T09:56:48.232Z | INFO | Sent SIGINT signal to server process 73345
+2025-11-26T09:56:48.237Z | INFO | MCP MySQL server exited with code: 0
+2025-11-26T09:56:48.238Z | INFO | Server requested restart, restarting...
+2025-11-26T09:56:48.330Z | INFO | Received SIGTERM, shutting down server...
+2025-11-26T09:56:48.331Z | INFO | Sent SIGTERM signal to server process 73345
+2025-11-26T09:56:55.242Z | INFO | Starting MCP MySQL server from: /Users/jacquesvanwyk/.asdf/installs/nodejs/20.19.4/lib/node_modules/@liangshanli/mcp-server-mysql/src/server-final.js
+2025-11-26T09:56:55.244Z | INFO | Starting MCP MySQL server with environment: | {"MYSQL_HOST":"127.0.0.1","MYSQL_PORT":"3306","MYSQL_USER":"root","MYSQL_DATABASE":""}
+2025-11-26T09:56:55.245Z | INFO | MCP MySQL server process started with PID: 64856
+2025-11-26T09:56:55.246Z | INFO | Signal handlers registered for SIGINT and SIGTERM
+2025-11-26T09:56:55.246Z | INFO | Press Ctrl+C to gracefully shutdown the server
+2025-11-26T11:08:44.549Z | INFO | Received SIGINT, shutting down server...
+2025-11-26T11:08:44.551Z | INFO | Sent SIGINT signal to server process 64856
+2025-11-26T11:08:44.555Z | INFO | MCP MySQL server exited with code: 0
+2025-11-26T11:08:44.556Z | INFO | Server requested restart, restarting...
+2025-11-26T11:08:44.650Z | INFO | Received SIGTERM, shutting down server...
+2025-11-26T11:08:44.650Z | INFO | Sent SIGTERM signal to server process 64856
+2025-11-26T11:08:56.570Z | INFO | Starting MCP MySQL server from: /Users/jacquesvanwyk/.asdf/installs/nodejs/20.19.4/lib/node_modules/@liangshanli/mcp-server-mysql/src/server-final.js
+2025-11-26T11:08:56.572Z | INFO | Starting MCP MySQL server with environment: | {"MYSQL_HOST":"127.0.0.1","MYSQL_PORT":"3306","MYSQL_USER":"root","MYSQL_DATABASE":""}
+2025-11-26T11:08:56.573Z | INFO | MCP MySQL server process started with PID: 5589
+2025-11-26T11:08:56.573Z | INFO | Signal handlers registered for SIGINT and SIGTERM
+2025-11-26T11:08:56.574Z | INFO | Press Ctrl+C to gracefully shutdown the server
+2025-12-04T16:07:25.673Z | INFO | Starting MCP MySQL server from: /Users/jacquesvanwyk/.asdf/installs/nodejs/20.19.4/lib/node_modules/@liangshanli/mcp-server-mysql/src/server-final.js
+2025-12-04T16:07:25.676Z | INFO | Starting MCP MySQL server with environment: | {"MYSQL_HOST":"127.0.0.1","MYSQL_PORT":"3306","MYSQL_USER":"root","MYSQL_DATABASE":""}
+2025-12-04T16:07:25.676Z | INFO | MCP MySQL server process started with PID: 30225
+2025-12-04T16:07:25.676Z | INFO | Signal handlers registered for SIGINT and SIGTERM
+2025-12-04T16:07:25.677Z | INFO | Press Ctrl+C to gracefully shutdown the server
+2025-12-05T08:36:58.191Z | INFO | Starting MCP MySQL server from: /Users/jacquesvanwyk/.asdf/installs/nodejs/20.19.4/lib/node_modules/@liangshanli/mcp-server-mysql/src/server-final.js
+2025-12-05T08:36:58.193Z | INFO | Starting MCP MySQL server with environment: | {"MYSQL_HOST":"127.0.0.1","MYSQL_PORT":"3306","MYSQL_USER":"root","MYSQL_DATABASE":""}
+2025-12-05T08:36:58.194Z | INFO | MCP MySQL server process started with PID: 63876
+2025-12-05T08:36:58.194Z | INFO | Signal handlers registered for SIGINT and SIGTERM
+2025-12-05T08:36:58.194Z | INFO | Press Ctrl+C to gracefully shutdown the server

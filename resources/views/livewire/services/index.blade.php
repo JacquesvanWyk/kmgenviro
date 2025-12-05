@@ -60,9 +60,9 @@ $categories = computed(fn() =>
 
             @php
                 // Define service category details with icons and descriptions
-                // All icons use green background for consistency
+                // Slugs match database: environmental-monitoring-services, etc.
                 $categoryDetails = [
-                    'environmental-monitoring' => [
+                    'environmental-monitoring-services' => [
                         'icon' => 'chart-2',
                         'description' => 'Water, air, noise, and soil quality monitoring with accredited laboratory analysis.',
                     ],
@@ -70,48 +70,47 @@ $categories = computed(fn() =>
                         'icon' => 'document-text',
                         'description' => 'EIA, specialist studies, and environmental assessments for projects of all sizes.',
                     ],
-                    'permitting-compliance' => [
+                    'permitting-services-applications' => [
                         'icon' => 'diploma',
                         'description' => 'Environmental permits, licenses, and regulatory compliance management.',
                     ],
-                    'waste-asbestos-management' => [
+                    'waste-management-services' => [
                         'icon' => 'trash-bin-minimalistic',
-                        'description' => 'Hazardous waste management, asbestos surveys, and DoEL-approved abatement.',
+                        'description' => 'Hazardous waste management and compliance.',
                     ],
-                    'climate-carbon-esg' => [
+                    'asbestos-management-services' => [
+                        'icon' => 'danger',
+                        'description' => 'Asbestos surveys and DoEL-approved abatement.',
+                    ],
+                    'esg-advisory-reporting' => [
                         'icon' => 'leaf',
                         'description' => 'Carbon footprinting, climate risk, and ESG strategy development.',
                     ],
-                    'occupational-hygiene-ohs' => [
+                    'occupational-hygiene-services' => [
                         'icon' => 'shield-user',
                         'description' => 'Workplace exposure assessments, OHS compliance, and health risk management.',
                     ],
-                    'training-capacity-building' => [
-                        'icon' => 'graduation-cap',
+                    'training-courses-cpd' => [
+                        'icon' => 'square-academic-cap',
                         'description' => 'EAPASA-accredited training courses for environmental professionals.',
                     ],
-                    'equipment-rental' => [
+                    'equipment-rental-services' => [
                         'icon' => 'settings',
                         'description' => 'Professional environmental monitoring equipment available for hire.',
                     ],
-                    'environmental-ohs-esg-auditing' => [
+                    'environmental-auditing-compliance' => [
                         'icon' => 'clipboard-check',
                         'description' => 'Compliance audits, due diligence, and management system assessments.',
                     ],
                 ];
 
-                // Map category slugs to their details
-                function getCategoryDetails($slug, $details) {
-                    foreach ($details as $key => $detail) {
-                        if (Str::contains($slug, $key) || Str::contains($key, $slug)) {
-                            return $detail;
-                        }
-                    }
-                    // Default
-                    return [
-                        'icon' => 'folder',
-                        'description' => 'Professional environmental consulting services.',
-                    ];
+                // Get icon for category slug
+                function getCategoryIcon($slug, $details) {
+                    return $details[$slug]['icon'] ?? 'folder-2';
+                }
+
+                function getCategoryDescription($slug, $details) {
+                    return $details[$slug]['description'] ?? 'Professional environmental consulting services.';
                 }
             @endphp
 
