@@ -239,6 +239,21 @@ $openBookingForm = function ($courseId = null, $scheduleId = null) {
                 </p>
             </div>
 
+            <!-- Special Sessions Notice -->
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-8">
+                <div class="flex flex-col sm:flex-row sm:items-center gap-4 text-sm">
+                    <div class="flex items-center gap-2">
+                        <x-solar-icon name="calendar-add" size="20" class="text-green-600" />
+                        <span class="text-zinc-700"><strong>Special Sessions:</strong> Can be arranged with the admin team at <a href="mailto:bookings@kmgenviro.co.za" class="text-green-600 font-semibold hover:underline">bookings@kmgenviro.co.za</a></span>
+                    </div>
+                    <div class="hidden sm:block w-px h-6 bg-green-300"></div>
+                    <div class="flex items-center gap-2">
+                        <x-solar-icon name="square-academic-cap" size="20" class="text-green-600" />
+                        <span class="text-zinc-700"><strong>Universities:</strong> Can arrange suitable dates for sessions</span>
+                    </div>
+                </div>
+            </div>
+
             @if($this->upcomingSchedules->count() > 0)
                 <div class="bg-white rounded-lg shadow-sm overflow-hidden">
                     <div class="overflow-x-auto">
