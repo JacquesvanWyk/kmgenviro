@@ -607,67 +607,104 @@ $projectCount = computed(fn() => Project::count());
         </div>
     </section>
 
-    <!-- Featured Projects -->
-    @if($this->featuredProjects->count() > 0)
-        <section class="py-24 bg-white">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl md:text-5xl font-black text-zinc-950 mb-4">
-                        Featured Projects
-                    </h2>
-                    <p class="text-xl text-zinc-500 max-w-3xl mx-auto">
-                        Recent environmental projects showcasing our expertise
-                    </p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    @foreach($this->featuredProjects as $project)
-                        <a href="{{ route('projects.show', $project) }}"
-                           class="group bg-zinc-50 rounded-lg overflow-hidden hover:shadow-xl transition-all">
-                            <div class="aspect-video bg-zinc-200 relative overflow-hidden">
-                                @if($project->featured_image && file_exists(public_path('storage/' . $project->featured_image)))
-                                    <img src="{{ asset('storage/' . $project->featured_image) }}"
-                                         alt="{{ $project->title }}"
-                                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                                @else
-                                    <div class="w-full h-full flex items-center justify-center">
-                                        <x-solar-icon name="folder" size="48" class="text-zinc-400" />
-                                    </div>
-                                @endif
-
-                                @if($project->sector)
-                                    <div class="absolute top-4 left-4 px-3 py-1 bg-green-500 text-zinc-950 text-sm font-semibold rounded">
-                                        {{ $project->sector->name }}
-                                    </div>
-                                @endif
-                            </div>
-
-                            <div class="p-6">
-                                <h3 class="text-xl font-bold text-zinc-950 mb-2 group-hover:text-green-600 transition-colors">
-                                    {{ $project->title }}
-                                </h3>
-                                <p class="text-zinc-500 text-sm mb-4">
-                                    {{ Str::limit($project->description, 100) }}
-                                </p>
-                                <div class="flex items-center gap-2 text-green-600 font-semibold">
-                                    <span>View Project</span>
-                                    <x-solar-icon name="alt-arrow-right" size="16" class="group-hover:translate-x-1 transition-transform" />
-                                </div>
-                            </div>
-                        </a>
-                    @endforeach
-                </div>
-
-                <div class="text-center mt-12">
-                    <a href="{{ route('projects.index') }}"
-                       class="inline-flex items-center gap-3 px-8 py-4 text-lg font-bold text-white bg-zinc-900 hover:bg-zinc-800 transition-all">
-                        <span>View All Projects</span>
-                        <x-solar-icon name="alt-arrow-right" size="24" />
-                    </a>
-                </div>
+    <!-- Sectors & Projects -->
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-black text-zinc-950 mb-4">
+                    Sectors & <span class="text-green-500">Projects</span>
+                </h2>
+                <p class="text-xl text-zinc-500 max-w-3xl mx-auto">
+                    Delivering environmental solutions across South Africa's key industries
+                </p>
             </div>
-        </section>
-    @endif
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Mining & Minerals -->
+                <a href="{{ route('sectors.index') }}?sector=mining-mineral-resources"
+                   class="group bg-zinc-900 overflow-hidden hover:shadow-xl transition-all">
+                    <div class="aspect-video bg-zinc-800 relative overflow-hidden">
+                        @if(file_exists(public_path('images/sectors/mining.jpg')))
+                            <img src="{{ asset('images/sectors/mining.jpg') }}"
+                                 alt="Mining & Mineral Resources"
+                                 class="w-full h-full object-cover opacity-60 group-hover:scale-105 group-hover:opacity-80 transition-all duration-500">
+                        @endif
+                        <div class="absolute inset-0 bg-gradient-to-t from-zinc-900 to-transparent"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-green-500 transition-colors">
+                            Mining & Mineral Resources
+                        </h3>
+                        <p class="text-zinc-400 text-sm mb-4">
+                            EIAs, mining rights, water use licenses, closure plans & rehabilitation
+                        </p>
+                        <div class="flex items-center gap-2 text-green-500 font-semibold">
+                            <span>Explore Sector</span>
+                            <x-solar-icon name="alt-arrow-right" size="16" class="group-hover:translate-x-1 transition-transform" />
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Infrastructure -->
+                <a href="{{ route('sectors.index') }}?sector=infrastructure-construction"
+                   class="group bg-zinc-900 overflow-hidden hover:shadow-xl transition-all">
+                    <div class="aspect-video bg-zinc-800 relative overflow-hidden">
+                        @if(file_exists(public_path('images/sectors/infrastructure-construction.jpg')))
+                            <img src="{{ asset('images/sectors/infrastructure-construction.jpg') }}"
+                                 alt="Infrastructure & Construction"
+                                 class="w-full h-full object-cover opacity-60 group-hover:scale-105 group-hover:opacity-80 transition-all duration-500">
+                        @endif
+                        <div class="absolute inset-0 bg-gradient-to-t from-zinc-900 to-transparent"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-green-500 transition-colors">
+                            Infrastructure & Construction
+                        </h3>
+                        <p class="text-zinc-400 text-sm mb-4">
+                            Roads, bridges, bulk infrastructure & urban development assessments
+                        </p>
+                        <div class="flex items-center gap-2 text-green-500 font-semibold">
+                            <span>Explore Sector</span>
+                            <x-solar-icon name="alt-arrow-right" size="16" class="group-hover:translate-x-1 transition-transform" />
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Renewable Energy -->
+                <a href="{{ route('sectors.index') }}?sector=renewable-energy"
+                   class="group bg-zinc-900 overflow-hidden hover:shadow-xl transition-all">
+                    <div class="aspect-video bg-zinc-800 relative overflow-hidden">
+                        @if(file_exists(public_path('images/services/environmental-monitoring.jpg')))
+                            <img src="{{ asset('images/services/environmental-monitoring.jpg') }}"
+                                 alt="Renewable Energy"
+                                 class="w-full h-full object-cover opacity-60 group-hover:scale-105 group-hover:opacity-80 transition-all duration-500">
+                        @endif
+                        <div class="absolute inset-0 bg-gradient-to-t from-zinc-900 to-transparent"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-green-500 transition-colors">
+                            Renewable Energy
+                        </h3>
+                        <p class="text-zinc-400 text-sm mb-4">
+                            Solar PV, wind farms, grid connections & REIPPP support
+                        </p>
+                        <div class="flex items-center gap-2 text-green-500 font-semibold">
+                            <span>Explore Sector</span>
+                            <x-solar-icon name="alt-arrow-right" size="16" class="group-hover:translate-x-1 transition-transform" />
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="{{ route('sectors.index') }}"
+                   class="inline-flex items-center gap-3 px-8 py-4 text-lg font-bold text-white bg-zinc-900 hover:bg-zinc-800 transition-all">
+                    <span>View All Sectors & Projects</span>
+                    <x-solar-icon name="alt-arrow-right" size="24" />
+                </a>
+            </div>
+        </div>
+    </section>
 
     <!-- Training & Events -->
     <section class="py-24 bg-zinc-900 text-white">
