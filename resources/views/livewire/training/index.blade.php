@@ -191,7 +191,7 @@ $openBookingForm = function ($courseId = null, $scheduleId = null) {
                         <x-solar-icon name="users-group-rounded" size="24" class="text-white" />
                     </div>
                     <div>
-                        <div class="font-bold text-zinc-950">500+</div>
+                        <div class="font-bold text-zinc-950">100+</div>
                         <div class="text-sm text-zinc-500">Delegates Trained</div>
                     </div>
                 </div>
@@ -207,7 +207,7 @@ $openBookingForm = function ($courseId = null, $scheduleId = null) {
                     <x-solar-icon name="user-check-rounded" size="24" class="text-green-500" />
                     <div>
                         <div class="font-bold text-zinc-950 text-sm">Expert Instructors</div>
-                        <div class="text-xs text-zinc-500">15+ years experience</div>
+                        <div class="text-xs text-zinc-500">13+ years experience</div>
                     </div>
                 </div>
                 <div class="flex items-center gap-3 p-4 bg-zinc-50">

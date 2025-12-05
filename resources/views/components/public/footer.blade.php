@@ -42,7 +42,7 @@ $topServices = ServiceCategory::where('is_active', true)
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                         </svg>
                         <div>
-                            <div class="text-white font-semibold">011 480 4822</div>
+                            <div class="text-white font-semibold">011 480 4822 / 011 969 6184</div>
                             <div class="text-zinc-400">072 546 3191</div>
                             <div class="text-zinc-500 text-xs">Mon - Fri, 8AM - 5PM</div>
                         </div>
@@ -215,7 +215,7 @@ $topServices = ServiceCategory::where('is_active', true)
                         <svg class="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                         </svg>
-                        <span class="text-zinc-400">IIAV (Int'l Institute of Acoustics & Vibration)</span>
+                        <span class="text-zinc-400">IIAV Member</span>
                     </li>
                     <li class="flex items-start gap-2">
                         <svg class="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">

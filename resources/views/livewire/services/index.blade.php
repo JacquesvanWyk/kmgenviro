@@ -104,13 +104,9 @@ $categories = computed(fn() =>
                     ],
                 ];
 
-                // Get icon for category slug
-                function getCategoryIcon($slug, $details) {
-                    return $details[$slug]['icon'] ?? 'folder-2';
-                }
-
-                function getCategoryDescription($slug, $details) {
-                    return $details[$slug]['description'] ?? 'Professional environmental consulting services.';
+                // Get details for category slug
+                function getCategoryDetails($slug, $details) {
+                    return $details[$slug] ?? ['icon' => 'folder-2', 'description' => 'Professional environmental consulting services.'];
                 }
             @endphp
 
@@ -207,7 +203,7 @@ $categories = computed(fn() =>
                     <div class="text-sm text-zinc-400 uppercase tracking-wider">Individual Services</div>
                 </div>
                 <div>
-                    <div class="text-4xl font-black text-green-500 mb-2">15+</div>
+                    <div class="text-4xl font-black text-green-500 mb-2">13+</div>
                     <div class="text-sm text-zinc-400 uppercase tracking-wider">Years Experience</div>
                 </div>
                 <div>

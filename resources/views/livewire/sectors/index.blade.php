@@ -308,7 +308,7 @@ $sectors = computed(fn() =>
                     <div class="text-xs text-zinc-500 uppercase tracking-wider">Sectors</div>
                 </div>
                 <div>
-                    <div class="text-3xl font-black text-green-500 mb-1">500+</div>
+                    <div class="text-3xl font-black text-green-500 mb-1">100+</div>
                     <div class="text-xs text-zinc-500 uppercase tracking-wider">Projects</div>
                 </div>
                 <div>
@@ -316,7 +316,7 @@ $sectors = computed(fn() =>
                     <div class="text-xs text-zinc-500 uppercase tracking-wider">Provinces</div>
                 </div>
                 <div>
-                    <div class="text-3xl font-black text-green-500 mb-1">15+</div>
+                    <div class="text-3xl font-black text-green-500 mb-1">13+</div>
                     <div class="text-xs text-zinc-500 uppercase tracking-wider">Years</div>
                 </div>
             </div>

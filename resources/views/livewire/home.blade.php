@@ -126,11 +126,11 @@ $projectCount = computed(fn() => Project::count());
                 <!-- Stats Bar -->
                 <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
                     <div class="text-center bg-white/10 backdrop-blur-sm p-6 rounded">
-                        <div class="text-3xl md:text-4xl font-black text-green-500 mb-2">15+</div>
+                        <div class="text-3xl md:text-4xl font-black text-green-500 mb-2">13+</div>
                         <div class="text-sm text-zinc-300 uppercase tracking-wider">Years Experience</div>
                     </div>
                     <div class="text-center bg-white/10 backdrop-blur-sm p-6 rounded">
-                        <div class="text-3xl md:text-4xl font-black text-green-500 mb-2">{{ $this->projectCount ?: '500' }}+</div>
+                        <div class="text-3xl md:text-4xl font-black text-green-500 mb-2">100+</div>
                         <div class="text-sm text-zinc-300 uppercase tracking-wider">Projects</div>
                     </div>
                     <div class="text-center bg-white/10 backdrop-blur-sm p-6 rounded">
@@ -325,7 +325,7 @@ $projectCount = computed(fn() => Project::count());
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
                 <!-- DoEL -->
                 <div class="flex flex-col items-center text-center">
-                    <div class="w-48 h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
+                    <div class="w-48 h-32 flex items-center justify-center mb-4 p-4">
                         @if(file_exists(public_path('images/accreditations/doel.jpg')))
                             <img src="{{ asset('images/accreditations/doel.jpg') }}" alt="DoEL" class="w-full h-full object-contain">
                         @else
@@ -337,7 +337,7 @@ $projectCount = computed(fn() => Project::count());
 
                 <!-- SACNASP -->
                 <div class="flex flex-col items-center text-center">
-                    <div class="w-48 h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
+                    <div class="w-48 h-32 flex items-center justify-center mb-4 p-4">
                         @if(file_exists(public_path('images/accreditations/sacnasp.png')))
                             <img src="{{ asset('images/accreditations/sacnasp.png') }}" alt="SACNASP" class="w-full h-full object-contain">
                         @else
@@ -349,7 +349,7 @@ $projectCount = computed(fn() => Project::count());
 
                 <!-- EAPASA -->
                 <div class="flex flex-col items-center text-center">
-                    <div class="w-48 h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
+                    <div class="w-48 h-32 flex items-center justify-center mb-4 p-4">
                         @if(file_exists(public_path('images/accreditations/eapasa.png')))
                             <img src="{{ asset('images/accreditations/eapasa.png') }}" alt="EAPASA" class="w-full h-full object-contain">
                         @else
@@ -361,7 +361,7 @@ $projectCount = computed(fn() => Project::count());
 
                 <!-- GBCSA -->
                 <div class="flex flex-col items-center text-center">
-                    <div class="w-48 h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
+                    <div class="w-48 h-32 flex items-center justify-center mb-4 p-4">
                         @if(file_exists(public_path('images/accreditations/GBCSA-logo.png')))
                             <img src="{{ asset('images/accreditations/GBCSA-logo.png') }}" alt="GBCSA" class="w-full h-full object-contain">
                         @else
@@ -373,7 +373,7 @@ $projectCount = computed(fn() => Project::count());
 
                 <!-- WISA -->
                 <div class="flex flex-col items-center text-center">
-                    <div class="w-48 h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
+                    <div class="w-48 h-32 flex items-center justify-center mb-4 p-4">
                         @if(file_exists(public_path('images/accreditations/WISA.png')))
                             <img src="{{ asset('images/accreditations/WISA.png') }}" alt="WISA" class="w-full h-full object-contain">
                         @else
@@ -385,20 +385,19 @@ $projectCount = computed(fn() => Project::count());
 
                 <!-- IIAV -->
                 <div class="flex flex-col items-center text-center">
-                    <div class="w-48 h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
+                    <div class="w-48 h-32 flex items-center justify-center mb-4 p-4">
                         @if(file_exists(public_path('images/accreditations/IIAV.png')))
                             <img src="{{ asset('images/accreditations/IIAV.png') }}" alt="The International Institute of Acoustics and Vibration" class="w-full h-full object-contain">
                         @else
                             <div class="text-sm font-bold text-zinc-700">IIAV</div>
                         @endif
                     </div>
-                    <div class="font-bold text-zinc-950 mb-1 text-sm">IIAV</div>
-                    <div class="text-xs text-zinc-500">Int'l Institute of Acoustics & Vibration</div>
+                    <div class="font-bold text-zinc-950 mb-1">IIAV</div>
                 </div>
 
                 <!-- IAIAsa -->
                 <div class="flex flex-col items-center text-center">
-                    <div class="w-48 h-32 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-4 border border-zinc-100 hover:shadow-lg transition-shadow p-4">
+                    <div class="w-48 h-32 flex items-center justify-center mb-4 p-4">
                         @if(file_exists(public_path('images/accreditations/IAIAsa.png')))
                             <img src="{{ asset('images/accreditations/IAIAsa.png') }}" alt="IAIAsa" class="w-full h-full object-contain">
                         @else
@@ -540,10 +539,10 @@ $projectCount = computed(fn() => Project::count());
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                 @php
                     $galleryImages = [
-                        ['src' => 'images/gallery/kmg-team-air-sampling.jpg', 'alt' => 'Air quality monitoring'],
-                        ['src' => 'images/gallery/kmg-team-field-work.jpg', 'alt' => 'Environmental field work'],
-                        ['src' => 'images/gallery/kmg-team-water-sampling-2.jpg', 'alt' => 'Water sampling'],
-                        ['src' => 'images/gallery/kmg-team-noise-monitoring.jpg', 'alt' => 'Noise monitoring'],
+                        ['src' => 'images/gallery/team-fieldwork.jpg', 'alt' => 'Team fieldwork'],
+                        ['src' => 'images/gallery/water-sampling-river.jpg', 'alt' => 'Water sampling'],
+                        ['src' => 'images/gallery/team-soil-sampling.jpg', 'alt' => 'Soil sampling'],
+                        ['src' => 'images/gallery/monitoring-coal-mine.jpg', 'alt' => 'Mining monitoring'],
                     ];
                 @endphp
                 @foreach($galleryImages as $image)

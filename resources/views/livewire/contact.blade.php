@@ -193,6 +193,9 @@ $resetForm = function ($form) {
                                     <a href="tel:0114804822" class="text-zinc-600 hover:text-green-600 transition-colors text-lg font-semibold block">
                                         011 480 4822 <span class="text-sm font-normal text-zinc-500">(Office)</span>
                                     </a>
+                                    <a href="tel:0119696184" class="text-zinc-600 hover:text-green-600 transition-colors text-lg font-semibold block">
+                                        011 969 6184 <span class="text-sm font-normal text-zinc-500">(Office)</span>
+                                    </a>
                                     <a href="tel:0725463191" class="text-zinc-600 hover:text-green-600 transition-colors block">
                                         072 546 3191 <span class="text-sm text-zinc-500">(Cell)</span>
                                     </a>

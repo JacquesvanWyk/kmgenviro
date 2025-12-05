@@ -314,11 +314,11 @@ $services = computed(fn() =>
                     <!-- Quick Stats -->
                     <div class="mt-8 grid grid-cols-3 gap-4">
                         <div class="bg-green-500 p-4 rounded-lg text-center">
-                            <div class="text-2xl font-black text-zinc-900">15+</div>
+                            <div class="text-2xl font-black text-zinc-900">13+</div>
                             <div class="text-xs text-zinc-800">Years</div>
                         </div>
                         <div class="bg-green-500 p-4 rounded-lg text-center">
-                            <div class="text-2xl font-black text-zinc-900">500+</div>
+                            <div class="text-2xl font-black text-zinc-900">100+</div>
                             <div class="text-xs text-zinc-800">Projects</div>
                         </div>
                         <div class="bg-green-500 p-4 rounded-lg text-center">

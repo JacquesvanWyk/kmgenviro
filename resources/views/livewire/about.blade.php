@@ -88,7 +88,7 @@ $accreditations = computed(fn() =>
                             <div class="text-sm text-zinc-600">SA Provinces</div>
                         </div>
                         <div class="bg-zinc-50 p-6 rounded-lg text-center">
-                            <div class="text-4xl font-black text-green-500 mb-2">500+</div>
+                            <div class="text-4xl font-black text-green-500 mb-2">100+</div>
                             <div class="text-sm text-zinc-600">Projects Completed</div>
                         </div>
                         <div class="bg-zinc-50 p-6 rounded-lg text-center">
@@ -281,7 +281,6 @@ $accreditations = computed(fn() =>
                         @endif
                     </div>
                     <div class="font-bold text-zinc-950 mb-1">IIAV</div>
-                    <p class="text-xs text-zinc-500">Int'l Institute of Acoustics & Vibration</p>
                 </div>
 
                 <!-- IAIAsa -->
