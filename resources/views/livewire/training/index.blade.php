@@ -110,6 +110,14 @@ $submitBooking = function () {
 $openBookingForm = function ($courseId = null, $scheduleId = null) {
     $this->bookingCourseId = $courseId;
     $this->bookingScheduleId = $scheduleId;
+
+    if ($scheduleId) {
+        $schedule = TrainingSchedule::find($scheduleId);
+        if ($schedule) {
+            $this->bookingPreferredDate = $schedule->start_date->format('Y-m-d');
+        }
+    }
+
     $this->showBookingForm = true;
     $this->bookingSubmitted = false;
 };
