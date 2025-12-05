@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Mail\UseSendTransport;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +21,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Mail::extend('usesend', function (array $config) {
+            return new UseSendTransport($config['api_key']);
+        });
     }
 }
