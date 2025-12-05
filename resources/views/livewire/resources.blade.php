@@ -6,9 +6,6 @@ use App\Models\Resource;
 layout('components.layouts.public');
 title('Resources & Downloads | KMG Environmental Solutions');
 
-$seoDescription = 'Download KMG Environmental Solutions company profile, service brochures, training materials, and technical guides. Free resources for environmental professionals and industry stakeholders.';
-$seoKeywords = 'environmental resources, company profile download, environmental brochures, training materials, technical guides, KMG downloads, environmental documentation';
-
 state([
     'categoryFilter' => '',
 ]);
@@ -63,8 +60,8 @@ $downloadResource = function ($resourceId) {
 
 ?>
 
-<x-slot:description>{{ $seoDescription }}</x-slot:description>
-<x-slot:keywords>{{ $seoKeywords }}</x-slot:keywords>
+<x-slot:description>Download KMG Environmental Solutions company profile, service brochures, training materials, and technical guides. Free resources for environmental professionals and industry stakeholders.</x-slot:description>
+<x-slot:keywords>environmental resources, company profile download, environmental brochures, training materials, technical guides, KMG downloads, environmental documentation</x-slot:keywords>
 
 <div x-data="{ activeCategory: @entangle('categoryFilter') }"
      @download-file.window="window.open($event.detail.url, '_blank')">

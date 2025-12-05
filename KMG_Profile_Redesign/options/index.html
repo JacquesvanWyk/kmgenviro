@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KMG Redesign Options</title>
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; background: #f0f2f5; padding: 40px; text-align: center; }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { margin-bottom: 40px; color: #1a1a1a; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: 0.2s; text-decoration: none; color: #333; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 150px; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .card h2 { font-size: 1.2rem; margin-bottom: 10px; }
+        .card p { font-size: 0.9rem; color: #666; }
+        .badge { background: #e3f2fd; color: #0d47a1; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>KMG Company Profile Redesign Options</h1>
+        <p style="margin-bottom: 40px;">Select a design concept to view:</p>
+        <div class="grid">
+            <a href="option1_corporate.html" class="card">
+                <h2>Option 1: Corporate</h2>
+                <p>Clean, Professional, Standard</p>
+                <span class="badge">Recommended</span>
+            </a>
+            <a href="option2_modern.html" class="card">
+                <h2>Option 2: Modern</h2>
+                <p>Large Type, Minimalist, Bold</p>
+            </a>
+            <a href="option3_organic.html" class="card">
+                <h2>Option 3: Organic</h2>
+                <p>Soft Shapes, Nature Tones</p>
+            </a>
+            <a href="option4_sleek.html" class="card">
+                <h2>Option 4: Dark Mode</h2>
+                <p>High Contrast, Tech Feel</p>
+            </a>
+            <a href="option5_industrial.html" class="card">
+                <h2>Option 5: Industrial</h2>
+                <p>Structured, Grid Layout</p>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

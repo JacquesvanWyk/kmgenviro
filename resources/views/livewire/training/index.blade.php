@@ -9,9 +9,6 @@ use Illuminate\Support\Facades\Mail;
 layout('components.layouts.public');
 title('Training & Events | Accredited Environmental Training | KMG');
 
-$seoDescription = 'EAPASA and SACNASP accredited environmental training courses in South Africa. Courses include environmental management, occupational hygiene, asbestos awareness, legal compliance, and more. Book online or request in-house training.';
-$seoKeywords = 'environmental training South Africa, EAPASA accredited training, SACNASP training, environmental management courses, occupational hygiene training, asbestos awareness training, environmental compliance training, CPD courses environmental';
-
 state([
     'activeCategory' => 'all',
     'showBookingForm' => false,
@@ -145,8 +142,8 @@ $openBookingForm = function ($courseId = null, $scheduleId = null) {
 
 ?>
 
-<x-slot:description>{{ $seoDescription }}</x-slot:description>
-<x-slot:keywords>{{ $seoKeywords }}</x-slot:keywords>
+<x-slot:description>EAPASA and SACNASP accredited environmental training courses in South Africa. Courses include environmental management, occupational hygiene, asbestos awareness, legal compliance, and more. Book online or request in-house training.</x-slot:description>
+<x-slot:keywords>environmental training South Africa, EAPASA accredited training, SACNASP training, environmental management courses, occupational hygiene training, asbestos awareness training, environmental compliance training, CPD courses environmental</x-slot:keywords>
 
 <div x-data="{ activeCategory: @entangle('activeCategory'), showBookingForm: @entangle('showBookingForm') }">
     <!-- Hero Section -->

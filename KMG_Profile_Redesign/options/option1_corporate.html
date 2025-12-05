@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KMG Environmental Solutions - Corporate Profile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #004d40; /* Deep Teal */
+            --accent: #00e676; /* Bright Green */
+            --text-dark: #1a1a1a;
+            --text-light: #555;
+            --bg-light: #f8f9fa;
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; color: var(--text-dark); line-height: 1.6; background: var(--white); }
+        
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Header */
+        header { padding: 20px 0; position: absolute; width: 100%; top: 0; z-index: 10; }
+        .nav-flex { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 800; font-size: 1.5rem; color: white; display: flex; align-items: center; gap: 10px; }
+        .logo span { color: var(--accent); }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(rgba(0,77,64,0.9), rgba(0,77,64,0.8)), url('https://images.unsplash.com/photo-1497436072909-60f360e1d4b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 160px 0 100px;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+        
+        .hero h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px; font-weight: 800; }
+        .hero p { font-size: 1.25rem; max-width: 600px; opacity: 0.9; margin-bottom: 40px; }
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: var(--accent);
+            color: var(--primary);
+            font-weight: 700;
+            border-radius: 4px;
+            transition: transform 0.2s;
+        }
+        .btn:hover { transform: translateY(-2px); }
+
+        /* Stats */
+        .stats { transform: translateY(-50%); }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .stat-item { padding: 30px; text-align: center; border-right: 1px solid #eee; }
+        .stat-item:last-child { border: none; }
+        .stat-num { font-size: 2.5rem; font-weight: 700; color: var(--primary); display: block; }
+        .stat-label { font-size: 0.9rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Section General */
+        section { padding: 80px 0; }
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .section-title h2 { font-size: 2.5rem; color: var(--primary); margin-bottom: 15px; }
+        .section-title p { color: var(--text-light); max-width: 600px; margin: 0 auto; }
+
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .service-card {
+            background: var(--bg-light);
+            padding: 40px;
+            border-radius: 8px;
+            transition: 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+        .service-card:hover {
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-bottom-color: var(--accent);
+            transform: translateY(-5px);
+        }
+        .service-card h3 { margin-bottom: 15px; color: var(--primary); }
+
+        /* Equipment (New Data) */
+        .equipment-section { background: var(--primary); color: white; }
+        .equipment-section .section-title h2 { color: white; }
+        .equipment-section .section-title p { color: rgba(255,255,255,0.7); }
+        .equip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        .equip-cat h4 { color: var(--accent); margin-bottom: 20px; font-size: 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+        .equip-list li { margin-bottom: 10px; font-size: 0.95rem; opacity: 0.9; position: relative; padding-left: 15px; }
+        .equip-list li::before { content: '›'; color: var(--accent); position: absolute; left: 0; font-weight: bold; }
+
+        /* Training (New Data) */
+        .training-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+        .course-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 6px;
+        }
+        .course-info h4 { margin-bottom: 5px; }
+        .course-duration {
+            background: var(--bg-light);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 200px);
+            gap: 15px;
+        }
+        .gallery-item {
+            background: #ccc;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+        .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .gallery-item:hover img { transform: scale(1.1); }
+        .placeholder-text {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            color: rgba(255,255,255,0.8); font-weight: bold; text-transform: uppercase; pointer-events: none;
+        }
+
+        /* Footer */
+        footer { background: #111; color: white; padding: 60px 0 30px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px; }
+        .footer-col h4 { color: white; margin-bottom: 20px; }
+        .footer-col p { color: #888; margin-bottom: 10px; font-size: 0.9rem; }
+        .footer-bottom { border-top: 1px solid #222; padding-top: 30px; text-align: center; color: #555; font-size: 0.85rem; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .gallery-grid { grid-template-columns: 1fr 1fr; }
+            .gallery-item:nth-child(1) { grid-column: span 2; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-flex">
+            <div class="logo">
+                <!-- Placeholder for Logo -->
+                <div style="width: 40px; height: 40px; background: var(--accent); border-radius: 50%;"></div>
+                KMG<span>Enviro</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Environmental<br>Excellence.<br><span style="color: var(--accent);">Delivered.</span></h1>
+            <p>South Africa's trusted environmental consultancy. Accredited specialists delivering regulation-aligned solutions across the SADC region.</p>
+            <a href="#contact" class="btn">Get in Touch</a>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="stats">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-num">13+</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-num">100+</span>
+                    <span class="stat-label">Projects</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-num">9</span>
+                    <span class="stat-label">Provinces</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-num">L2</span>
+                    <span class="stat-label">B-BBEE Status</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Core Services</h2>
+                <p>Comprehensive environmental management, ESG compliance, and specialist scientific services.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Impact Assessments</h3>
+                    <p>Full EIA services including Basic Assessments, Scoping & EIR, and specialist studies.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Environmental Monitoring</h3>
+                    <p>Water, air, noise & soil monitoring with SANAS-accredited lab analysis.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Occupational Hygiene</h3>
+                    <p>SAIOH-registered workplace exposure assessments and OHS compliance audits.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Permitting & Licensing</h3>
+                    <p>AEL, WUL, Waste Management Licenses, and integrated authorisations.</p>
+                </div>
+                <div class="service-card">
+                    <h3>ESG & Carbon Advisory</h3>
+                    <p>Carbon footprinting, climate risk analysis, and net-zero pathway development.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Waste Management</h3>
+                    <p>Audits, management plans, and hazardous waste classification.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Equipment Section from PDF -->
+    <section class="equipment-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Equipment & Expertise</h2>
+                <p>We maintain a comprehensive fleet of calibrated monitoring equipment.</p>
+            </div>
+            <div class="equip-grid">
+                <div class="equip-cat">
+                    <h4>Air Quality</h4>
+                    <ul class="equip-list">
+                        <li>Personal dust samplers (PM10, PM2.5)</li>
+                        <li>Real-time particulate monitors</li>
+                        <li>Gas detection equipment</li>
+                        <li>Portable weather stations</li>
+                    </ul>
+                </div>
+                <div class="equip-cat">
+                    <h4>Noise Monitoring</h4>
+                    <ul class="equip-list">
+                        <li>Type 1 & 2 sound level meters</li>
+                        <li>Personal noise dosimeters</li>
+                        <li>Octave band analysers</li>
+                        <li>Environmental noise monitors</li>
+                    </ul>
+                </div>
+                <div class="equip-cat">
+                    <h4>Water Quality</h4>
+                    <ul class="equip-list">
+                        <li>Multi-parameter water quality meters</li>
+                        <li>Portable pH & conductivity meters</li>
+                        <li>Turbidity meters</li>
+                        <li>Professional sampling equipment</li>
+                    </ul>
+                </div>
+                <div class="equip-cat">
+                    <h4>Survey & Specialist</h4>
+                    <ul class="equip-list">
+                        <li>Soil sampling equipment</li>
+                        <li>GPS surveying instruments</li>
+                        <li>Thermal imaging cameras</li>
+                        <li>Drone for aerial surveys</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Training Section from PDF -->
+    <section class="training">
+        <div class="container">
+            <div class="section-title">
+                <h2>CPD Accredited Training</h2>
+                <p>SACNASP and EAPASA accredited training provider.</p>
+            </div>
+            <div class="training-grid">
+                <div class="course-card">
+                    <div class="course-info">
+                        <h4>Environmental Impact Assessment</h4>
+                        <small>Comprehensive overview of EIA processes</small>
+                    </div>
+                    <span class="course-duration">2 Days</span>
+                </div>
+                <div class="course-card">
+                    <div class="course-info">
+                        <h4>Workplace Environmental Awareness</h4>
+                        <small>Staff education and compliance</small>
+                    </div>
+                    <span class="course-duration">1 Day</span>
+                </div>
+                <div class="course-card">
+                    <div class="course-info">
+                        <h4>Water Quality Management</h4>
+                        <small>Sampling, analysis and interpretation</small>
+                    </div>
+                    <span class="course-duration">1 Day</span>
+                </div>
+                <div class="course-card">
+                    <div class="course-info">
+                        <h4>Waste Management Compliance</h4>
+                        <small>Legal requirements and best practice</small>
+                    </div>
+                    <span class="course-duration">1 Day</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Gallery -->
+    <section class="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>Project Gallery</h2>
+                <p>A glimpse into our field operations and site visits.</p>
+            </div>
+            <div class="gallery-grid">
+                <!-- Using placeholders - User to replace with real images from assets/ -->
+                <div class="gallery-item">
+                    <div class="placeholder-text">Site Inspection</div>
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80" alt="Site work">
+                </div>
+                <div class="gallery-item">
+                    <div class="placeholder-text">Water Sampling</div>
+                    <img src="https://images.unsplash.com/photo-1574169208507-84376144848b?auto=format&fit=crop&w=400&q=80" alt="Lab work">
+                </div>
+                <div class="gallery-item">
+                    <div class="placeholder-text">Drone Survey</div>
+                    <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=400&q=80" alt="Survey">
+                </div>
+                <div class="gallery-item">
+                    <div class="placeholder-text">Monitoring</div>
+                    <img src="https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?auto=format&fit=crop&w=400&q=80" alt="Field">
+                </div>
+                <div class="gallery-item">
+                    <div class="placeholder-text">Training</div>
+                    <img src="https://images.unsplash.com/photo-1544531696-b8c007d7534d?auto=format&fit=crop&w=400&q=80" alt="Training">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>KMG Enviro</h4>
+                    <p>Your Partner in Environmental Excellence.</p>
+                    <br>
+                    <p>DoEL Approved Asbestos Contractor</p>
+                    <p>B-BBEE Level 2 Contributor</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <p>08 Hillside Road, Metropolitan Building<br>Parktown, Johannesburg</p>
+                    <p><strong>Tel:</strong> 011 480 4822</p>
+                    <p><strong>Cell:</strong> 072 546 3191</p>
+                    <p><strong>Email:</strong> info@kmgenviro.co.za</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Training Bookings</h4>
+                    <p>For CPD accredited course enquiries:</p>
+                    <p><strong>Email:</strong> bookings@kmgenviro.co.za</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2025 KMG Environmental Solutions (Pty) Ltd. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

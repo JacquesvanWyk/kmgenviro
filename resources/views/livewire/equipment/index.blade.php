@@ -14,9 +14,6 @@ use function Livewire\Volt\usesFileUploads;
 layout('components.layouts.public');
 title('Equipment Rental | Environmental & Scientific Equipment | KMG');
 
-$seoDescription = 'Rent professional environmental and scientific monitoring equipment in South Africa. Air quality monitors, noise meters, water sampling equipment, and more. Flexible rental terms with technical support.';
-$seoKeywords = 'environmental equipment rental, scientific equipment hire, air quality monitor rental, noise meter hire, water sampling equipment, environmental monitoring equipment South Africa, laboratory equipment rental';
-
 usesFileUploads();
 
 state([
@@ -96,8 +93,8 @@ $resetQuoteForm = fn () => $this->quoteSubmitted = false;
 
 ?>
 
-<x-slot:description>{{ $seoDescription }}</x-slot:description>
-<x-slot:keywords>{{ $seoKeywords }}</x-slot:keywords>
+<x-slot:description>Rent professional environmental and scientific monitoring equipment in South Africa. Air quality monitors, noise meters, water sampling equipment, and more. Flexible rental terms with technical support.</x-slot:description>
+<x-slot:keywords>environmental equipment rental, scientific equipment hire, air quality monitor rental, noise meter hire, water sampling equipment, environmental monitoring equipment South Africa, laboratory equipment rental</x-slot:keywords>
 
 @php
 $categoryDetails = [

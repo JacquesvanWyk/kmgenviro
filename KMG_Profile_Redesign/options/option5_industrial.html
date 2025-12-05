@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KMG Environmental Solutions - Industrial Profile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #333;
+            --secondary: #f4f4f4;
+            --highlight: #ff6b00; /* Safety Orange */
+            --border: #ddd;
+        }
+
+        * { box-sizing: border-box; }
+        body { font-family: 'Open Sans', sans-serif; background: #fff; color: #333; margin: 0; }
+        h1, h2, h3, h4 { font-family: 'Oswald', sans-serif; text-transform: uppercase; margin: 0; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+
+        /* Header */
+        header { border-bottom: 4px solid var(--primary); padding-bottom: 20px; margin-bottom: 60px; display: flex; justify-content: space-between; align-items: flex-end; }
+        .brand h1 { font-size: 2.5rem; line-height: 1; }
+        .brand span { color: var(--highlight); }
+        .header-info { text-align: right; font-size: 0.8rem; font-weight: 600; }
+
+        /* Hero Grid */
+        .hero-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 2px; background: var(--primary); border: 2px solid var(--primary); margin-bottom: 60px; }
+        .hero-main { background: #fff; padding: 60px; display: flex; flex-direction: column; justify-content: center; }
+        .hero-main h2 { font-size: 3.5rem; margin-bottom: 20px; line-height: 1.1; }
+        .hero-side { background: var(--secondary); display: grid; grid-template-rows: repeat(3, 1fr); gap: 1px; }
+        .stat-box { background: #fff; display: flex; flex-direction: column; justify-content: center; padding: 20px; text-align: center; }
+        .stat-box strong { font-size: 2rem; font-family: 'Oswald', sans-serif; color: var(--highlight); }
+
+        /* Section Title */
+        .title-bar { background: var(--primary); color: #fff; padding: 15px 20px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; }
+        .title-bar h3 { font-size: 1.5rem; letter-spacing: 1px; }
+
+        /* Services Table */
+        .services-table { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); border: 1px solid var(--border); border-bottom: none; border-right: none; }
+        .service-cell { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 30px; transition: 0.2s; }
+        .service-cell:hover { background: var(--secondary); }
+        .service-cell h4 { color: var(--primary); font-size: 1.2rem; margin-bottom: 10px; border-left: 3px solid var(--highlight); padding-left: 10px; }
+        
+        /* Equipment List */
+        .equip-list { column-count: 2; column-gap: 40px; }
+        .equip-item { break-inside: avoid; margin-bottom: 20px; border: 1px solid var(--border); padding: 20px; }
+        .equip-item h5 { font-size: 1rem; margin-bottom: 10px; border-bottom: 2px solid var(--border); padding-bottom: 5px; }
+        .equip-item ul { padding-left: 20px; margin: 0; font-size: 0.9rem; }
+
+        /* Gallery */
+        .gallery-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; margin-top: 20px; background: var(--primary); padding: 5px; }
+        .gallery-strip img { width: 100%; height: 150px; object-fit: cover; opacity: 0.8; transition: 0.3s; display: block; }
+        .gallery-strip img:hover { opacity: 1; }
+
+        /* Footer */
+        footer { background: var(--primary); color: #fff; padding: 60px 0; margin-top: 80px; border-top: 5px solid var(--highlight); }
+        .footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+        .footer-block h4 { color: var(--highlight); margin-bottom: 20px; }
+        .footer-block p { font-size: 0.9rem; opacity: 0.8; line-height: 1.8; }
+
+        @media (max-width: 768px) {
+            .hero-grid { grid-template-columns: 1fr; }
+            .hero-side { grid-template-rows: 1fr; grid-template-columns: repeat(3, 1fr); }
+            .equip-list { column-count: 1; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .gallery-strip { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="brand">
+                <h1>KMG<span>ENVIRO</span></h1>
+                <small>ENVIRONMENTAL SOLUTIONS SERVICES</small>
+            </div>
+            <div class="header-info">
+                ISO ALIGNED<br>SACNASP REGISTERED<br>EST. 2012
+            </div>
+        </header>
+
+        <div class="hero-grid">
+            <div class="hero-main">
+                <h2>ENGINEERING<br>A SUSTAINABLE<br>FUTURE.</h2>
+                <p>We provide scientifically robust environmental solutions for the mining, industrial, and infrastructure sectors.</p>
+            </div>
+            <div class="hero-side">
+                <div class="stat-box">
+                    <strong>13+</strong>
+                    <span>YEARS</span>
+                </div>
+                <div class="stat-box">
+                    <strong>100+</strong>
+                    <span>PROJECTS</span>
+                </div>
+                <div class="stat-box">
+                    <strong>L2</strong>
+                    <span>B-BBEE</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="title-bar">
+            <h3>CORE CAPABILITIES</h3>
+            <span>SCIENTIFIC SERVICES</span>
+        </div>
+
+        <div class="services-table">
+            <div class="service-cell">
+                <h4>IMPACT ASSESSMENTS</h4>
+                <p>Full EIA, Basic Assessments, Scoping & EIR, and Environmental Management Plans.</p>
+            </div>
+            <div class="service-cell">
+                <h4>MONITORING SERVICES</h4>
+                <p>Air quality, noise, water, and soil monitoring using calibrated equipment.</p>
+            </div>
+            <div class="service-cell">
+                <h4>OCCUPATIONAL HYGIENE</h4>
+                <p>SAIOH-registered workplace exposure assessments and health risk management.</p>
+            </div>
+            <div class="service-cell">
+                <h4>PERMITTING & LEGAL</h4>
+                <p>AEL, WUL, Waste Licenses, and integrated environmental authorisations.</p>
+            </div>
+            <div class="service-cell">
+                <h4>ESG & ADVISORY</h4>
+                <p>Carbon footprinting, climate risk analysis, and sustainability reporting.</p>
+            </div>
+            <div class="service-cell">
+                <h4>WASTE MANAGEMENT</h4>
+                <p>Waste audits, classification, and regulatory compliance support.</p>
+            </div>
+        </div>
+
+        <br><br>
+
+        <div class="title-bar">
+            <h3>TECHNICAL RESOURCES</h3>
+            <span>EQUIPMENT & FLEET</span>
+        </div>
+
+        <div class="equip-list">
+            <div class="equip-item">
+                <h5>AIR QUALITY MONITORING</h5>
+                <ul>
+                    <li>PM10 / PM2.5 Dust Samplers</li>
+                    <li>Real-time Particulate Monitors</li>
+                    <li>Gas Detection Equipment</li>
+                    <li>Portable Weather Stations</li>
+                </ul>
+            </div>
+            <div class="equip-item">
+                <h5>NOISE MONITORING</h5>
+                <ul>
+                    <li>Type 1 & 2 Sound Level Meters</li>
+                    <li>Personal Noise Dosimeters</li>
+                    <li>Octave Band Analysers</li>
+                </ul>
+            </div>
+            <div class="equip-item">
+                <h5>WATER QUALITY</h5>
+                <ul>
+                    <li>Multi-parameter Meters</li>
+                    <li>Portable pH & Conductivity</li>
+                    <li>Turbidity Meters</li>
+                </ul>
+            </div>
+            <div class="equip-item">
+                <h5>SPECIALIST SURVEY</h5>
+                <ul>
+                    <li>GPS Surveying Instruments</li>
+                    <li>Thermal Imaging Cameras</li>
+                    <li>Drone Aerial Surveys</li>
+                </ul>
+            </div>
+        </div>
+
+        <br><br>
+        <div class="title-bar">
+            <h3>PROJECT GALLERY</h3>
+        </div>
+        <div class="gallery-strip">
+            <img src="https://images.unsplash.com/photo-1591628001888-76cc02e0c276?auto=format&fit=crop&w=400&q=80" alt="Project 1">
+            <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=400&q=80" alt="Project 2">
+            <img src="https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?auto=format&fit=crop&w=400&q=80" alt="Project 3">
+            <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=400&q=80" alt="Project 4">
+            <img src="https://images.unsplash.com/photo-1516937941348-c096397e36e0?auto=format&fit=crop&w=400&q=80" alt="Project 5">
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-block">
+                <h4>HEAD OFFICE</h4>
+                <p>08 Hillside Road<br>Metropolitan Building<br>Parktown, Johannesburg</p>
+            </div>
+            <div class="footer-block">
+                <h4>CONTACT</h4>
+                <p><strong>Tel:</strong> 011 480 4822</p>
+                <p><strong>Cell:</strong> 072 546 3191</p>
+                <p><strong>Email:</strong> info@kmgenviro.co.za</p>
+            </div>
+            <div class="footer-block">
+                <h4>ACCREDITATIONS</h4>
+                <p>SACNASP Registered<br>EAPASA Accredited<br>DoEL Approved Asbestos Contractor</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

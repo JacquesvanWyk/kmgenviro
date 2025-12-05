@@ -6,9 +6,6 @@ use App\Models\ServiceCategory;
 layout('components.layouts.public');
 title('Our Services | Environmental Consultancy | KMG');
 
-$seoDescription = 'Comprehensive environmental services including monitoring, compliance, ESG advisory, occupational hygiene, waste management, asbestos removal, and professional training. Accredited specialists serving South Africa and SADC region.';
-$seoKeywords = 'environmental services South Africa, environmental monitoring services, environmental compliance, ESG services, occupational hygiene services, waste management, asbestos management, environmental training courses, water quality monitoring, air quality testing';
-
 $categories = computed(fn() =>
     ServiceCategory::where('is_active', true)
         ->withCount(['services' => fn($q) => $q->where('is_active', true)])
@@ -19,8 +16,8 @@ $categories = computed(fn() =>
 
 ?>
 
-<x-slot:description>{{ $seoDescription }}</x-slot:description>
-<x-slot:keywords>{{ $seoKeywords }}</x-slot:keywords>
+<x-slot:description>Comprehensive environmental services including monitoring, compliance, ESG advisory, occupational hygiene, waste management, asbestos removal, and professional training. Accredited specialists serving South Africa and SADC region.</x-slot:description>
+<x-slot:keywords>environmental services South Africa, environmental monitoring services, environmental compliance, ESG services, occupational hygiene services, waste management, asbestos management, environmental training courses, water quality monitoring, air quality testing</x-slot:keywords>
 
 <div class="bg-white">
     <!-- Hero Section -->

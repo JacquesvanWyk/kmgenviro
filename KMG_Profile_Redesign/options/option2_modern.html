@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KMG Environmental Solutions - Modern Profile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #121212;
+            --green: #c0ff00; /* Acid Green */
+            --gray: #f3f3f3;
+            --text: #222;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Space Grotesk', sans-serif; color: var(--text); line-height: 1.4; }
+
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+
+        /* Typography */
+        h1 { font-size: 6rem; line-height: 0.9; letter-spacing: -2px; margin-bottom: 40px; }
+        h2 { font-size: 3rem; letter-spacing: -1px; margin-bottom: 30px; }
+        h3 { font-size: 1.5rem; font-weight: 500; }
+        p { font-size: 1.1rem; line-height: 1.6; color: #555; }
+
+        /* Navbar */
+        nav { padding: 40px 0; display: flex; justify-content: space-between; align-items: center; }
+        .brand { font-weight: 700; font-size: 1.5rem; letter-spacing: -1px; }
+        .brand span { color: var(--green); }
+
+        /* Hero */
+        .hero { padding: 100px 0 150px; border-bottom: 1px solid #ddd; }
+        .hero-tag { font-size: 1rem; font-weight: 700; text-transform: uppercase; margin-bottom: 20px; display: block; letter-spacing: 1px; }
+        
+        /* Stats */
+        .stats-row { display: flex; justify-content: space-between; margin-top: 80px; border-top: 1px solid #eee; padding-top: 40px; }
+        .stat-box h4 { font-size: 4rem; margin-bottom: 5px; color: var(--black); }
+        .stat-box span { font-size: 0.9rem; text-transform: uppercase; font-weight: 700; }
+
+        /* Section */
+        section { padding: 120px 0; }
+        .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 80px; border-bottom: 1px solid #000; padding-bottom: 40px; }
+        
+        /* Services Grid */
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .service-item { background: var(--gray); padding: 40px; transition: 0.3s; }
+        .service-item:hover { background: var(--green); }
+        .service-item h3 { margin-bottom: 20px; }
+
+        /* Equipment List */
+        .equip-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 60px; }
+        .equip-cats { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .equip-col h4 { border-bottom: 2px solid var(--green); padding-bottom: 10px; margin-bottom: 20px; }
+        .equip-col ul { list-style: none; }
+        .equip-col li { margin-bottom: 8px; font-size: 0.95rem; }
+
+        /* Gallery */
+        .gallery-scroll { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 20px; }
+        .gallery-img { min-width: 400px; height: 300px; background: #eee; object-fit: cover; }
+
+        /* Footer */
+        footer { background: var(--black); color: white; padding: 100px 0; }
+        .footer-content h2 { color: white; margin-bottom: 60px; }
+        .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+        .contact-item h5 { color: var(--green); margin-bottom: 15px; text-transform: uppercase; }
+        .contact-item p { color: #888; }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 3.5rem; }
+            .stats-row { flex-wrap: wrap; gap: 40px; }
+            .services-grid { grid-template-columns: 1fr; }
+            .equip-layout { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <nav>
+            <div class="brand">KMG<span>.</span></div>
+            <div style="font-weight: 500;">Since 2012</div>
+        </nav>
+
+        <header class="hero">
+            <span class="hero-tag">Company Profile '25</span>
+            <h1>Environmental<br>Excellence</h1>
+            <p style="max-width: 500px;">Accredited specialists delivering regulation-aligned<br>solutions across the SADC region.</p>
+            
+            <div class="stats-row">
+                <div class="stat-box">
+                    <h4>13+</h4>
+                    <span>Years</span>
+                </div>
+                <div class="stat-box">
+                    <h4>100+</h4>
+                    <span>Projects</span>
+                </div>
+                <div class="stat-box">
+                    <h4>L2</h4>
+                    <span>B-BBEE</span>
+                </div>
+                <div class="stat-box">
+                    <h4>9</h4>
+                    <span>Provinces</span>
+                </div>
+            </div>
+        </header>
+
+        <section>
+            <div class="section-header">
+                <h2>Core Services</h2>
+                <p style="text-align: right;">Comprehensive solutions for<br>complex challenges.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-item">
+                    <h3>01. Impact Assessments</h3>
+                    <p>Full EIA services, Basic Assessments, Scoping & EIR.</p>
+                </div>
+                <div class="service-item">
+                    <h3>02. Monitoring</h3>
+                    <p>Air, water, noise & soil monitoring with SANAS-accredited labs.</p>
+                </div>
+                <div class="service-item">
+                    <h3>03. Permitting</h3>
+                    <p>AEL, WUL, Waste Licenses & Authorisations.</p>
+                </div>
+                <div class="service-item">
+                    <h3>04. ESG Advisory</h3>
+                    <p>Carbon footprinting, climate risk & GRI reporting.</p>
+                </div>
+                <div class="service-item">
+                    <h3>05. Occ. Hygiene</h3>
+                    <p>SAIOH-registered exposure assessments.</p>
+                </div>
+                <div class="service-item">
+                    <h3>06. Training</h3>
+                    <p>SACNASP & EAPASA accredited courses.</p>
+                </div>
+            </div>
+        </section>
+
+        <section style="background: #f9f9f9; padding: 100px 40px; margin: 0 -40px;">
+            <div class="equip-layout">
+                <div>
+                    <h2>Tools of<br>the Trade</h2>
+                    <p>State-of-the-art calibrated equipment for precise data collection.</p>
+                </div>
+                <div class="equip-cats">
+                    <div class="equip-col">
+                        <h4>Air & Noise</h4>
+                        <ul>
+                            <li>PM10 / PM2.5 Dust Samplers</li>
+                            <li>Real-time Particulate Monitors</li>
+                            <li>Type 1 Sound Level Meters</li>
+                            <li>Dosimeters & Octave Band</li>
+                        </ul>
+                    </div>
+                    <div class="equip-col">
+                        <h4>Water & Survey</h4>
+                        <ul>
+                            <li>Multi-parameter Water Meters</li>
+                            <li>Turbidity & pH Meters</li>
+                            <li>GPS Survey Instruments</li>
+                            <li>Thermal Imaging Drones</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2>Field Gallery</h2>
+            </div>
+            <div class="gallery-scroll">
+                <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=600&q=80" class="gallery-img" alt="Field">
+                <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=600&q=80" class="gallery-img" alt="Lab">
+                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" class="gallery-img" alt="Tech">
+                <img src="https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?auto=format&fit=crop&w=600&q=80" class="gallery-img" alt="Nature">
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <h2>Get in Touch.</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <h5>Head Office</h5>
+                    <p>08 Hillside Road<br>Metropolitan Building<br>Parktown, JHB</p>
+                </div>
+                <div class="contact-item">
+                    <h5>Direct</h5>
+                    <p>011 480 4822</p>
+                    <p>info@kmgenviro.co.za</p>
+                </div>
+                <div class="contact-item">
+                    <h5>Training</h5>
+                    <p>bookings@kmgenviro.co.za</p>
+                    <p>072 546 3191</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

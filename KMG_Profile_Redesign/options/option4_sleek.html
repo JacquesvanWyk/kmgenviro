@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KMG Environmental Solutions - Dark Profile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a192f;
+            --light-bg: #112240;
+            --text: #8892b0;
+            --heading: #ccd6f6;
+            --accent: #64ffda;
+        }
+
+        body { background-color: var(--bg); color: var(--text); font-family: 'Roboto', sans-serif; margin: 0; padding: 0; line-height: 1.6; }
+        h1, h2, h3, h4 { color: var(--heading); margin: 0 0 20px 0; }
+        h1, h2 { font-family: 'Roboto Mono', monospace; }
+        
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 25px; }
+
+        /* Nav */
+        nav { padding: 30px 0; display: flex; justify-content: space-between; align-items: center; }
+        .logo { color: var(--accent); font-family: 'Roboto Mono', monospace; font-weight: 700; font-size: 1.2rem; border: 1px solid var(--accent); padding: 5px 10px; }
+
+        /* Hero */
+        .hero { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+        .pre-title { color: var(--accent); font-family: 'Roboto Mono', monospace; margin-bottom: 20px; }
+        .hero h1 { font-size: 4rem; line-height: 1.1; }
+        .hero p { max-width: 500px; font-size: 1.1rem; margin-bottom: 50px; }
+        .cta-btn {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            padding: 15px 25px;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.9rem;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: 0.2s;
+        }
+        .cta-btn:hover { background: rgba(100, 255, 218, 0.1); }
+
+        /* Stats */
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 100px; }
+        .stat-card { background: var(--light-bg); padding: 20px; text-align: center; border-radius: 4px; }
+        .stat-num { display: block; font-size: 2rem; color: var(--accent); font-weight: 700; font-family: 'Roboto Mono', monospace; }
+
+        /* Section */
+        section { padding: 80px 0; }
+        .section-head { display: flex; align-items: center; margin-bottom: 40px; }
+        .section-head span { font-family: 'Roboto Mono', monospace; color: var(--accent); font-size: 1.2rem; margin-right: 10px; }
+        .section-head h2 { margin: 0; font-size: 2rem; }
+        .line { flex-grow: 1; height: 1px; background: #233554; margin-left: 20px; }
+
+        /* Services */
+        .service-list { list-style: none; padding: 0; }
+        .service-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #233554;
+            transition: 0.2s;
+        }
+        .service-item:hover { transform: translateX(10px); }
+        .service-item h3 { font-size: 1.3rem; margin: 0; color: var(--heading); }
+        .service-item p { margin: 0; font-size: 0.9rem; text-align: right; max-width: 500px; }
+
+        /* Equipment Tabs */
+        .equip-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
+        .equip-card { background: var(--light-bg); padding: 20px; border-radius: 4px; }
+        .equip-card h4 { color: var(--accent); font-family: 'Roboto Mono', monospace; font-size: 0.9rem; }
+        .equip-card ul { list-style: none; padding: 0; font-size: 0.85rem; }
+        .equip-card li::before { content: '▹'; color: var(--accent); margin-right: 8px; }
+
+        /* Gallery */
+        .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 40px; }
+        .gallery-img { width: 100%; height: 200px; object-fit: cover; filter: grayscale(100%) contrast(1.2); border-radius: 4px; transition: 0.3s; }
+        .gallery-img:hover { filter: none; transform: scale(1.02); z-index: 2; }
+
+        /* Footer */
+        footer { text-align: center; padding: 50px 0; font-family: 'Roboto Mono', monospace; font-size: 0.8rem; color: #555; }
+        .contact-info p { margin: 5px 0; color: var(--text); }
+        .contact-info strong { color: var(--accent); }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .service-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .service-item p { text-align: left; }
+            .gallery-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    
+    <nav class="container">
+        <div class="logo">KMG.ENV</div>
+        <a href="#contact" class="cta-btn">Book Consultation</a>
+    </nav>
+
+    <div class="container">
+        <section class="hero">
+            <span class="pre-title">Hi, we are KMG Environmental Solutions</span>
+            <h1>Scientific Excellence.<br>Regulatory Compliance.</h1>
+            <p>We provide accredited environmental management, ESG advisory, and occupational hygiene services across the SADC region.</p>
+            <a href="#services" class="cta-btn">View Services</a>
+        </section>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-num">13+</span>
+                Years
+            </div>
+            <div class="stat-card">
+                <span class="stat-num">100+</span>
+                Projects
+            </div>
+            <div class="stat-card">
+                <span class="stat-num">DoEL</span>
+                Approved
+            </div>
+            <div class="stat-card">
+                <span class="stat-num">L2</span>
+                B-BBEE
+            </div>
+        </div>
+
+        <section id="services">
+            <div class="section-head">
+                <span>01.</span>
+                <h2>Core Services</h2>
+                <div class="line"></div>
+            </div>
+            <ul class="service-list">
+                <li class="service-item">
+                    <h3>Impact Assessments</h3>
+                    <p>Basic Assessments, Scoping & EIR, EMPs.</p>
+                </li>
+                <li class="service-item">
+                    <h3>Monitoring</h3>
+                    <p>Air, water, noise & soil. SANAS labs.</p>
+                </li>
+                <li class="service-item">
+                    <h3>ESG Advisory</h3>
+                    <p>Carbon footprinting, Climate risk, GRI/CDP.</p>
+                </li>
+                <li class="service-item">
+                    <h3>Occupational Hygiene</h3>
+                    <p>SAIOH exposure assessments & audits.</p>
+                </li>
+                <li class="service-item">
+                    <h3>Waste Management</h3>
+                    <p>Classification, audits & licensing.</p>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <div class="section-head">
+                <span>02.</span>
+                <h2>Equipment</h2>
+                <div class="line"></div>
+            </div>
+            <div class="equip-grid">
+                <div class="equip-card">
+                    <h4>Air Quality</h4>
+                    <ul>
+                        <li>PM10/PM2.5 Samplers</li>
+                        <li>Real-time Monitors</li>
+                        <li>Gas Detection</li>
+                    </ul>
+                </div>
+                <div class="equip-card">
+                    <h4>Noise</h4>
+                    <ul>
+                        <li>Type 1 Meters</li>
+                        <li>Dosimeters</li>
+                        <li>Octave Band</li>
+                    </ul>
+                </div>
+                <div class="equip-card">
+                    <h4>Water</h4>
+                    <ul>
+                        <li>Multi-parameter Meters</li>
+                        <li>Turbidity Meters</li>
+                    </ul>
+                </div>
+                <div class="equip-card">
+                    <h4>Survey</h4>
+                    <ul>
+                        <li>GPS & Drones</li>
+                        <li>Thermal Imaging</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-head">
+                <span>03.</span>
+                <h2>Field Work</h2>
+                <div class="line"></div>
+            </div>
+            <div class="gallery-grid">
+                <img src="https://images.unsplash.com/photo-1523848309073-4412983c71db?auto=format&fit=crop&w=400&q=80" class="gallery-img">
+                <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&w=400&q=80" class="gallery-img">
+                <img src="https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?auto=format&fit=crop&w=400&q=80" class="gallery-img">
+            </div>
+        </section>
+
+        <section id="contact" style="text-align: center; margin-bottom: 100px;">
+            <span class="pre-title">What's Next?</span>
+            <h2 style="font-size: 3rem; margin-bottom: 20px;">Get In Touch</h2>
+            <p style="margin: 0 auto 50px; max-width: 500px;">Whether you have a question about compliance or need a full EIA, our team is ready to help.</p>
+            <div class="contact-info">
+                <p><strong>Tel:</strong> 011 480 4822</p>
+                <p><strong>Email:</strong> info@kmgenviro.co.za</p>
+                <p>Parktown, Johannesburg</p>
+            </div>
+            <br><br>
+            <a href="mailto:info@kmgenviro.co.za" class="cta-btn">Say Hello</a>
+        </section>
+
+        <footer>
+            &copy; 2025 KMG Environmental Solutions. All Rights Reserved.
+        </footer>
+    </div>
+
+</body>
+</html>
