@@ -144,7 +144,7 @@ $accreditations = computed(fn() =>
             </div>
 
             <!-- Core Values -->
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                 <div class="bg-white p-6 rounded-lg shadow-sm text-center group hover:shadow-lg transition-all">
                     <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-500 transition-colors">
                         <x-solar-icon name="shield-check" size="32" class="text-green-600 group-hover:text-white transition-colors" />
