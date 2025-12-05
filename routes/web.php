@@ -4,6 +4,7 @@ use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use App\Livewire\Settings\TwoFactor;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use Livewire\Volt\Volt;
@@ -24,7 +25,6 @@ Volt::route('/training', 'training.index')->name('training.index');
 Volt::route('/training/{course:slug}', 'training.show')->name('training.show');
 
 Volt::route('/equipment', 'equipment.index')->name('equipment.index');
-Volt::route('/equipment/{equipment:slug}', 'equipment.show')->name('equipment.show');
 
 Volt::route('/blog', 'blog.index')->name('blog.index');
 Volt::route('/blog/{post:slug}', 'blog.show')->name('blog.show');
@@ -32,6 +32,31 @@ Volt::route('/blog/{post:slug}', 'blog.show')->name('blog.show');
 Volt::route('/resources', 'resources')->name('resources');
 Volt::route('/gallery', 'gallery')->name('gallery');
 Volt::route('/contact', 'contact')->name('contact');
+
+// PDF Downloads
+Route::get('/download/company-profile', function () {
+    $pdf = Pdf::loadView('pdf.company-profile');
+    $pdf->setPaper('a4', 'portrait');
+
+    return $pdf->download('KMG-Enviro-Company-Profile.pdf');
+})->name('download.company-profile');
+
+// PDF Design Previews (temporary routes for design selection)
+Route::get('/preview/company-profile/{design?}', function (?string $design = null) {
+    $view = match ($design) {
+        'brutalist' => 'pdf.company-profile-designs.design-1-brutalist',
+        'organic' => 'pdf.company-profile-designs.design-2-organic',
+        'editorial' => 'pdf.company-profile-designs.design-3-editorial',
+        'artdeco' => 'pdf.company-profile-designs.design-4-artdeco',
+        'swiss' => 'pdf.company-profile-designs.design-5-swiss',
+        default => 'pdf.company-profile',
+    };
+
+    $pdf = Pdf::loadView($view);
+    $pdf->setPaper('a4', 'portrait');
+
+    return $pdf->stream('KMG-Enviro-Company-Profile-'.($design ?? 'original').'.pdf');
+})->name('preview.company-profile');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
