@@ -890,6 +890,13 @@
                                 Parktown, Johannesburg, 2193<br>
                                 South Africa
                             </p>
+                            <h3>Branch Office</h3>
+                            <p>
+                                Aston Manor House<br>
+                                128 Monument Road<br>
+                                Kempton Park<br>
+                                South Africa
+                            </p>
                         </td>
                         <td>
                             <h3>Contact Details</h3>

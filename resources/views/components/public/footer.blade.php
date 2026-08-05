@@ -65,10 +65,18 @@ $topServices = ServiceCategory::where('is_active', true)
                             <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
-                        <div class="text-zinc-400">
-                            08 Hillside Road, Metropolitan Building,<br>
-                            1st Floor B, Parktown, Johannesburg, 2193<br>
-                            <span class="text-zinc-500 text-xs">Serving all 9 provinces & SADC</span>
+                        <div class="text-zinc-400 space-y-3">
+                            <div>
+                                <span class="text-zinc-500 text-xs block">Head Office</span>
+                                08 Hillside Road, Metropolitan Building,<br>
+                                1st Floor B, Parktown, Johannesburg, 2193
+                            </div>
+                            <div>
+                                <span class="text-zinc-500 text-xs block">Branch Office</span>
+                                Aston Manor House, 128 Monument Road,<br>
+                                Kempton Park
+                            </div>
+                            <span class="text-zinc-500 text-xs block">Serving all 9 provinces & SADC</span>
                         </div>
                     </div>
                 </div>

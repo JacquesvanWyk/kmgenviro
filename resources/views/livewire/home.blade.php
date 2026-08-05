@@ -295,6 +295,13 @@ $projectCount = computed(fn() => Project::count());
                             <div class="text-zinc-600">08 Hillside Road, Metropolitan Building, 1st Floor B, Parktown, Johannesburg, 2193</div>
                         </div>
                     </div>
+                    <div class="flex items-start gap-3 mb-4">
+                        <x-solar-icon name="map-point" size="20" class="text-green-500 flex-shrink-0 mt-1" />
+                        <div>
+                            <div class="font-bold text-zinc-950">Branch Office</div>
+                            <div class="text-zinc-600">Aston Manor House, 128 Monument Road, Kempton Park</div>
+                        </div>
+                    </div>
                     <div class="flex items-start gap-3">
                         <x-solar-icon name="globe" size="20" class="text-green-500 flex-shrink-0 mt-1" />
                         <div>

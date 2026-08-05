@@ -197,18 +197,28 @@ $resetForm = function ($form) {
                     <h2 class="text-3xl font-black text-zinc-950 mb-8">Get In Touch</h2>
 
                     <div class="space-y-6">
-                        <!-- Office Address -->
+                        <!-- Office Addresses -->
                         <div class="flex items-start gap-4 p-6 bg-zinc-50 rounded-lg border border-zinc-100">
                             <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center flex-shrink-0">
                                 <x-solar-icon name="map-point" size="24" class="text-white" />
                             </div>
-                            <div>
-                                <h3 class="font-bold text-zinc-950 mb-1">Office Location</h3>
-                                <p class="text-zinc-600">
-                                    08 Hillside Road, Metropolitan Building,<br>
-                                    1st Floor B, Parktown,<br>
-                                    Johannesburg, 2193
-                                </p>
+                            <div class="space-y-4">
+                                <div>
+                                    <h3 class="font-bold text-zinc-950 mb-1">Head Office &mdash; Johannesburg</h3>
+                                    <p class="text-zinc-600">
+                                        08 Hillside Road, Metropolitan Building,<br>
+                                        1st Floor B, Parktown,<br>
+                                        Johannesburg, 2193
+                                    </p>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-zinc-950 mb-1">Branch Office &mdash; Kempton Park</h3>
+                                    <p class="text-zinc-600">
+                                        Aston Manor House,<br>
+                                        128 Monument Road,<br>
+                                        Kempton Park
+                                    </p>
+                                </div>
                             </div>
                         </div>
 
