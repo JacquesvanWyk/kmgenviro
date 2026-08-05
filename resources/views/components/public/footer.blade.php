@@ -74,7 +74,7 @@ $topServices = ServiceCategory::where('is_active', true)
                             <div>
                                 <span class="text-zinc-500 text-xs block">Branch Office</span>
                                 Aston Manor House, 128 Monument Road,<br>
-                                Kempton Park
+                                Aston Manor, Kempton Park, 1619
                             </div>
                             <span class="text-zinc-500 text-xs block">Serving all 9 provinces & SADC</span>
                         </div>

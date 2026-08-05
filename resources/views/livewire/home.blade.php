@@ -299,7 +299,7 @@ $projectCount = computed(fn() => Project::count());
                         <x-solar-icon name="map-point" size="20" class="text-green-500 flex-shrink-0 mt-1" />
                         <div>
                             <div class="font-bold text-zinc-950">Branch Office</div>
-                            <div class="text-zinc-600">Aston Manor House, 128 Monument Road, Kempton Park</div>
+                            <div class="text-zinc-600">Aston Manor House, 128 Monument Road, Aston Manor, Kempton Park, 1619</div>
                         </div>
                     </div>
                     <div class="flex items-start gap-3">

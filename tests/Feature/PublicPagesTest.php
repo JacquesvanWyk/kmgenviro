@@ -100,7 +100,7 @@ test('homepage shows both office addresses', function () {
     $response = $this->get('/');
 
     $response->assertSee('08 Hillside Road, Metropolitan Building, 1st Floor B, Parktown, Johannesburg, 2193');
-    $response->assertSee('Aston Manor House, 128 Monument Road, Kempton Park');
+    $response->assertSee('Aston Manor House, 128 Monument Road, Aston Manor, Kempton Park, 1619');
 });
 
 test('contact page shows both office addresses', function () {
@@ -109,7 +109,8 @@ test('contact page shows both office addresses', function () {
     $response->assertSuccessful();
     $response->assertSee('Head Office &mdash; Johannesburg', false);
     $response->assertSee('Branch Office &mdash; Kempton Park', false);
-    $response->assertSee('128 Monument Road');
+    $response->assertSee('128 Monument Road, Aston Manor,', false);
+    $response->assertSee('Kempton Park, 1619');
 });
 
 test('footer shows both office addresses', function () {
