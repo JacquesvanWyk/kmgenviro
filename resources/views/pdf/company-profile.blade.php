@@ -893,7 +893,7 @@
                             <h3>Branch Office</h3>
                             <p>
                                 Aston Manor House<br>
-                                128 Monument Road, Aston Manor<br>
+                                128 Monument Road<br>
                                 Kempton Park, 1619<br>
                                 South Africa
                             </p>

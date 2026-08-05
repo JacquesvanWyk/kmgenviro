@@ -215,7 +215,7 @@ $resetForm = function ($form) {
                                     <h3 class="font-bold text-zinc-950 mb-1">Branch Office &mdash; Kempton Park</h3>
                                     <p class="text-zinc-600">
                                         Aston Manor House,<br>
-                                        128 Monument Road, Aston Manor,<br>
+                                        128 Monument Road,<br>
                                         Kempton Park, 1619
                                     </p>
                                 </div>
