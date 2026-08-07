@@ -14,7 +14,6 @@ $accreditations = computed(fn() =>
 
 ?>
 
-<x-slot:description>Learn about KMG Environmental Solutions - a leading South African environmental consultancy with 13+ years experience. DoEL approved, SACNASP, EAPASA & GBCSA registered. B-BBEE Level 2 contributor serving all 9 provinces and SADC region.</x-slot:description>
 <x-slot:keywords>about KMG Environmental, environmental consultancy South Africa, SACNASP registered, EAPASA accredited, DoEL approved, B-BBEE Level 2, environmental specialists, South African environmental company</x-slot:keywords>
 
 <div class="bg-white">

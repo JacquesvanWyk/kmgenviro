@@ -158,7 +158,6 @@ $resetForm = function ($form) {
 
 ?>
 
-<x-slot:description>Contact KMG Environmental Solutions for environmental consultancy services, quotes, and enquiries. Based in Midrand, Gauteng, serving all of South Africa and SADC region. Get in touch today.</x-slot:description>
 <x-slot:keywords>contact KMG Environmental, environmental consultancy contact, environmental services quote, Midrand environmental consultants, South Africa environmental consultants, environmental services enquiry</x-slot:keywords>
 
 <div class="bg-white">

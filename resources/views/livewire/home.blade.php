@@ -55,7 +55,6 @@ $projectCount = computed(fn() => Project::count());
 
 ?>
 
-<x-slot:description>Leading South African environmental consultancy providing expert environmental monitoring, compliance, ESG advisory, occupational hygiene, and accredited training services. DoEL approved, SACNASP, EAPASA & GBCSA registered.</x-slot:description>
 <x-slot:keywords>environmental consultancy South Africa, environmental monitoring, environmental compliance, ESG advisory, occupational hygiene, environmental training, water quality monitoring, air quality monitoring, asbestos management, waste management, SACNASP, EAPASA, DoEL approved</x-slot:keywords>
 
 <div class="bg-zinc-50">

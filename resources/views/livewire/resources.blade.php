@@ -60,7 +60,6 @@ $downloadResource = function ($resourceId) {
 
 ?>
 
-<x-slot:description>Download KMG Environmental Solutions company profile, service brochures, training materials, and technical guides. Free resources for environmental professionals and industry stakeholders.</x-slot:description>
 <x-slot:keywords>environmental resources, company profile download, environmental brochures, training materials, technical guides, KMG downloads, environmental documentation</x-slot:keywords>
 
 <div x-data="{ activeCategory: @entangle('categoryFilter') }"

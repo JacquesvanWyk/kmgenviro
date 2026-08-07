@@ -1,3 +1,8 @@
+@php($seo = new \App\Support\Seo)
+@php($seoTitle = $title ?? config('seo.defaults.title'))
+@php($seoDescription = $description ?? $seo->description())
+@php($seoImage = $ogImage ?? $seo->image())
+@php($seoCanonical = url()->current())
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -5,31 +10,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $title ?? 'KMG Environmental Solutions | Environmental Consultancy South Africa' }}</title>
-    <meta name="description" content="{{ $description ?? 'Leading environmental consultancy providing expert solutions across South Africa. Accredited specialists in environmental compliance, training, and equipment rental.' }}">
+    <title>{{ $seoTitle }}</title>
+    <meta name="description" content="{{ $seoDescription }}">
+    <meta name="robots" content="index, follow, max-image-preview:large">
 
     @if(isset($keywords))
         <meta name="keywords" content="{{ $keywords }}">
     @endif
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:title" content="{{ $title ?? 'KMG Environmental Solutions' }}">
-    <meta property="og:description" content="{{ $description ?? 'Leading environmental consultancy providing expert solutions across South Africa.' }}">
-    <meta property="og:image" content="{{ $ogImage ?? asset('images/og-homepage.jpg') }}">
+    <meta property="og:type" content="{{ $seo->type() }}">
+    <meta property="og:url" content="{{ $seoCanonical }}">
+    <meta property="og:title" content="{{ $seoTitle }}">
+    <meta property="og:description" content="{{ $seoDescription }}">
+    <meta property="og:image" content="{{ $seoImage }}">
     <meta property="og:site_name" content="KMG Environmental Solutions">
     <meta property="og:locale" content="en_ZA">
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="{{ url()->current() }}">
-    <meta property="twitter:title" content="{{ $title ?? 'KMG Environmental Solutions' }}">
-    <meta property="twitter:description" content="{{ $description ?? 'Leading environmental consultancy providing expert solutions across South Africa.' }}">
-    <meta property="twitter:image" content="{{ $ogImage ?? asset('images/og-homepage.jpg') }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{ $seoCanonical }}">
+    <meta name="twitter:title" content="{{ $seoTitle }}">
+    <meta name="twitter:description" content="{{ $seoDescription }}">
+    <meta name="twitter:image" content="{{ $seoImage }}">
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="{{ url()->current() }}">
+    <link rel="canonical" href="{{ $seoCanonical }}">
+
+    <!-- Structured Data -->
+    @foreach($seo->structuredData() as $schema)
+        <script type="application/ld+json">{!! json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
+    @endforeach
 
     <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">

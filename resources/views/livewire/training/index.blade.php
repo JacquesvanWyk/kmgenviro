@@ -142,7 +142,6 @@ $openBookingForm = function ($courseId = null, $scheduleId = null) {
 
 ?>
 
-<x-slot:description>EAPASA and SACNASP accredited environmental training courses in South Africa. Courses include environmental management, occupational hygiene, asbestos awareness, legal compliance, and more. Book online or request in-house training.</x-slot:description>
 <x-slot:keywords>environmental training South Africa, EAPASA accredited training, SACNASP training, environmental management courses, occupational hygiene training, asbestos awareness training, environmental compliance training, CPD courses environmental</x-slot:keywords>
 
 <div x-data="{ activeCategory: @entangle('activeCategory'), showBookingForm: @entangle('showBookingForm') }">

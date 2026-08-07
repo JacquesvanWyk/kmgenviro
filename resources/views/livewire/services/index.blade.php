@@ -16,7 +16,6 @@ $categories = computed(fn() =>
 
 ?>
 
-<x-slot:description>Comprehensive environmental services including monitoring, compliance, ESG advisory, occupational hygiene, waste management, asbestos removal, and professional training. Accredited specialists serving South Africa and SADC region.</x-slot:description>
 <x-slot:keywords>environmental services South Africa, environmental monitoring services, environmental compliance, ESG services, occupational hygiene services, waste management, asbestos management, environmental training courses, water quality monitoring, air quality testing</x-slot:keywords>
 
 <div class="bg-white">
