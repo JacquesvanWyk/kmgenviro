@@ -38,18 +38,19 @@ return [
 
     /**
      * Meta descriptions for the static public pages, keyed by route name.
+     * Keep these under 160 characters so search engines show them in full.
      */
     'pages' => [
-        'home' => 'Leading South African environmental consultancy providing expert environmental monitoring, compliance, ESG advisory, occupational hygiene, and accredited training services. DoEL approved, SACNASP, EAPASA & GBCSA registered.',
-        'about' => 'Learn about KMG Environmental Solutions - a leading South African environmental consultancy with 13+ years experience. DoEL approved, SACNASP, EAPASA & GBCSA registered. B-BBEE Level 2 contributor serving all 9 provinces and SADC region.',
-        'services.index' => 'Comprehensive environmental services including monitoring, compliance, ESG advisory, occupational hygiene, waste management, asbestos removal, and professional training. Accredited specialists serving South Africa and SADC region.',
-        'sectors.index' => 'KMG Environmental Solutions serves key South African industries including mining, energy, infrastructure, manufacturing, and agriculture. Discover tailored environmental compliance solutions for your sector.',
-        'projects.index' => 'A portfolio of environmental consultancy projects completed by KMG Environmental Solutions across mining, energy, infrastructure and manufacturing in South Africa and the SADC region.',
-        'training.index' => 'EAPASA and SACNASP accredited environmental training courses in South Africa. Courses include environmental management, occupational hygiene, asbestos awareness, legal compliance, and more. Book online or request in-house training.',
-        'equipment.index' => 'Rent professional environmental and scientific monitoring equipment in South Africa. Air quality monitors, noise meters, water sampling equipment, and more. Flexible rental terms with technical support.',
+        'home' => 'South African environmental consultancy: monitoring, compliance, ESG advisory, occupational hygiene and accredited training. DoEL, SACNASP & EAPASA registered.',
+        'about' => 'KMG Environmental Solutions is a South African environmental consultancy with 13+ years experience, B-BBEE Level 2, serving all 9 provinces and the SADC region.',
+        'services.index' => 'Environmental monitoring, compliance, ESG advisory, occupational hygiene, waste management, asbestos removal and training across South Africa and SADC.',
+        'sectors.index' => 'Environmental compliance solutions tailored to mining, energy, infrastructure, manufacturing and agriculture across South Africa and the SADC region.',
+        'projects.index' => 'Environmental consultancy projects delivered by KMG across mining, energy, infrastructure and manufacturing in South Africa and the SADC region.',
+        'training.index' => 'EAPASA and SACNASP accredited environmental training in South Africa: environmental management, occupational hygiene, asbestos awareness and legal compliance.',
+        'equipment.index' => 'Rent environmental and scientific monitoring equipment in South Africa: air quality monitors, noise meters and water sampling kit, with technical support.',
         'blog.index' => 'Environmental insights, regulatory updates and industry commentary from the specialists at KMG Environmental Solutions.',
-        'resources' => 'Download KMG Environmental Solutions company profile, service brochures, training materials, and technical guides. Free resources for environmental professionals and industry stakeholders.',
+        'resources' => 'Download the KMG company profile, service brochures, training materials and technical guides. Free resources for environmental professionals.',
         'gallery' => 'Photographs of KMG Environmental Solutions teams, fieldwork, training sessions and completed environmental projects across South Africa.',
-        'contact' => 'Contact KMG Environmental Solutions for environmental consultancy services, quotes, and enquiries. Offices in Parktown, Johannesburg and Kempton Park, serving all of South Africa and the SADC region.',
+        'contact' => 'Contact KMG Environmental Solutions for consultancy, quotes and enquiries. Offices in Parktown, Johannesburg and Kempton Park, serving all of South Africa.',
     ],
 ];

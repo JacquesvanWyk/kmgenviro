@@ -37,10 +37,14 @@ class Seo
             $this->subject instanceof Project,
             $this->subject instanceof TrainingCourse => $this->subject->meta_description ?? $this->subject->short_description,
             $this->subject instanceof ServiceCategory => $this->subject->meta_description ?? $this->subject->description,
-            default => config('seo.pages')[$this->routeName] ?? null,
+            default => null,
         };
 
-        return $this->trim($description ?? config('seo.defaults.description'));
+        if ($description) {
+            return $this->trim($description);
+        }
+
+        return config('seo.pages')[$this->routeName] ?? config('seo.defaults.description');
     }
 
     public function image(): string

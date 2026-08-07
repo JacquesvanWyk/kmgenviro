@@ -52,7 +52,11 @@ test('every static public page has a unique title and meta description', functio
         preg_match('/<title>(.*?)<\/title>/s', $html, $title);
         preg_match('/<meta name="description" content="(.*?)">/s', $html, $description);
 
-        expect($description[1] ?? '')->not->toBe('');
+        $text = html_entity_decode($description[1] ?? '', ENT_QUOTES);
+
+        expect($text)->not->toBe('');
+        expect(strlen($text))->toBeLessThanOrEqual(160);
+        expect($text)->not->toEndWith('...');
 
         $titles[] = $title[1];
         $descriptions[] = $description[1];
