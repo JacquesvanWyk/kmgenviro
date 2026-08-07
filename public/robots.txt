@@ -1,2 +1,4 @@
 User-agent: *
 Disallow:
+
+Sitemap: https://kmgenviro.co.za/sitemap.xml

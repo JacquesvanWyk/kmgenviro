@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SitemapController;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -32,6 +33,8 @@ Volt::route('/blog/{post:slug}', 'blog.show')->name('blog.show');
 Volt::route('/resources', 'resources')->name('resources');
 Volt::route('/gallery', 'gallery')->name('gallery');
 Volt::route('/contact', 'contact')->name('contact');
+
+Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
 
 // PDF Downloads
 Route::get('/download/company-profile', function () {
