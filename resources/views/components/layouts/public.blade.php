@@ -64,6 +64,7 @@
 
     <!-- Additional Head Content -->
     {{ $head ?? '' }}
+    <script defer src="https://stats.motionstack.design/script.js" data-website-id="1a842f82-a133-4eb5-a7e6-6f15a38be2fd"></script>
 </head>
 <body class="min-h-screen font-sans antialiased bg-white text-zinc-950">
     <x-public.header />
